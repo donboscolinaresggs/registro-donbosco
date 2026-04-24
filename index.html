@@ -682,18 +682,11 @@ document.getElementById('regForm').addEventListener('submit', function(e){
     if(!data.get(n)) data.set(n,'No');
   });
 
-  fetch(SCRIPT_URL, {method:'POST', body:data})
-    .then(function(r){ return r.json(); })
-    .then(function(res){
-      if(res.result === 'ok'){
-        document.getElementById('regForm').style.display = 'none';
-        document.getElementById('success-msg').style.display = 'block';
-        window.scrollTo(0,0);
-      } else {
-        alert('Error al enviar. Intenta nuevamente.');
-        btn.disabled = false;
-        btn.textContent = '⚜ Enviar registro';
-      }
+  fetch(SCRIPT_URL, {method:'POST', body:data, mode:'no-cors'})
+    .then(function(){
+      document.getElementById('regForm').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+      window.scrollTo(0,0);
     })
     .catch(function(){
       alert('Error de conexión. Verifica tu internet.');
