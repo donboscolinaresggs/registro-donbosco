@@ -195,7 +195,7 @@ select{appearance:none;
           <option value="Guías — Compañía">⚜ Guías — Compañía (11–14 años)</option>
           <option value="Pioneros — Avanzada">🔥 Pioneros — Avanzada (15–17 años)</option>
           <option value="Caminantes — Clan">🌿 Caminantes — Clan (18–22 años)</option>
-          <option value="Dirigente">📋 Dirigente</option>
+          <option value="Dirigente/Guiadora">📋 Dirigente / Guiadora</option>
         </select>
       </div>
       <div class="field half" id="campo-patrulla">
@@ -254,7 +254,7 @@ select{appearance:none;
 <!-- ══════════════════════════════════════════════════════════════
      SECCIÓN 3 — DATOS DEL APODERADO
 ══════════════════════════════════════════════════════════════ -->
-<div class="card">
+<div class="card" id="sec-apoderado">
   <div class="sec-title"><span class="ico">👪</span> 3. Datos del apoderado / apoderada
     <span class="hint">Solo para menores de edad</span>
   </div>
@@ -626,8 +626,9 @@ var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxiBhJ2TZrWONKy6JnapAf
 // Mostrar/ocultar sección dirigente y campo patrulla
 document.getElementById('sel_unidad').addEventListener('change', function(){
   var sec = document.getElementById('sec-dirigente');
+  var apoderado = document.getElementById('sec-apoderado');
   var campoPatrulla = document.getElementById('campo-patrulla');
-  var sinPatrulla = ['Golondrinas — Bandada','Lobatos — Manada','Dirigente',''];
+  var sinPatrulla = ['Golondrinas — Bandada','Lobatos — Manada','Dirigente/Guiadora',''];
 
   // Patrulla: ocultar para Bandada y Manada
   if(sinPatrulla.indexOf(this.value) !== -1){
@@ -636,11 +637,22 @@ document.getElementById('sel_unidad').addEventListener('change', function(){
     campoPatrulla.style.display = 'flex';
   }
 
-  // Sección dirigente
-  if(this.value === 'Dirigente'){
+  // Sección dirigente y apoderado
+  if(this.value === 'Dirigente/Guiadora'){
     sec.style.display = 'block';
+    // Ocultar sección apoderado y quitar required de sus campos
+    apoderado.style.display = 'none';
+    apoderado.querySelectorAll('[required]').forEach(function(el){
+      el.dataset.wasRequired = 'true';
+      el.removeAttribute('required');
+    });
   } else {
     sec.style.display = 'none';
+    // Mostrar apoderado y restaurar required
+    apoderado.style.display = 'block';
+    apoderado.querySelectorAll('[data-was-required="true"]').forEach(function(el){
+      el.setAttribute('required', '');
+    });
   }
 });
 
@@ -653,6 +665,10 @@ document.getElementById('regForm').addEventListener('submit', function(e){
   var primerFaltante = null;
 
   required.forEach(function(el){
+    // Ignorar campos en secciones ocultas
+    var card = el.closest('.card');
+    if(card && card.style.display === 'none') return;
+    
     var falta = false;
     if(el.type === 'checkbox') {
       if(!el.checked) falta = true;
