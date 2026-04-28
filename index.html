@@ -23,19 +23,27 @@
   <div id="msg"></div>
 
 <script>
-  var URL = 'https://script.google.com/macros/s/AKfycbxF1K1i7a-KMoz3ZChTggBWVBkAfdxTS9RarAZI-hsjGZxpxx5LrnO23w98l7efET5V/exec';
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwAYwIFkt3Gsj2jEQF1jsR8ALaGnVcnG-waLXE1wi4PAqFtdt6N9Rm3QSUufxhTz4XX/exec';
 
   document.getElementById('f').addEventListener('submit', function(e) {
     e.preventDefault();
-    document.getElementById('msg').textContent = 'Enviando...';
+    var msg = document.getElementById('msg');
+    msg.innerHTML = '<i>Enviando...</i>';
+    
     var data = new FormData(this);
-    fetch(URL, { method: 'POST', body: data, mode: 'no-cors' })
-      .then(function() {
-        document.getElementById('msg').innerHTML = '<b style="color:green">✅ Enviado. Revisa Google Sheets.</b>';
-      })
-      .catch(function() {
-        document.getElementById('msg').innerHTML = '<b style="color:red">❌ Error de conexión.</b>';
-      });
+    
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: data,
+      mode: 'no-cors'
+    })
+    .then(function(response) {
+      msg.innerHTML = '<b style="color:green">✅ Enviado. Revisa Google Sheets en tu Drive.</b>';
+      document.getElementById('f').reset();
+    })
+    .catch(function(error) {
+      msg.innerHTML = '<b style="color:red">❌ Error: ' + error.message + '</b>';
+    });
   });
 </script>
 </body>
