@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ciclo de Programa · Guías y Scouts Don Bosco Linares</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #141412;
+  --bg2:     #1c1c19;
+  --bg3:     #242420;
+  --border:  rgba(255,255,255,0.07);
+  --verde:   #2D6A4F;
+  --verde2:  #52B788;
+  --crema:   #F2E8D5;
+  --cafe:    #C9A87C;
+  --amber:   #E9A84C;
+  --rojo:    #C0392B;
+  --muted:   #888;
+  --r:       10px;
+  /* Áreas – colores */
+  --corporalidad: #E76F51;
+  --creatividad:  #9B5DE5;
+  --caracter:     #52B788;
+  --afectividad:  #E9A84C;
+  --sociabilidad: #457B9D;
+  --espiritualidad:#C9A87C;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--crema); min-height: 100vh; }
+
+/* ── PANTALLAS ── */
+.screen { display: none; max-width: 860px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+.screen.active { display: block; }
+
+/* ── HEADER GLOBAL ── */
+.topbar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-left { display: flex; align-items: center; gap: 0.75rem; }
+.topbar-logo { font-size: 1.4rem; }
+.topbar-name { font-size: 0.85rem; font-weight: 600; color: var(--crema); line-height: 1.2; }
+.topbar-sub  { font-size: 0.72rem; color: var(--cafe); }
+.topbar-nav  { display: flex; gap: 0.4rem; }
+.nav-step {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  background: transparent;
+  cursor: default;
+  white-space: nowrap;
+}
+.nav-step.done   { border-color: rgba(82,183,136,0.4); color: var(--verde2); }
+.nav-step.active { border-color: var(--cafe); color: var(--cafe); background: rgba(201,168,124,0.08); }
+
+/* ── TÍTULOS DE SECCIÓN ── */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: var(--crema);
+  margin-bottom: 0.4rem;
+}
+.section-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* ── SEPARADOR ── */
+.sep {
+  height: 1px;
+  background: var(--border);
+  margin: 1.75rem 0;
+}
+
+/* ── FORMS ── */
+.field { margin-bottom: 1.25rem; }
+.field label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cafe);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.field input, .field select, .field textarea {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.85rem;
+  color: var(--crema);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: rgba(82,183,136,0.5);
+}
+.field textarea { min-height: 80px; resize: vertical; }
+.field-hint { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+@media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+
+/* ── BOTONES ── */
+.btn {
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+}
+.btn-primary {
+  background: var(--verde);
+  color: white;
+}
+.btn-primary:hover { background: #1f4d38; }
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.btn-outline:hover { border-color: var(--verde2); color: var(--verde2); }
+.btn-row { display: flex; gap: 0.75rem; justify-content: flex-end; flex-wrap: wrap; }
+
+/* ── CARDS GENÉRICAS ── */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.1rem 1.25rem;
+}
+.card + .card { margin-top: 0.75rem; }
+.card-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--crema);
+  margin-bottom: 0.25rem;
+}
+.card-meta { font-size: 0.8rem; color: var(--muted); }
+
+/* ── INTEGRANTES ── */
+.team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 0.75rem; }
+.member-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 0.9rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.member-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 0.85rem;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+}
+.member-info { min-width: 0; }
+.member-name { font-size: 0.88rem; font-weight: 600; color: var(--crema); }
+.member-role { font-size: 0.75rem; color: var(--muted); }
+.member-extra { font-size: 0.72rem; color: var(--cafe); margin-top: 2px; }
+
+/* ── DIAGNÓSTICO ── */
+.diag-question {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.1rem 1.25rem;
+  margin-bottom: 0.75rem;
+}
+.diag-q-text {
+  font-size: 0.9rem;
+  color: var(--crema);
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+.diag-q-num {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--cafe);
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.radio-group { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.radio-opt {
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.18s;
+  user-select: none;
+}
+.radio-opt.selected {
+  border-color: var(--verde2);
+  color: var(--verde2);
+  background: rgba(82,183,136,0.1);
+}
+.resumen-diag {
+  background: rgba(45,106,79,0.1);
+  border: 1px solid rgba(82,183,136,0.25);
+  border-radius: var(--r);
+  padding: 1rem 1.25rem;
+  margin-top: 1.25rem;
+}
+.resumen-diag h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--verde2); margin-bottom: 0.5rem; }
+.resumen-diag p  { font-size: 0.88rem; color: #a8d5b5; line-height: 1.6; }
+
+/* ── ÉNFASIS ── */
+.enfasis-banner {
+  background: linear-gradient(135deg, #1a3d2b, #2D6A4F 70%, #1a3d2b);
+  border: 1px solid rgba(82,183,136,0.25);
+  border-radius: var(--r);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.enfasis-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cafe); font-weight: 600; margin-bottom: 0.3rem; }
+.enfasis-texto { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--crema); line-height: 1.3; }
+
+/* ── ACTIVIDADES – cards ── */
+.act-grid { display: flex; flex-direction: column; gap: 0.6rem; }
+.act-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s;
+}
+.act-card:hover { border-color: rgba(82,183,136,0.35); transform: translateX(3px); }
+.act-card-inner { display: flex; align-items: stretch; }
+.act-acento { width: 4px; flex-shrink: 0; }
+.act-body { flex: 1; padding: 0.8rem 1rem; min-width: 0; }
+.act-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; margin-bottom: 0.25rem; }
+.act-nombre { font-size: 0.92rem; font-weight: 600; color: var(--crema); }
+.act-actividad { font-size: 0.78rem; color: var(--muted); }
+.act-right { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; }
+.act-fecha { font-size: 0.72rem; color: var(--muted); white-space: nowrap; }
+.estado-pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.7rem; font-weight: 600;
+  padding: 2px 8px; border-radius: 12px;
+}
+.pill-pendiente { background: rgba(136,136,136,0.12); color: var(--muted); }
+.pill-proxima   { background: rgba(233,168,76,0.15);  color: var(--amber); }
+.pill-realizada { background: rgba(82,183,136,0.15);  color: var(--verde2); }
+.pill-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.pill-proxima .pill-dot { animation: pulso 1.8s infinite; }
+@keyframes pulso { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+/* áreas en act-card */
+.act-areas { display: flex; gap: 3px; flex-wrap: wrap; margin-top: 0.4rem; }
+.area-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  title: '';
+}
+
+/* ── FILTROS POR ÁREA ── */
+.filter-bar { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.1rem; align-items: center; }
+.filter-bar span { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-right: 0.25rem; }
+.filter-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 11px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  font-size: 0.78rem; color: var(--muted);
+  cursor: pointer; background: transparent;
+  font-family: 'Source Sans 3', sans-serif;
+  transition: all 0.18s;
+}
+.filter-chip .chip-dot { width: 7px; height: 7px; border-radius: 50%; }
+.filter-chip.on { color: var(--crema); }
+
+/* ── MÉTRICAS ── */
+.metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin-bottom: 1.5rem; }
+@media (max-width: 500px) { .metrics { grid-template-columns: repeat(2,1fr); } }
+.metric {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 0.9rem 0.75rem;
+  text-align: center;
+}
+.metric-num { font-family: 'Playfair Display', serif; font-size: 2rem; display: block; line-height: 1; margin-bottom: 0.2rem; }
+.metric-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+
+/* ── CALENDARIO TIMELINE ── */
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before { content:''; position:absolute; left:0.65rem; top:0; bottom:0; width:1px; background:var(--border); }
+.tl-item { position: relative; margin-bottom: 0.65rem; cursor: pointer; }
+.tl-item:hover .tl-card { border-color: rgba(82,183,136,0.3); }
+.tl-dot { position:absolute; left:-2rem; top:0.7rem; width:10px; height:10px; border-radius:50%; border:2px solid var(--border); z-index:1; }
+.tl-item.est-pendiente .tl-dot { background:#333; border-color:#555; }
+.tl-item.est-proxima .tl-dot { background:var(--amber); border-color:var(--amber); animation:pulso 1.8s infinite; }
+.tl-item.est-realizada .tl-dot { background:var(--verde2); border-color:var(--verde2); }
+.tl-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+  transition: border-color 0.2s;
+}
+.tl-fecha { font-size: 0.72rem; color: var(--muted); min-width: 80px; font-weight: 600; }
+.tl-nombre { font-size: 0.85rem; color: #ccc; flex: 1; }
+.tl-areas-dots { display:flex; gap:3px; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,0.88); z-index:200;
+  overflow-y:auto; padding:2rem 1rem; align-items:flex-start; justify-content:center;
+}
+.modal-overlay.open { display:flex; }
+.modal {
+  background: #1c1c19;
+  border: 1px solid rgba(82,183,136,0.2);
+  border-radius: 14px;
+  max-width: 640px; width:100%;
+  overflow:hidden; margin:auto;
+}
+.modal-accent { height:4px; }
+.modal-head { padding:1.25rem 1.5rem 1rem; border-bottom:1px solid var(--border); position:relative; }
+.modal-chips { display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.6rem; margin-top:0.25rem; }
+.modal-titulo { font-family:'Playfair Display',serif; font-size:1.35rem; color:var(--crema); margin-bottom:0.15rem; }
+.modal-sub { font-size:0.85rem; color:var(--cafe); }
+.modal-x { position:absolute; top:1rem; right:1rem; background:rgba(255,255,255,0.07); border:none; color:#bbb; width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; }
+.modal-x:hover { background:rgba(255,255,255,0.14); color:white; }
+.modal-body { padding:1.25rem 1.5rem; }
+.m-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; margin-bottom:1.25rem; }
+@media(max-width:480px){ .m-grid2 { grid-template-columns:1fr; } }
+.m-dato { background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:0.7rem; }
+.m-dato-label { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.07em; color:#666; font-weight:600; margin-bottom:0.15rem; }
+.m-dato-val { font-size:0.86rem; color:#ccc; }
+.m-sec { margin-bottom:1.1rem; }
+.m-label { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--cafe); font-weight:600; margin-bottom:0.4rem; display:block; }
+.m-text { font-size:0.88rem; color:#c5c2b8; line-height:1.65; }
+.m-areas { display:flex; flex-wrap:wrap; gap:0.35rem; }
+.m-area-chip {
+  display:inline-flex; align-items:center; gap:5px;
+  padding:3px 10px; border-radius:12px;
+  font-size:0.75rem; font-weight:600; border:1px solid;
+}
+.m-mats { list-style:none; display:flex; flex-direction:column; gap:0.25rem; }
+.m-mats li { font-size:0.84rem; color:#bbb; padding-left:1rem; position:relative; }
+.m-mats li::before { content:'·'; position:absolute; left:0; color:var(--verde2); font-size:1.1rem; line-height:1; }
+.modal-foot { padding:0.9rem 1.5rem; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; }
+.modal-nav { background:transparent; border:1px solid var(--border); color:#bbb; padding:5px 14px; border-radius:7px; font-size:0.78rem; cursor:pointer; font-family:'Source Sans 3',sans-serif; transition:all 0.2s; }
+.modal-nav:hover { border-color:var(--verde2); color:var(--verde2); }
+.modal-nav:disabled { opacity:0.25; cursor:default; }
+
+/* ── BADGE EQUIPO ── */
+.badge { display:inline-block; padding:2px 8px; border-radius:10px; font-size:0.7rem; font-weight:600; }
+.badge-akela    { background:rgba(233,168,76,0.15); color:var(--amber); }
+.badge-guiadora { background:rgba(155,93,229,0.15); color:#C77DFF; }
+.badge-resp     { background:rgba(82,183,136,0.15); color:var(--verde2); }
+
+/* ── INFO BLOQUE ── */
+.info-box { background:rgba(45,106,79,0.08); border:1px solid rgba(82,183,136,0.2); border-radius:var(--r); padding:1rem 1.25rem; margin-bottom:1.25rem; }
+.info-box p { font-size:0.85rem; color:#a8d5b5; line-height:1.6; }
+.info-box strong { color:var(--verde2); }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo">🐺</div>
+    <div>
+      <div class="topbar-name">Don Bosco Linares</div>
+      <div class="topbar-sub">Guías y Scouts de Chile · desde 12 oct 1970</div>
+    </div>
+  </div>
+  <div class="topbar-nav" id="nav-steps">
+    <div class="nav-step active" id="ns-0">Unidad</div>
+    <div class="nav-step" id="ns-1">Lobatos</div>
+    <div class="nav-step" id="ns-2">Diagnóstico</div>
+    <div class="nav-step" id="ns-3">Énfasis</div>
+    <div class="nav-step" id="ns-4">Actividades</div>
+    <div class="nav-step" id="ns-5">Calendario</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PANTALLA 0: UNIDAD + EQUIPO
+════════════════════════════════════════ -->
+<div class="screen active" id="screen-0">
+  <div>
+    <h2 class="section-title" style="margin-top:2rem">Configuración de la unidad</h2>
+    <p class="section-sub">Ingresa los datos básicos de la manada. Esta información se guarda y se usa en todo el ciclo de programa.</p>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Nombre de la unidad</label>
+        <input id="u-nombre" type="text" value="Manada Seeonee" placeholder="Ej: Manada Seeonee">
+      </div>
+      <div class="field">
+        <label>Año / ciclo</label>
+        <input id="u-ciclo" type="text" value="2025" placeholder="2025">
+      </div>
+    </div>
+
+    <div class="sep"></div>
+    <h3 style="font-size:1rem;color:var(--crema);margin-bottom:0.25rem;font-weight:600;">Equipo de animadores adultos</h3>
+    <p style="font-size:0.82rem;color:var(--muted);margin-bottom:1.1rem">La responsable de grupo es parte del grupo, no de la unidad. Aquí van quienes trabajan directamente con la manada.</p>
+
+    <!-- Akela -->
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem">
+        <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--cafe);font-weight:600">Akela — Jefe/a de Manada</span>
+        <span class="badge badge-akela">Akela</span>
+      </div>
+      <div class="field-row">
+        <div class="field" style="margin:0"><label>Nombre</label><input id="a-nombre" type="text" value="Jairo Arellano"></div>
+        <div class="field" style="margin:0"><label>Nombre selvático</label><input id="a-selva" type="text" value="Akela"></div>
+      </div>
+    </div>
+
+    <!-- Guiadoras -->
+    <div id="guiadoras-container">
+      <div class="card" style="margin-top:0.75rem" data-g="0">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem">
+          <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:#C77DFF;font-weight:600">Guiadora 1</span>
+          <span class="badge badge-guiadora">Guiadora</span>
+        </div>
+        <div class="field-row">
+          <div class="field" style="margin:0"><label>Nombre</label><input type="text" value="Rosa Sepúlveda" class="g-nombre"></div>
+          <div class="field" style="margin:0"><label>Nombre selvático</label><input type="text" value="Raksha" class="g-selva"></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:0.75rem" data-g="1">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem">
+          <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:#C77DFF;font-weight:600">Guiadora 2</span>
+          <span class="badge badge-guiadora">Guiadora</span>
+        </div>
+        <div class="field-row">
+          <div class="field" style="margin:0"><label>Nombre</label><input type="text" value="Constanza Vásquez" class="g-nombre"></div>
+          <div class="field" style="margin:0"><label>Nombre selvático</label><input type="text" value="Bagheera" class="g-selva"></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:0.75rem" data-g="2">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem">
+          <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:#C77DFF;font-weight:600">Guiadora 3</span>
+          <span class="badge badge-guiadora">Guiadora</span>
+        </div>
+        <div class="field-row">
+          <div class="field" style="margin:0"><label>Nombre</label><input type="text" value="Paula Cisterna" class="g-nombre"></div>
+          <div class="field" style="margin:0"><label>Nombre selvático</label><input type="text" value="" class="g-selva" placeholder="(opcional)"></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-outline" style="margin-top:0.75rem;font-size:0.82rem" onclick="agregarGuiadora()">+ Agregar guiadora/o</button>
+
+    <div class="sep"></div>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="irA(1)">Continuar → Lobatos</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PANTALLA 1: LOBATOS
+════════════════════════════════════════ -->
+<div class="screen" id="screen-1">
+  <div>
+    <h2 class="section-title" style="margin-top:2rem">Integrantes de la manada</h2>
+    <p class="section-sub">Lobatos y lobatas de 7–10 años. La etapa se calcula automáticamente desde la fecha de nacimiento.<br>
+    <strong style="color:var(--cafe)">En la versión conectada a Google Sheets, esta lista se importará desde el formulario de registro existente.</strong></p>
+
+    <div class="info-box">
+      <p>Etapas de progresión: <strong>Lobato/a Nuevo/a</strong> (año 1) · <strong>Lobato/a Activo/a</strong> (año 2) · <strong>Lobato/a Veterano/a</strong> (año 3+). La etapa se determina por tiempo en la manada, no por edad.</p>
+    </div>
+
+    <div id="lobatos-lista" class="team-grid"></div>
+
+    <div class="sep"></div>
+    <button class="btn btn-outline" style="font-size:0.82rem;margin-bottom:1.25rem" onclick="agregarLobato()">+ Agregar lobato/a manualmente</button>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="irA(0)">← Volver</button>
+      <button class="btn btn-primary" onclick="irA(2)">Continuar → Diagnóstico</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PANTALLA 2: DIAGNÓSTICO
+════════════════════════════════════════ -->
+<div class="screen" id="screen-2">
+  <div>
+    <h2 class="section-title" style="margin-top:2rem">Diagnóstico de la manada</h2>
+    <p class="section-sub">Según el manual AGSCH, el diagnóstico examina el clima educativo, el avance en actividades y la progresión personal. Es realizado por el equipo de Viejos Lobos al cierre de cada ciclo.</p>
+
+    <div id="diag-preguntas"></div>
+
+    <div class="resumen-diag" id="diag-resumen" style="display:none">
+      <h4>Síntesis del diagnóstico</h4>
+      <p id="diag-resumen-txt"></p>
+    </div>
+
+    <div class="sep"></div>
+    <div class="field">
+      <label>Observaciones adicionales del equipo</label>
+      <textarea id="diag-obs" placeholder="Ej: Más del 50% son lobatos nuevos. Debemos reforzar el marco simbólico desde el inicio: libro de la selva, historia, personajes, ley de la selva, cómo funciona la manada..."></textarea>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="irA(1)">← Volver</button>
+      <button class="btn btn-primary" onclick="irA(3)">Continuar → Énfasis</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PANTALLA 3: ÉNFASIS
+════════════════════════════════════════ -->
+<div class="screen" id="screen-3">
+  <div>
+    <h2 class="section-title" style="margin-top:2rem">Énfasis del ciclo</h2>
+    <p class="section-sub">El énfasis es una visión global del futuro a la luz del diagnóstico: fortalece lo positivo, corrige lo negativo y orienta las actividades. Cambia en cada ciclo.</p>
+
+    <div class="enfasis-banner" id="enfasis-preview">
+      <div class="enfasis-label">Énfasis del ciclo actual</div>
+      <div class="enfasis-texto" id="enfasis-preview-txt">—</div>
+    </div>
+
+    <div class="field">
+      <label>Énfasis (motto del ciclo)</label>
+      <input id="enfasis-input" type="text" value="Viviendo la aventura en la selva de Seeonee"
+             placeholder="Ej: Fortalecer la identidad de manada y el marco simbólico"
+             oninput="actualizarEnfasis()">
+      <p class="field-hint">Breve frase que define el foco educativo de este ciclo. Todas las actividades deben relacionarse con este énfasis.</p>
+    </div>
+
+    <div class="field">
+      <label>Marco simbólico</label>
+      <input id="marco-input" type="text" value="El Libro de la Selva — Seeonee" placeholder="Marco narrativo del ciclo">
+    </div>
+
+    <div class="field">
+      <label>Fundamentación (¿por qué este énfasis?)</label>
+      <textarea id="enfasis-fund" placeholder="Basado en el diagnóstico: más del 50% son lobatos nuevos, es necesario reforzar el marco simbólico desde el inicio..."
+      >Basado en el diagnóstico: la mayoría de integrantes son nuevos/as. Se priorizará el conocimiento del marco simbólico (libro de la selva, personajes, ley de la manada) y la construcción de identidad de grupo.</textarea>
+    </div>
+
+    <div class="sep"></div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="irA(2)">← Volver</button>
+      <button class="btn btn-primary" onclick="irA(4)">Continuar → Actividades</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PANTALLA 4: ACTIVIDADES
+════════════════════════════════════════ -->
+<div class="screen" id="screen-4">
+  <div>
+    <h2 class="section-title" style="margin-top:2rem">Actividades del ciclo</h2>
+    <p class="section-sub">Actividades preseleccionadas por el equipo, pendientes de ratificación por la manada. Los lobatos pueden proponer cambios o agregar actividades. El filtro es por área de desarrollo según el manual AGSCH.</p>
+
+    <div class="metrics">
+      <div class="metric"><span class="metric-num" id="m-total" style="color:var(--crema)">0</span><span class="metric-label">Total</span></div>
+      <div class="metric"><span class="metric-num" id="m-real" style="color:var(--verde2)">0</span><span class="metric-label">Realizadas</span></div>
+      <div class="metric"><span class="metric-num" id="m-prox" style="color:var(--amber)">0</span><span class="metric-label">Próximas</span></div>
+      <div class="metric"><span class="metric-num" id="m-pend" style="color:var(--muted)">0</span><span class="metric-label">Pendientes</span></div>
+    </div>
+
+    <!-- Filtros por área de desarrollo (6 praderas + "todas") -->
+    <div class="filter-bar">
+      <span>Área:</span>
+      <button class="filter-chip on" data-area="todas" onclick="filtrarArea(this)" style="border-color:var(--verde2);color:var(--verde2)">Todas</button>
+      <button class="filter-chip" data-area="corporalidad" onclick="filtrarArea(this)">
+        <span class="chip-dot" style="background:var(--corporalidad)"></span>Corporalidad (Bagheera)
+      </button>
+      <button class="filter-chip" data-area="creatividad" onclick="filtrarArea(this)">
+        <span class="chip-dot" style="background:var(--creatividad)"></span>Creatividad (Kaa)
+      </button>
+      <button class="filter-chip" data-area="caracter" onclick="filtrarArea(this)">
+        <span class="chip-dot" style="background:var(--caracter)"></span>Carácter (Baloo)
+      </button>
+      <button class="filter-chip" data-area="afectividad" onclick="filtrarArea(this)">
+        <span class="chip-dot" style="background:var(--afectividad)"></span>Afectividad (Raksha)
+      </button>
+      <button class="filter-chip" data-area="sociabilidad" onclick="filtrarArea(this)">
+        <span class="chip-dot" style="background:var(--sociabilidad)"></span>Sociabilidad (Akela)
+      </button>
+      <button class="filter-chip" data-area="espiritualidad" onclick="filtrarArea(this)">
+        <span class="chip-dot" style="background:var(--espiritualidad)"></span>Espiritualidad (Francisco)
+      </button>
+    </div>
+
+    <div class="act-grid" id="act-lista"></div>
+
+    <div class="sep"></div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="irA(3)">← Volver</button>
+      <button class="btn btn-primary" onclick="irA(5)">Continuar → Calendario</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PANTALLA 5: CALENDARIO
+════════════════════════════════════════ -->
+<div class="screen" id="screen-5">
+  <div>
+    <h2 class="section-title" style="margin-top:2rem">Calendario del ciclo</h2>
+    <p class="section-sub">Programación cronológica de actividades. Esta calendarización es presentada y ratificada en la primera reunión de la manada.</p>
+
+    <div class="enfasis-banner" style="margin-bottom:1.25rem">
+      <div class="enfasis-label">Énfasis del ciclo</div>
+      <div class="enfasis-texto" id="cal-enfasis-txt">—</div>
+    </div>
+
+    <div class="timeline" id="cal-timeline"></div>
+
+    <div class="sep"></div>
+    <div class="btn-row">
+      <button class="btn btn-outline" onclick="irA(4)">← Volver</button>
+      <button class="btn btn-primary" style="background:var(--cafe);color:#1a1a12" onclick="alert('¡Ciclo de programa listo! En la versión conectada, esto guardará todo en Google Sheets.')">✓ Guardar ciclo de programa</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL FICHA -->
+<div class="modal-overlay" id="modal" onclick="cerrarModalFuera(event)">
+  <div class="modal">
+    <div class="modal-accent" id="m-accent"></div>
+    <div class="modal-head">
+      <div class="modal-chips" id="m-chips"></div>
+      <div class="modal-titulo" id="m-titulo"></div>
+      <div class="modal-sub" id="m-sub"></div>
+      <button class="modal-x" onclick="cerrarModal()">✕</button>
+    </div>
+    <div class="modal-body" id="m-body"></div>
+    <div class="modal-foot">
+      <button class="modal-nav" id="m-prev" onclick="navModal(-1)">← Anterior</button>
+      <span id="m-count" style="font-size:0.75rem;color:var(--muted)"></span>
+      <button class="modal-nav" id="m-next" onclick="navModal(1)">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════
+//  ESTADO GLOBAL
+// ═══════════════════════════════
+let currentScreen = 0;
+let modalIdx = -1;
+let areaFiltro = "todas";
+
+// ═══════════════════════════════
+//  DATOS: LOBATOS (demo)
+//  En producción → fetch desde Google Apps Script / Sheets
+// ═══════════════════════════════
+const LOBATOS_DEMO = [
+  { nombre:"Joaquín Muñoz",    fn:"2016-03-14", genero:"M", etapa:"nuevo",    intereses:"fútbol, dibujo" },
+  { nombre:"Valentina Reyes",  fn:"2015-09-02", genero:"F", etapa:"activo",   intereses:"música, lectura" },
+  { nombre:"Mateo Soto",       fn:"2017-01-20", genero:"M", etapa:"nuevo",    intereses:"ciencias" },
+  { nombre:"Isidora Parra",    fn:"2016-07-11", genero:"F", etapa:"nuevo",    intereses:"danza, naturaleza" },
+  { nombre:"Benjamín Rojas",   fn:"2015-05-30", genero:"M", etapa:"activo",   intereses:"camping" },
+  { nombre:"Sofía Contreras",  fn:"2016-11-08", genero:"F", etapa:"nuevo",    intereses:"arte, animales" },
+  { nombre:"Emilio Vidal",     fn:"2017-02-15", genero:"M", etapa:"nuevo",    intereses:"computadores" },
+  { nombre:"Renata Castro",    fn:"2015-08-22", genero:"F", etapa:"veterano", intereses:"teatro" },
+];
+
+// ═══════════════════════════════
+//  DATOS: ACTIVIDADES REALES
+//  Fechas según calendarización ratificada
+// ═══════════════════════════════
+const ACTIVIDADES = [
+  {
+    id:1,
+    nombre:"Presentación del calendario",
+    actividad:"Reforzar gritos y dinámicas · Reventar globos en los pies · Submarino",
+    fecha:"2025-05-02",
+    estado:"proxima",
+    areas:["afectividad","sociabilidad","corporalidad"],
+    duracion:"2 horas",
+    lugar:"Cubil",
+    responsable:"Akela + equipo",
+    objetivo:"Presentar y ratificar el calendario del ciclo con la manada. Reforzar las dinámicas grupales e identidad de manada.",
+    descripcion:"Primera reunión del ciclo. Se presenta el calendario a los lobatos para su ratificación. Juegos de integración y energía grupal: gritos de seisena, juego de los globos y submarino.",
+    materiales:["Calendario impreso o proyectado","Globos","Espacio amplio"],
+    notas:"El calendario es ratificado aquí. Los lobatos pueden proponer cambios."
+  },
+  {
+    id:2,
+    nombre:"Prueba de la manada",
+    actividad:"Juegos de módulos (cumpleaños Bagheera)",
+    fecha:"2025-05-09",
+    estado:"pendiente",
+    areas:["corporalidad","caracter","sociabilidad"],
+    duracion:"2 horas",
+    lugar:"Cancha / patio",
+    responsable:"Bagheera + apoyo del Clan",
+    objetivo:"Desarrollar habilidades físicas, trabajo en equipo y cooperación inter-ramas.",
+    descripcion:"5-6 módulos de habilidades y destreza. El memorice de la selva será uno de los módulos. Se invita al Clan a apoyar con algunos módulos. Actividad especial por el cumpleaños de Bagheera.",
+    materiales:["Materiales por módulo (cuerdas, conos, memorice)","Cronómetro","Fichas de puntuación"],
+    notas:"Coordinar con Clan con anticipación. Preparar módulo sorpresa para Bagheera."
+  },
+  {
+    id:3,
+    nombre:"Encuentro de Manadas",
+    actividad:"Actividad inter-manadas (horarios por confirmar)",
+    fecha:"2025-05-16",
+    estado:"pendiente",
+    areas:["sociabilidad","afectividad","corporalidad"],
+    duracion:"Jornada (por confirmar)",
+    lugar:"Por confirmar",
+    responsable:"Akela + coordinación districal",
+    objetivo:"Fortalecer vínculos con otras manadas del distrito, vivir experiencias de hermandad scout.",
+    descripcion:"Encuentro de manadas del distrito. Pendiente confirmar horarios. Organizar transporte y alimentación. Coordinar registro de asistencia.",
+    materiales:["Transporte (gestionar)","Alimentación","Ficha de registro","Uniforme completo"],
+    notas:"⚠ Pendiente: horario, transporte, alimentación, registro. Coordinar con responsable de grupo."
+  },
+  {
+    id:4,
+    nombre:"Los nudos de Akela",
+    actividad:"Nudos y construcciones",
+    fecha:"2025-05-23",
+    estado:"pendiente",
+    areas:["caracter","inteligencia","corporalidad"],
+    duracion:"2 horas",
+    lugar:"Cubil / patio",
+    responsable:"Akela",
+    objetivo:"Aprender y practicar nudos básicos scouts. Aplicarlos en construcciones con ramas al estilo selvático.",
+    descripcion:"Taller de nudos: cuadrado, vuelta de escota, ballestrinque. Los lobatos construyen estructuras pequeñas con ramas. Lenguaje temático: 'construir con lianas de Seeonee'.",
+    materiales:["Cuerdas de 3mm (2m por lobato)","Ramas medianas","Hoja guía de nudos","Tijeras"],
+    notas:"Actividad con ficha PDF ya existente. Revisar y adaptar."
+  },
+  {
+    id:5,
+    nombre:"Cuidemos la selva",
+    actividad:"Huerta comunitaria",
+    fecha:"2025-05-30",
+    estado:"pendiente",
+    areas:["espiritualidad","sociabilidad","caracter"],
+    duracion:"3 horas (mañana)",
+    lugar:"Espacio verde Linares",
+    responsable:"Bagheera + Akela",
+    objetivo:"Desarrollar conciencia ambiental y responsabilidad con el entorno a través de acción concreta: construir una huerta.",
+    descripcion:"La manada construye una huerta en un espacio comunitario. Limpieza del terreno, preparación de tierra, siembra. Documentan el proceso. En la tarde el equipo de dirigentes tiene encuentro de distrito.",
+    materiales:["Guantes","Palas pequeñas","Semillas/plantas","Etiquetas","Regaderas","Cámara"],
+    notas:"Actividad en la mañana. Confirmar espacio con anticipación."
+  },
+  {
+    id:6,
+    nombre:"Un día con la manada",
+    actividad:"Cocinar con los lobatos (Casa Centenario)",
+    fecha:"2025-06-06",
+    estado:"pendiente",
+    areas:["afectividad","sociabilidad","corporalidad"],
+    duracion:"Jornada completa",
+    lugar:"Casa Centenario",
+    responsable:"Akela + apoyo Clan o apoderados",
+    objetivo:"Fortalecer vínculos de manada, desarrollar habilidades culinarias básicas y sentido de convivencia.",
+    descripcion:"Jornada completa en Casa Centenario. Los lobatos cocinan juntos. Juegos libres, fogón, convivencia. Se puede pedir apoyo al Clan o apoderados para cocina.",
+    materiales:["Ingredientes (gestionar)","Utensilios de cocina","Materiales de juego","Autorización de salida"],
+    notas:"Coordinar transporte y permisos. Pedir apoyo Clan / apoderados para cocina."
+  },
+  {
+    id:7,
+    nombre:"Feria de ciencias",
+    actividad:"Los inventos de los hombres",
+    fecha:"2025-06-13",
+    estado:"pendiente",
+    areas:["inteligencia","creatividad"],
+    duracion:"2 horas",
+    lugar:"Cubil",
+    responsable:"Bagheera",
+    objetivo:"Estimular curiosidad científica y capacidad de investigación. Presentación de experimentos.",
+    descripcion:"Cada lobato o seisena presenta un experimento relacionado con la naturaleza o vida selvática. Feria de exposición con preguntas del público.",
+    materiales:["Materiales por experimento (cada grupo los consigue)","Mesones","Carteles"],
+    notas:"Avisar con 3 semanas de anticipación para que preparen en casa."
+  },
+  {
+    id:8,
+    nombre:"Viaje fuera de Linares",
+    actividad:"Excursión (revisar con apoderados)",
+    fecha:"2025-06-20",
+    estado:"pendiente",
+    areas:["corporalidad","afectividad","sociabilidad"],
+    duracion:"Jornada completa",
+    lugar:"Por confirmar fuera de Linares",
+    responsable:"Akela + equipo + apoderados",
+    objetivo:"Vivir una experiencia de aventura en un entorno nuevo. Fortalecer vínculos y autoconfianza.",
+    descripcion:"Excursión fuera de Linares. Destino por confirmar con apoderados. Requiere coordinación de transporte, alimentación y autorizaciones.",
+    materiales:["Transporte","Alimentación","Autorizaciones","Botiquín","Uniformes"],
+    notas:"⚠ Revisar con apoderados. Confirmar destino, presupuesto y permisos."
+  },
+  {
+    id:9,
+    nombre:"Vacaciones",
+    actividad:"Descanso",
+    fecha:"2025-06-27",
+    estado:"pendiente",
+    areas:[],
+    duracion:"—",
+    lugar:"—",
+    responsable:"—",
+    objetivo:"Período de vacaciones escolares.",
+    descripcion:"Sin reunión de manada.",
+    materiales:[],
+    notas:"Vacaciones: 27 jun · 4 jul"
+  },
+  {
+    id:10,
+    nombre:"Show de talentos e intereses",
+    actividad:"Talentos de la manada",
+    fecha:"2025-07-11",
+    estado:"pendiente",
+    areas:["creatividad","afectividad","sociabilidad"],
+    duracion:"90 min",
+    lugar:"Cubil / salón",
+    responsable:"Akela",
+    objetivo:"Valorar los talentos individuales y fortalecer autoestima. Los lobatos preparan durante vacaciones.",
+    descripcion:"Cada lobato muestra algo que sabe hacer: tocar instrumento, bailar, dibujar, contar un cuento, magia... La manada celebra y aplaude. Se prepara en vacaciones de invierno.",
+    materiales:["Escenario simple","Decoración festiva","Diplomas de reconocimiento"],
+    notas:"Avisar a los lobatos antes de vacaciones para que preparen."
+  },
+  {
+    id:11,
+    nombre:"Búsqueda del tesoro con pistas",
+    actividad:"Las huellas de Bagheera",
+    fecha:"2025-07-18",
+    estado:"pendiente",
+    areas:["corporalidad","inteligencia","caracter"],
+    duracion:"2 horas",
+    lugar:"Plaza / barrio / terreno",
+    responsable:"Bagheera",
+    objetivo:"Desarrollar capacidad de observación, deducción y trabajo en equipo siguiendo señales selváticas.",
+    descripcion:"Shere Khan ha escondido algo. Los lobatos siguen pistas por el territorio usando señales de rastreo scout. Cada seisena recibe una ruta. Convergen al final para descubrir el tesoro.",
+    materiales:["Sobres con pistas","Señales scout (yeso o cintas)","Premio (cofre decorado)"],
+    notas:"Requiere preparación previa del recorrido por parte de las guiadoras."
+  },
+  {
+    id:12,
+    nombre:"Juego de ciudad",
+    actividad:"Bomberos · CFT · Panadería · UTAL · Parroquia",
+    fecha:"2025-07-25",
+    estado:"pendiente",
+    areas:["sociabilidad","caracter","inteligencia"],
+    duracion:"Jornada",
+    lugar:"Linares (recorrido urbano)",
+    responsable:"Akela + equipo",
+    objetivo:"Conocer instituciones de la comunidad local. Desarrollar sentido de servicio y ciudadanía.",
+    descripcion:"Recorrido por instituciones de Linares: Bomberos, CFT, Panadería, UTAL, Parroquia. En cada lugar los lobatos realizan una actividad o aprendizaje. Estilo rally urbano.",
+    materiales:["Mapa del recorrido","Cuaderno de misiones","Autorización","Transporte (si aplica)"],
+    notas:"Coordinar con cada institución con anticipación."
+  },
+  {
+    id:13,
+    nombre:"Amanecer Scout",
+    actividad:"Actividad especial madrugada",
+    fecha:"2025-08-01",
+    estado:"pendiente",
+    areas:["afectividad","espiritualidad","sociabilidad"],
+    duracion:"Madrugada (hora TBD)",
+    lugar:"Por confirmar",
+    responsable:"Akela + equipo",
+    objetivo:"Vivir una experiencia única de hermandad y espiritualidad al amanecer.",
+    descripcion:"Actividad especial al amanecer. Ver salida del sol juntos, reflexión, compartir. Requiere autorización especial de apoderados.",
+    materiales:["Frazadas","Mate/infusión","Linternas","Autorizaciones especiales"],
+    notas:"⚠ Requiere autorización de apoderados. Confirmar lugar seguro."
+  },
+  {
+    id:14,
+    nombre:"Día del niño — Taller de campismo",
+    actividad:"Armado de carpa y mochila",
+    fecha:"2025-08-08",
+    estado:"pendiente",
+    areas:["corporalidad","caracter","inteligencia"],
+    duracion:"2.5 horas",
+    lugar:"Cubil / patio",
+    responsable:"Akela + Bagheera",
+    objetivo:"Preparar a los lobatos para el campamento de cierre. Aprender armado de carpa, organización de mochila y normas de seguridad.",
+    descripcion:"Taller práctico de campismo por el Día del Niño. Los lobatos aprenden a armar carpa, organizar mochila y conocen las normas de seguridad. Se presenta el programa del campamento de cierre.",
+    materiales:["Tiendas de campaña","Mochilas de ejemplo","Lista de equipamiento","Checklist personal"],
+    notas:"Actividad con ficha PDF ya existente. Adaptar al contexto del campamento final."
+  },
+  {
+    id:15,
+    nombre:"Raid — Acampada y Flor Roja",
+    actividad:"Campamento de cierre de ciclo",
+    fecha:"2025-08-15",
+    estado:"pendiente",
+    areas:["corporalidad","caracter","afectividad","espiritualidad","sociabilidad"],
+    duracion:"Jornada completa + pernocte",
+    lugar:"Por confirmar",
+    responsable:"Equipo completo",
+    objetivo:"Integrar todas las habilidades del ciclo en un campamento. Cerrar el ciclo con la ceremonia de Flor Roja y entrega de reconocimientos.",
+    descripcion:"Campamento de cierre. Raid de actividades durante el día. En la noche, ceremonia de Flor Roja: fogón central, cada lobato comparte un logro del ciclo, entrega de reconocimientos e insignias. La manada celebra que avanzó.",
+    materiales:["Equipamiento de campamento completo","Velas o fogón","Pergaminos de promesa","Insignias de etapa","Carta personal por lobato"],
+    notas:"Actividad de cierre del ciclo. Requiere máxima planificación. Coordinar con apoderados y grupo."
+  }
+];
+
+// ═══════════════════════════════
+//  ÁREAS DE DESARROLLO (6 praderas)
+// ═══════════════════════════════
+const AREAS = {
+  corporalidad:   { label:"Corporalidad",   personaje:"Bagheera",  color:"var(--corporalidad)" },
+  creatividad:    { label:"Creatividad",    personaje:"Kaa",       color:"var(--creatividad)"  },
+  caracter:       { label:"Carácter",       personaje:"Baloo",     color:"var(--caracter)"     },
+  afectividad:    { label:"Afectividad",    personaje:"Raksha",    color:"var(--afectividad)"  },
+  sociabilidad:   { label:"Sociabilidad",   personaje:"Akela",     color:"var(--sociabilidad)" },
+  espiritualidad: { label:"Espiritualidad", personaje:"Francisco", color:"var(--espiritualidad)"},
+  inteligencia:   { label:"Inteligencia",   personaje:"Baloo",     color:"#F9C80E"             }
+};
+
+// ═══════════════════════════════
+//  DIAGNÓSTICO — preguntas
+// ═══════════════════════════════
+const DIAG_PREGUNTAS = [
+  {
+    id:"clima",
+    texto:"¿El clima educativo de la manada produce el ambiente deseado? (aplicación del método, valores, convivencia)",
+    opts:["Muy bien","Bien","Regular","Por mejorar","Deficiente"]
+  },
+  {
+    id:"actividades",
+    texto:"¿Las actividades han resultado desafiantes, atractivas y significativas para los lobatos?",
+    opts:["Siempre","Casi siempre","A veces","Pocas veces","No aplica (ciclo nuevo)"]
+  },
+  {
+    id:"equilibrio",
+    texto:"¿Las actividades ofrecen equilibrio entre las distintas áreas de desarrollo?",
+    opts:["Sí, equilibrado","Falta reforzar 1-2 áreas","Muy desequilibrado","No aplica"]
+  },
+  {
+    id:"nuevos",
+    texto:"¿Qué proporción de la manada son lobatos/as nuevos/as este ciclo?",
+    opts:["Mayoría nuevos (+50%)","Mitad nuevos","Minoría nuevos","Casi ninguno nuevo"]
+  },
+  {
+    id:"marcosim",
+    texto:"¿Los lobatos conocen el marco simbólico? (libro de la selva, personajes, ley, historia de la manada)",
+    opts:["Lo conocen bien","Conocimiento parcial","Mayoría lo desconoce","No aplica"]
+  },
+  {
+    id:"progresion",
+    texto:"¿El seguimiento individual de la progresión personal ha sido constante?",
+    opts:["Sí, constante","Irregular","Poco","Recién comenzamos"]
+  },
+  {
+    id:"seisenas",
+    texto:"¿Las seisenas funcionan bien como equipos autónomos?",
+    opts:["Muy bien","Bien","En formación","Necesitan refuerzo"]
+  }
+];
+
+let diagRespuestas = {};
+
+// ═══════════════════════════════
+//  NAVEGACIÓN
+// ═══════════════════════════════
+function irA(n) {
+  document.getElementById("screen-" + currentScreen).classList.remove("active");
+  document.getElementById("screen-" + n).classList.add("active");
+  currentScreen = n;
+  // actualizar nav
+  for (let i = 0; i < 6; i++) {
+    const el = document.getElementById("ns-" + i);
+    el.classList.remove("active","done");
+    if (i < n) el.classList.add("done");
+    else if (i === n) el.classList.add("active");
+  }
+  // acciones por pantalla
+  if (n === 1) renderLobatos();
+  if (n === 2) renderDiagnostico();
+  if (n === 3) actualizarEnfasis();
+  if (n === 4) renderActividades();
+  if (n === 5) renderCalendario();
+  window.scrollTo(0,0);
+}
+
+// ═══════════════════════════════
+//  PANTALLA 1: LOBATOS
+// ═══════════════════════════════
+function calcEdad(fn) {
+  const hoy = new Date();
+  const nac = new Date(fn);
+  let edad = hoy.getFullYear() - nac.getFullYear();
+  if (hoy < new Date(hoy.getFullYear(), nac.getMonth(), nac.getDate())) edad--;
+  return edad;
+}
+function etapaColor(e) {
+  return e === "veterano" ? "#C9A87C" : e === "activo" ? "#52B788" : "#888";
+}
+function etapaLabel(e) {
+  return e === "veterano" ? "Veterano/a" : e === "activo" ? "Activo/a" : "Nuevo/a";
+}
+function iniciales(n) {
+  return n.split(" ").slice(0,2).map(p=>p[0]).join("").toUpperCase();
+}
+function generoColor(g) { return g==="F" ? "#C77DFF" : "#457B9D"; }
+
+function renderLobatos() {
+  const cont = document.getElementById("lobatos-lista");
+  cont.innerHTML = LOBATOS_DEMO.map((l, i) => {
+    const edad = calcEdad(l.fn);
+    const ec = etapaColor(l.etapa);
+    const gc = generoColor(l.genero);
+    return `
+    <div class="member-card">
+      <div class="member-avatar" style="background:${gc}22;color:${gc};border:1.5px solid ${gc}44">${iniciales(l.nombre)}</div>
+      <div class="member-info">
+        <div class="member-name">${l.nombre}</div>
+        <div class="member-role">${edad} años · ${l.genero === "F" ? "Lobata" : "Lobato"}</div>
+        <div class="member-extra" style="color:${ec}">${etapaLabel(l.etapa)}</div>
+        ${l.intereses ? `<div class="member-extra" style="color:var(--muted);margin-top:1px">${l.intereses}</div>` : ""}
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function agregarLobato() {
+  const nombre = prompt("Nombre del lobato/a:");
+  if (!nombre) return;
+  LOBATOS_DEMO.push({ nombre, fn: "2016-01-01", genero:"M", etapa:"nuevo", intereses:"" });
+  renderLobatos();
+}
+
+// ═══════════════════════════════
+//  PANTALLA 2: DIAGNÓSTICO
+// ═══════════════════════════════
+function renderDiagnostico() {
+  const cont = document.getElementById("diag-preguntas");
+  cont.innerHTML = DIAG_PREGUNTAS.map((q,i) => `
+  <div class="diag-question">
+    <div class="diag-q-num">Pregunta ${i+1} · ${labelDiagArea(q.id)}</div>
+    <div class="diag-q-text">${q.texto}</div>
+    <div class="radio-group">
+      ${q.opts.map(o => `
+        <div class="radio-opt ${diagRespuestas[q.id]===o?'selected':''}"
+             onclick="selDiag('${q.id}','${o}',this)">${o}</div>
+      `).join("")}
+    </div>
+  </div>`).join("");
+  actualizarResumenDiag();
+}
+
+function labelDiagArea(id) {
+  const m = { clima:"Clima educativo", actividades:"Actividades", equilibrio:"Áreas de desarrollo",
+               nuevos:"Composición de la manada", marcosim:"Marco simbólico",
+               progresion:"Progresión personal", seisenas:"Seisenas" };
+  return m[id] || id;
+}
+
+function selDiag(id, val, el) {
+  diagRespuestas[id] = val;
+  el.closest(".diag-question").querySelectorAll(".radio-opt").forEach(o => o.classList.remove("selected"));
+  el.classList.add("selected");
+  actualizarResumenDiag();
+}
+
+function actualizarResumenDiag() {
+  const n = Object.keys(diagRespuestas).length;
+  const total = DIAG_PREGUNTAS.length;
+  const resumen = document.getElementById("diag-resumen");
+  const txt = document.getElementById("diag-resumen-txt");
+  if (n < 3) { resumen.style.display = "none"; return; }
+  resumen.style.display = "block";
+  const partes = [];
+  if (diagRespuestas.nuevos && diagRespuestas.nuevos.includes("+50%"))
+    partes.push("La mayoría de la manada son lobatos/as nuevos/as: se debe reforzar el marco simbólico desde el inicio.");
+  if (diagRespuestas.marcosim && diagRespuestas.marcosim.includes("desconoce"))
+    partes.push("El marco simbólico (libro de la selva, personajes, ley) no es conocido por la mayoría.");
+  if (diagRespuestas.seisenas && diagRespuestas.seisenas.includes("refuerzo"))
+    partes.push("Las seisenas necesitan trabajo de formación como equipo.");
+  if (diagRespuestas.progresion && diagRespuestas.progresion.includes("comenzamos"))
+    partes.push("Es el primer ciclo: el seguimiento de progresión personal se construirá desde cero.");
+  if (diagRespuestas.equilibrio && diagRespuestas.equilibrio.includes("área"))
+    partes.push("Existe desequilibrio en las áreas de desarrollo: revisar calendarización.");
+  txt.textContent = partes.length > 0
+    ? partes.join(" ")
+    : "Diagnóstico en proceso. Responde más preguntas para obtener una síntesis automática.";
+}
+
+// ═══════════════════════════════
+//  PANTALLA 3: ÉNFASIS
+// ═══════════════════════════════
+function actualizarEnfasis() {
+  const val = document.getElementById("enfasis-input")?.value || "—";
+  const p = document.getElementById("enfasis-preview-txt");
+  if (p) p.textContent = val || "—";
+  const cal = document.getElementById("cal-enfasis-txt");
+  if (cal) cal.textContent = val || "—";
+}
+
+// ═══════════════════════════════
+//  PANTALLA 4: ACTIVIDADES
+// ═══════════════════════════════
+let actsFiltradas = [...ACTIVIDADES];
+
+function filtrarArea(btn) {
+  areaFiltro = btn.dataset.area;
+  document.querySelectorAll(".filter-chip").forEach(b => {
+    b.classList.remove("on");
+    b.style.borderColor = "";
+    b.style.color = "";
+  });
+  btn.classList.add("on");
+  if (areaFiltro !== "todas") {
+    const color = AREAS[areaFiltro]?.color || "var(--verde2)";
+    btn.style.borderColor = color;
+    btn.style.color = color;
+  } else {
+    btn.style.borderColor = "var(--verde2)";
+    btn.style.color = "var(--verde2)";
+  }
+  renderActividades();
+}
+
+function renderActividades() {
+  actsFiltradas = areaFiltro === "todas"
+    ? ACTIVIDADES.filter(a => a.id !== 9)
+    : ACTIVIDADES.filter(a => a.areas.includes(areaFiltro));
+
+  // Métricas (todas, sin filtro)
+  const real = ACTIVIDADES.filter(a=>a.estado==="realizada").length;
+  const prox = ACTIVIDADES.filter(a=>a.estado==="proxima").length;
+  const pend = ACTIVIDADES.filter(a=>a.estado==="pendiente").length;
+  document.getElementById("m-total").textContent = ACTIVIDADES.filter(a=>a.id!==9).length;
+  document.getElementById("m-real").textContent = real;
+  document.getElementById("m-prox").textContent = prox;
+  document.getElementById("m-pend").textContent = pend;
+
+  const lista = document.getElementById("act-lista");
+  lista.innerHTML = actsFiltradas.map((a, i) => {
+    const col = a.areas[0] ? (AREAS[a.areas[0]]?.color || "#888") : "#555";
+    const areasDots = a.areas.map(ar =>
+      `<div class="area-dot" style="background:${AREAS[ar]?.color||'#555'}" title="${AREAS[ar]?.label||ar}"></div>`
+    ).join("");
+    return `
+    <div class="act-card" onclick="abrirModal(${i})">
+      <div class="act-card-inner">
+        <div class="act-acento" style="background:${col}"></div>
+        <div class="act-body">
+          <div class="act-top">
+            <div>
+              <div class="act-nombre">${a.nombre}</div>
+              <div class="act-actividad">${a.actividad}</div>
+            </div>
+            <div class="act-right">
+              <div class="act-fecha">📅 ${fmt(a.fecha)}</div>
+              <div class="estado-pill pill-${a.estado}">
+                <span class="pill-dot"></span>
+                ${a.estado==="proxima"?"Próxima":a.estado==="realizada"?"Realizada":"Pendiente"}
+              </div>
+            </div>
+          </div>
+          <div class="act-areas">${areasDots}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+// ═══════════════════════════════
+//  PANTALLA 5: CALENDARIO
+// ═══════════════════════════════
+function renderCalendario() {
+  actualizarEnfasis();
+  const ordenadas = [...ACTIVIDADES].sort((a,b)=>new Date(a.fecha)-new Date(b.fecha));
+  const tl = document.getElementById("cal-timeline");
+  tl.innerHTML = ordenadas.map((a,i) => {
+    const col = a.areas[0] ? (AREAS[a.areas[0]]?.color||"#555") : "#555";
+    const dots = a.areas.map(ar =>
+      `<div class="area-dot" style="background:${AREAS[ar]?.color||'#555'};width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:2px" title="${AREAS[ar]?.label||ar}"></div>`
+    ).join("");
+    const esVacaciones = a.id === 9;
+    return `
+    <div class="tl-item est-${a.estado}" onclick="${esVacaciones?'':('abrirModalById('+a.id+')')}">
+      <div class="tl-dot"></div>
+      <div class="tl-card" style="${esVacaciones?'opacity:0.45;cursor:default':''}">
+        <div class="tl-fecha">${fmt(a.fecha)}</div>
+        <div class="tl-nombre">${a.nombre}</div>
+        <div class="tl-areas-dots">${dots}</div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+// ═══════════════════════════════
+//  MODAL
+// ═══════════════════════════════
+function abrirModal(i) {
+  modalIdx = i;
+  const a = actsFiltradas[i];
+  const col = a.areas[0] ? (AREAS[a.areas[0]]?.color||"#888") : "#888";
+
+  document.getElementById("m-accent").style.background = col;
+
+  const areaChips = a.areas.map(ar => {
+    const info = AREAS[ar] || { label:ar, color:"#888" };
+    return `<span class="m-area-chip" style="background:${info.color}18;color:${info.color};border-color:${info.color}33">${info.label} · ${info.personaje||""}</span>`;
+  }).join("");
+
+  const estadoCol = a.estado==="realizada"?"var(--verde2)":a.estado==="proxima"?"var(--amber)":"var(--muted)";
+  const estadoLabel = a.estado==="realizada"?"Realizada":a.estado==="proxima"?"Próxima":"Pendiente";
+
+  document.getElementById("m-chips").innerHTML = `
+    <span class="estado-pill pill-${a.estado}"><span class="pill-dot"></span>${estadoLabel}</span>
+    <span style="font-size:0.72rem;color:var(--muted)">#${a.id}</span>
+  `;
+  document.getElementById("m-titulo").textContent = a.nombre;
+  document.getElementById("m-sub").textContent   = a.actividad;
+
+  const mats = (a.materiales||[]).map(m=>`<li>${m}</li>`).join("");
+
+  document.getElementById("m-body").innerHTML = `
+    <div class="m-grid2">
+      <div class="m-dato"><div class="m-dato-label">📅 Fecha</div><div class="m-dato-val">${fmt(a.fecha)}</div></div>
+      <div class="m-dato"><div class="m-dato-label">⏱ Duración</div><div class="m-dato-val">${a.duracion||"—"}</div></div>
+      <div class="m-dato"><div class="m-dato-label">📍 Lugar</div><div class="m-dato-val">${a.lugar||"—"}</div></div>
+      <div class="m-dato"><div class="m-dato-label">👤 Responsable</div><div class="m-dato-val">${a.responsable||"—"}</div></div>
+    </div>
+    <div class="m-sec">
+      <span class="m-label">Áreas de desarrollo (Praderas)</span>
+      <div class="m-areas">${areaChips}</div>
+    </div>
+    <div class="m-sec">
+      <span class="m-label">Objetivo educativo</span>
+      <p class="m-text">${a.objetivo||"—"}</p>
+    </div>
+    <div class="m-sec">
+      <span class="m-label">Descripción</span>
+      <p class="m-text">${a.descripcion||"—"}</p>
+    </div>
+    ${mats ? `<div class="m-sec"><span class="m-label">Materiales</span><ul class="m-mats">${mats}</ul></div>` : ""}
+    ${a.notas ? `<div class="m-sec"><span class="m-label">Notas del equipo</span><p class="m-text" style="color:var(--amber)">${a.notas}</p></div>` : ""}
+  `;
+
+  document.getElementById("m-count").textContent = `${i+1} de ${actsFiltradas.length}`;
+  document.getElementById("m-prev").disabled = i === 0;
+  document.getElementById("m-next").disabled = i === actsFiltradas.length - 1;
+
+  document.getElementById("modal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function abrirModalById(id) {
+  // Para el calendario: buscar en actsFiltradas o en ACTIVIDADES
+  const allIdx = ACTIVIDADES.filter(a=>a.id!==9);
+  const old = actsFiltradas;
+  actsFiltradas = allIdx;
+  const i = allIdx.findIndex(a=>a.id===id);
+  if (i>=0) abrirModal(i);
+}
+
+function cerrarModal() {
+  document.getElementById("modal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+function cerrarModalFuera(e) { if(e.target===document.getElementById("modal")) cerrarModal(); }
+function navModal(dir) {
+  const n = modalIdx + dir;
+  if (n >= 0 && n < actsFiltradas.length) abrirModal(n);
+}
+document.addEventListener("keydown", e => {
+  if (!document.getElementById("modal").classList.contains("open")) return;
+  if (e.key === "Escape") cerrarModal();
+  if (e.key === "ArrowLeft") navModal(-1);
+  if (e.key === "ArrowRight") navModal(1);
+});
+
+// ═══════════════════════════════
+//  EQUIPO
+// ═══════════════════════════════
+function agregarGuiadora() {
+  const n = document.querySelectorAll("[data-g]").length;
+  const div = document.createElement("div");
+  div.className = "card";
+  div.style.marginTop = "0.75rem";
+  div.dataset.g = n;
+  div.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem">
+      <span style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em;color:#C77DFF;font-weight:600">Guiadora ${n+1}</span>
+      <span class="badge badge-guiadora">Guiadora</span>
+    </div>
+    <div class="field-row">
+      <div class="field" style="margin:0"><label>Nombre</label><input type="text" class="g-nombre" placeholder="Nombre completo"></div>
+      <div class="field" style="margin:0"><label>Nombre selvático</label><input type="text" class="g-selva" placeholder="(opcional)"></div>
+    </div>`;
+  document.getElementById("guiadoras-container").appendChild(div);
+}
+
+// ═══════════════════════════════
+//  UTILS
+// ═══════════════════════════════
+const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+function fmt(str) {
+  if (!str) return "—";
+  const [y,m,d] = str.split("-");
+  return `${parseInt(d)} ${MESES[parseInt(m)-1]} ${y}`;
+}
+
+// ═══════════════════════════════
+//  INIT
+// ═══════════════════════════════
+actualizarEnfasis();
+</script>
+</body>
+</html>
