@@ -189,8 +189,7 @@ select{appearance:none;
         <label>Rama perteneciente <span class="req">*</span></label>
         <select name="unidad" required id="sel_unidad">
           <option value="">Seleccionar…</option>
-          <option value="Golondrinas — Bandada">🌟 Golondrinas — Bandada (7–10 años)</option>
-          <option value="Lobatos — Manada">🐾 Lobatos — Manada (7–10 años)</option>
+          <option value="Lobatos — Manada">🐾 Lobatos — Manada mixta (7–10 años, niños y niñas)</option>
           <option value="Scouts — Tropa">⚜ Scouts — Tropa (11–14 años)</option>
           <option value="Guías — Compañía">⚜ Guías — Compañía (11–14 años)</option>
           <option value="Pioneros — Avanzada">🔥 Pioneros — Avanzada (15–17 años)</option>
@@ -410,7 +409,7 @@ select{appearance:none;
         <label>¿Padece alguna enfermedad? <span class="req">*</span></label>
         <div class="radio-group">
           <label><input type="radio" name="enfermedad" value="No" required> No</label>
-          <label><input type="radio" name="enfermedad" value="Sí"> Sí</label>
+          <label><input type="radio" name="enfermedad" value="Sí" required> Sí</label>
         </div>
       </div>
       <div class="field half">
@@ -424,7 +423,7 @@ select{appearance:none;
         <label>¿Recibe algún tratamiento? <span class="req">*</span></label>
         <div class="radio-group">
           <label><input type="radio" name="tratamiento" value="No" required> No</label>
-          <label><input type="radio" name="tratamiento" value="Sí"> Sí</label>
+          <label><input type="radio" name="tratamiento" value="Sí" required> Sí</label>
         </div>
       </div>
       <div class="field half">
@@ -440,7 +439,7 @@ select{appearance:none;
         <label>¿Ha tenido operaciones? <span class="req">*</span></label>
         <div class="radio-group">
           <label><input type="radio" name="operaciones" value="No" required> No</label>
-          <label><input type="radio" name="operaciones" value="Sí"> Sí</label>
+          <label><input type="radio" name="operaciones" value="Sí" required> Sí</label>
         </div>
       </div>
       <div class="field half">
@@ -454,7 +453,7 @@ select{appearance:none;
         <label>¿Tiene asma u otras condiciones respiratorias?</label>
         <div class="radio-group">
           <label><input type="radio" name="asma" value="No"> No</label>
-          <label><input type="radio" name="asma" value="Sí"> Sí</label>
+          <label><input type="radio" name="asma" value="Sí" required> Sí</label>
         </div>
       </div>
       <div class="field half">
@@ -468,7 +467,7 @@ select{appearance:none;
         <label>¿Tiene diagnóstico de neurodivergencia? <span class="tip">(TEA, TDAH, dislexia…)</span></label>
         <div class="radio-group">
           <label><input type="radio" name="neuro" value="No"> No</label>
-          <label><input type="radio" name="neuro" value="Sí"> Sí</label>
+          <label><input type="radio" name="neuro" value="Sí" required> Sí</label>
         </div>
       </div>
       <div class="field half">
@@ -482,7 +481,7 @@ select{appearance:none;
         <label>¿Tiene alguna discapacidad física o sensorial?</label>
         <div class="radio-group">
           <label><input type="radio" name="discap" value="No"> No</label>
-          <label><input type="radio" name="discap" value="Sí"> Sí</label>
+          <label><input type="radio" name="discap" value="Sí" required> Sí</label>
         </div>
       </div>
       <div class="field half">
@@ -628,7 +627,7 @@ document.getElementById('sel_unidad').addEventListener('change', function(){
   var sec = document.getElementById('sec-dirigente');
   var apoderado = document.getElementById('sec-apoderado');
   var campoPatrulla = document.getElementById('campo-patrulla');
-  var sinPatrulla = ['Golondrinas — Bandada','Lobatos — Manada','Dirigente/Guiadora',''];
+  var sinPatrulla = ['Lobatos — Manada','Dirigente/Guiadora',''];
 
   // Patrulla: ocultar para Bandada y Manada
   if(sinPatrulla.indexOf(this.value) !== -1){
@@ -701,6 +700,11 @@ document.getElementById('regForm').addEventListener('submit', function(e){
   // Radio groups obligatorios
   var radios = {};
   this.querySelectorAll('input[type=radio][required]').forEach(function(r){
+    // Ignorar si está en sección oculta
+    var card = r.closest('.card');
+    if(card && card.style.display === 'none') return;
+    var secDir = r.closest('#sec-dirigente');
+    if(secDir && secDir.style.display === 'none') return;
     if(!radios[r.name]) radios[r.name] = { ok: false, el: r };
     if(r.checked) radios[r.name].ok = true;
   });
