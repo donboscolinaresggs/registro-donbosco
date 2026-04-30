@@ -549,6 +549,103 @@ body.publico .solo-privado { display: none !important; }
   .modal-hd { padding: 0.9rem 1rem 0.75rem; }
   .modal-ft { padding: 0.7rem 1rem; }
 }
+
+/* ═══════════════════════════════════════════
+   CALENDARIO MENSUAL
+═══════════════════════════════════════════ */
+.cal-leyenda {
+  display:inline-flex; align-items:center; gap:4px;
+  padding:3px 9px; border-radius:10px; font-size:0.72rem;
+  font-weight:600; border:1px solid;
+}
+.cal-nav {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:0.75rem;
+}
+.cal-nav-btn {
+  background:var(--bg2); border:1px solid var(--border); color:var(--crema);
+  width:32px; height:32px; border-radius:8px; font-size:1.1rem;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:all 0.18s;
+}
+.cal-nav-btn:hover { border-color:var(--verde2); color:var(--verde2); }
+.cal-mes-titulo {
+  font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--crema);
+  font-weight:600; text-align:center;
+}
+.cal-grid-wrap {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:var(--r); overflow:hidden;
+}
+.cal-dias-header {
+  display:grid; grid-template-columns:repeat(7,1fr);
+  border-bottom:1px solid var(--border);
+}
+.cal-dias-header > div {
+  text-align:center; padding:0.5rem 0;
+  font-size:0.68rem; text-transform:uppercase;
+  letter-spacing:0.08em; color:var(--muted); font-weight:600;
+}
+.cal-grid {
+  display:grid; grid-template-columns:repeat(7,1fr);
+}
+.cal-celda {
+  min-height:80px; border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border); padding:0.35rem;
+  position:relative; vertical-align:top;
+  transition:background 0.15s;
+}
+.cal-celda:nth-child(7n) { border-right:none; }
+.cal-celda.otro-mes { opacity:0.3; }
+.cal-celda.hoy { background:rgba(82,183,136,0.06); }
+.cal-celda.tiene-eventos { cursor:pointer; }
+.cal-celda.tiene-eventos:hover { background:rgba(255,255,255,0.03); }
+.cal-num {
+  font-size:0.75rem; color:var(--muted); font-weight:600;
+  margin-bottom:0.25rem; display:block;
+}
+.cal-celda.hoy .cal-num {
+  background:var(--verde2); color:#141410;
+  width:20px; height:20px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.7rem;
+}
+.cal-celda.domingo .cal-num { color:#E76F51; }
+.cal-evento {
+  font-size:0.65rem; line-height:1.2;
+  padding:2px 4px; border-radius:4px; margin-bottom:2px;
+  cursor:pointer; overflow:hidden;
+  white-space:nowrap; text-overflow:ellipsis;
+  border-left:2px solid;
+}
+.ev-manada    { background:rgba(82,183,136,0.12); color:#a8d5b5; border-color:var(--verde2); }
+.ev-distrito  { background:rgba(233,168,76,0.12); color:#d4b87a; border-color:var(--amber); }
+.ev-fija      { background:rgba(155,93,229,0.12); color:#d4b8f5; border-color:#C77DFF; }
+.ev-vacacion  { background:rgba(80,80,80,0.12); color:#555; border-color:#444; font-style:italic; }
+
+/* Lista debajo del calendario */
+.cal-lista-titulo {
+  font-size:0.7rem; text-transform:uppercase; letter-spacing:0.09em;
+  color:var(--cafe); font-weight:600; margin-bottom:0.6rem;
+}
+.cal-lista-item {
+  display:flex; align-items:flex-start; gap:0.75rem;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:8px; padding:0.7rem 0.9rem; margin-bottom:0.5rem;
+  cursor:pointer; transition:border-color 0.18s;
+  border-left:3px solid;
+}
+.cal-lista-item:hover { border-color:rgba(255,255,255,0.15); }
+.cli-fecha { font-size:0.7rem; color:var(--muted); min-width:55px; font-weight:600; white-space:nowrap; }
+.cli-nombre { font-size:0.86rem; color:var(--crema); font-weight:600; }
+.cli-sub { font-size:0.75rem; color:var(--muted); margin-top:1px; }
+.cli-tipo { font-size:0.65rem; font-weight:600; padding:1px 6px; border-radius:8px; margin-top:3px; display:inline-block; }
+
+@media(max-width:480px) {
+  .cal-celda { min-height:55px; padding:0.2rem; }
+  .cal-evento { font-size:0.58rem; }
+  .cal-num { font-size:0.68rem; }
+}
 </style>
 </head>
 <body>
@@ -559,7 +656,7 @@ body.publico .solo-privado { display: none !important; }
     <div class="topbar-logo">🐺</div>
     <div class="topbar-texts">
       <div class="topbar-name" id="tb-nombre">Don Bosco Linares</div>
-      <div class="topbar-sub" id="tb-sub">Desde 12 oct 1970</div>
+      <div class="topbar-sub" id="tb-sub">Guías y Scouts de Chile · desde 12 oct 1970</div>
     </div>
   </div>
   <div class="topbar-badges">
@@ -582,7 +679,7 @@ body.publico .solo-privado { display: none !important; }
     <div class="ph-logo">🐺</div>
     <div class="ph-grupo">Guías y Scouts Don Bosco Linares</div>
     <div class="ph-nombre" id="pub-nombre">Manada Seeonee</div>
-    <div class="ph-sub" id="pub-sub">Ciclo de programa 1-2026</div>
+    <div class="ph-sub" id="pub-sub">Ciclo de programa 2025</div>
   </div>
 
   <h2 class="section-title solo-privado">Configuración de la unidad</h2>
@@ -767,20 +864,41 @@ body.publico .solo-privado { display: none !important; }
 ════════════════════════════════════════ -->
 <div class="screen" id="screen-5">
   <h2 class="section-title">Calendario del ciclo</h2>
-  <p class="section-sub">Programación cronológica. <span class="solo-privado">Esta calendarización es presentada y ratificada en la primera reunión de la manada.</span></p>
+  <p class="section-sub">Ciclo 1 &middot; 2026 &nbsp;&middot;&nbsp; <span class="solo-privado">Calendarización presentada y ratificada por la manada.</span></p>
 
-  <div class="enfasis-banner">
+  <div class="enfasis-banner" style="margin-bottom:1.25rem">
     <div class="enfasis-lbl">Énfasis</div>
     <div class="enfasis-txt" id="cal-enfasis">—</div>
   </div>
 
-  <div class="timeline" id="timeline"></div>
+  <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.1rem;align-items:center">
+    <span style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em">Tipo:</span>
+    <span class="cal-leyenda" style="background:rgba(82,183,136,0.15);color:var(--verde2);border-color:rgba(82,183,136,0.3)">🐺 Manada</span>
+    <span class="cal-leyenda" style="background:rgba(233,168,76,0.15);color:var(--amber);border-color:rgba(233,168,76,0.3)">🏛 Grupo / Distrito</span>
+    <span class="cal-leyenda" style="background:rgba(155,93,229,0.15);color:#C77DFF;border-color:rgba(155,93,229,0.3)">⭐ Fija del grupo</span>
+    <span class="cal-leyenda" style="background:rgba(120,120,120,0.1);color:#666;border-color:rgba(120,120,120,0.2)">🗓 Vacaciones</span>
+  </div>
 
-  <div class="btn-row solo-privado">
-    <button class="btn btn-outline" onclick="irA(4)">← Volver</button>
+  <div class="cal-nav">
+    <button class="cal-nav-btn" onclick="calMes(-1)">&#8249;</button>
+    <div class="cal-mes-titulo" id="cal-mes-titulo">—</div>
+    <button class="cal-nav-btn" onclick="calMes(1)">&#8250;</button>
+  </div>
+
+  <div class="cal-grid-wrap">
+    <div class="cal-dias-header">
+      <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+  </div>
+
+  <div id="cal-lista-mes" style="margin-top:1.25rem"></div>
+
+  <div class="btn-row solo-privado" style="margin-top:1.5rem">
+    <button class="btn btn-outline" onclick="irA(4)">&#8592; Volver</button>
     <button class="btn btn-primary" style="background:var(--cafe);color:#141410"
       onclick="alert('En la versión conectada a Google Sheets, esto guardará el ciclo completo.')">
-      ✓ Guardar ciclo de programa
+      &#10003; Guardar ciclo de programa
     </button>
   </div>
 </div>
@@ -848,7 +966,7 @@ const UNIDADES = {
       { nombre:"Joaquin Andrés Orellana Sepúlveda",    fn:"2016-04-04", genero:"M", intereses:"" },
       { nombre:"Elías Felipe de Jesús Figueroa López", fn:"2018-12-08", genero:"M",    intereses:"" },
       { nombre:"Salvador Prandi Galvez",               fn:"2019-02-20", genero:"M",    intereses:"" },
-      { nombre:"Matías Alonso Orellana Sepúlveda",     fn:"2009-03-12", genero:"M", intereses:"", alerta:"17 años — verificar fecha" },
+      { nombre:"Matías Alonso Orellana Sepúlveda",     fn:"2019-03-12", genero:"M", intereses:"" },
       { nombre:"Támara Anjhelin Cury Yuja",            fn:"2019-05-03", genero:"F",    intereses:"", alerta:"6 años — verificar" },
       { nombre:"Jesús Andres Ruiz Vásquez",            fn:"2016-04-07", genero:"M", intereses:"" },
       { nombre:"Jacinta Paz Sanhueza Salazar",         fn:"2017-01-26", genero:"F",   intereses:"" },
@@ -882,26 +1000,26 @@ const DATA = UNIDADES[UNIDAD] || UNIDADES.manada;
 ══════════════════════════════════════════ */
 const ACTIVIDADES = [
   // ── PRE-CICLO (ya realizadas) ──
-  { id:0,  nombre:"Diagnóstico y creación de énfasis", act:"Sesión de Viejos Lobos",                                   fecha:"2025-04-12", estado:"realizada", areas:["caracter","afectividad"],                        dur:"2 horas",         lugar:"Cubil",                        resp:"Akela + equipo",                objetivo:"Aplicar el diagnóstico de la manada y definir el énfasis del ciclo de programa.",                         desc:"Reunión del equipo de Viejos Lobos. Se aplica el cuestionario de diagnóstico, se analiza el estado de la manada y se construye el énfasis del ciclo.",                                                                                                    mats:["Pauta de diagnóstico","Pizarra o papelógrafo","Material de trabajo"],                                      nota:"Actividad interna del equipo dirigente." },
-  { id:00, nombre:"Presentación del énfasis",          act:"Presentación a la manada",                                  fecha:"2025-04-18", estado:"realizada", areas:["afectividad","sociabilidad"],                    dur:"Reunión regular", lugar:"Cubil",                        resp:"Akela",                          objetivo:"Presentar el énfasis del ciclo a la manada: Viviendo la aventura en la selva de Seeonee.",               desc:"El equipo presenta el énfasis y el marco simbólico (libro de la selva, personajes) a los lobatos. Se contextualiza el ciclo.",                                                                                                                             mats:["Presentación visual o papelógrafo","Imagen de énfasis"],                                                   nota:"" },
-  { id:000,nombre:"Juego democrático",                  act:"Preselección y votación de actividades",                   fecha:"2025-04-25", estado:"realizada", areas:["sociabilidad","caracter"],                       dur:"Reunión regular", lugar:"Cubil",                        resp:"Akela + equipo",                objetivo:"Presentar las actividades preseleccionadas a la manada para su ratificación democrática.",                desc:"Se presentan las actividades preseleccionadas. La manada vota, propone cambios y agrega actividades. El resultado orienta la calendarización.",                                                                                                            mats:["Lista de actividades","Tarjetas de votación","Papelógrafo"],                                               nota:"Las actividades del calendario fueron ratificadas en esta reunión." },
+  { id:0,  nombre:"Diagnóstico y creación de énfasis", act:"Sesión de Viejos Lobos",                                   fecha:"2026-04-12", estado:"realizada", areas:["caracter","afectividad"],                        dur:"2 horas",         lugar:"Cubil",                        resp:"Akela + equipo",                objetivo:"Aplicar el diagnóstico de la manada y definir el énfasis del ciclo de programa.",                         desc:"Reunión del equipo de Viejos Lobos. Se aplica el cuestionario de diagnóstico, se analiza el estado de la manada y se construye el énfasis del ciclo.",                                                                                                    mats:["Pauta de diagnóstico","Pizarra o papelógrafo","Material de trabajo"],                                      nota:"Actividad interna del equipo dirigente." },
+  { id:00, nombre:"Presentación del énfasis",          act:"Presentación a la manada",                                  fecha:"2026-04-18", estado:"realizada", areas:["afectividad","sociabilidad"],                    dur:"Reunión regular", lugar:"Cubil",                        resp:"Akela",                          objetivo:"Presentar el énfasis del ciclo a la manada: Viviendo la aventura en la selva de Seeonee.",               desc:"El equipo presenta el énfasis y el marco simbólico (libro de la selva, personajes) a los lobatos. Se contextualiza el ciclo.",                                                                                                                             mats:["Presentación visual o papelógrafo","Imagen de énfasis"],                                                   nota:"" },
+  { id:000,nombre:"Juego democrático",                  act:"Preselección y votación de actividades",                   fecha:"2026-04-25", estado:"realizada", areas:["sociabilidad","caracter"],                       dur:"Reunión regular", lugar:"Cubil",                        resp:"Akela + equipo",                objetivo:"Presentar las actividades preseleccionadas a la manada para su ratificación democrática.",                desc:"Se presentan las actividades preseleccionadas. La manada vota, propone cambios y agrega actividades. El resultado orienta la calendarización.",                                                                                                            mats:["Lista de actividades","Tarjetas de votación","Papelógrafo"],                                               nota:"Las actividades del calendario fueron ratificadas en esta reunión." },
 
   // ── CICLO ACTIVO ──
-  { id:1,  nombre:"Presentación del calendario",       act:"Gritos y dinámicas · Globos en los pies · Submarino",      fecha:"2025-05-02", estado:"proxima",   areas:["afectividad","sociabilidad","corporalidad"],    dur:"2 horas",         lugar:"Cubil",                        resp:"Akela + equipo",                objetivo:"Presentar y ratificar el calendario del ciclo con la manada. Reforzar gritos, dinámicas e identidad de grupo.", desc:"Se presenta el calendario definitivo a la manada. Actividades de integración y energía: refuerzo de gritos de seisena, reventar globos en los pies, juego submarino.", mats:["Calendario impreso o proyectado","Globos","Espacio amplio"],                                                nota:"Primera reunión formal del ciclo. El calendario puede ajustarse con propuestas de los lobatos." },
-  { id:2,  nombre:"Prueba de la manada",               act:"Juegos de módulos · Cumpleaños Bagheera",                  fecha:"2025-05-09", estado:"pendiente", areas:["corporalidad","caracter","sociabilidad"],       dur:"2 horas",         lugar:"Cancha / patio",               resp:"Bagheera + apoyo Clan",          objetivo:"Desarrollar habilidades físicas, trabajo en equipo y cooperación inter-ramas a través de un circuito de módulos.", desc:"5–6 módulos de habilidades y destreza. Módulos definidos: Memorice de la selva, Voleibol toalla, Gato gigante, Acertijos, Slackline. Se invita al Clan a apoyar. Actividad especial por el cumpleaños de Bagheera.", mats:["Memorice de la selva","Red de voleibol + toallas","Gato gigante","Tarjetas de acertijos","Slackline","Cronómetro","Fichas de puntuación"], nota:"Coordinar con Clan con anticipación. Definir módulos adicionales." },
-  { id:3,  nombre:"Encuentro de Manadas",              act:"Actividad distrital — Yerbas Buenas",                      fecha:"2025-05-16", estado:"pendiente", areas:["sociabilidad","afectividad","corporalidad"],    dur:"11:30 a 18:00 hrs",lugar:"Yerbas Buenas",               resp:"Akela + coordinación districal", objetivo:"Fortalecer vínculos con otras manadas del distrito en una jornada de fraternidad scout.",                   desc:"Encuentro de manadas del distrito en la comuna de Yerbas Buenas. Horario: 11:30 a 18:00 hrs. Los lobatos y lobatas deben llevar comida fría. Coordinar transporte con apoderados.", mats:["Comida fría (cada lobato trae la suya)","Uniforme completo","Ficha de registro","Botiquín"], nota:"⚠ Pendiente: coordinar transporte con apoderados." },
-  { id:4,  nombre:"Los nudos de Akela",                act:"Taller de nudos y construcciones",                         fecha:"2025-05-23", estado:"pendiente", areas:["caracter","inteligencia","corporalidad"],       dur:"2 horas",         lugar:"Cubil / patio",                resp:"Akela",                          objetivo:"Aprender y practicar nudos básicos scouts aplicándolos en construcciones reales.",                         desc:"Taller de nudos: cuadrado, vuelta de escota, ballestrinque y otros. Los lobatos construyen estructuras con colihues o troncos similares. Posibles construcciones: mochilero, tendedero. Ver posibilidad de conseguir colihues.", mats:["Cuerdas 3mm (2m por lobato)","Colihues o troncos similares","Hoja guía de nudos","Tijeras"],               nota:"Verificar disponibilidad de colihues. Ficha PDF ya existente." },
-  { id:5,  nombre:"Cuidemos la selva",                 act:"Huerta en el Rincón Scout",                                fecha:"2025-05-30", estado:"pendiente", areas:["espiritualidad","sociabilidad","caracter"],     dur:"3 horas (mañana)",lugar:"Rincón Scout",                 resp:"Bagheera + Akela",               objetivo:"Desarrollar conciencia ambiental construyendo una huerta a un costado del Rincón Scout.",                  desc:"La manada construye una huerta en el espacio disponible al costado del Rincón Scout. Preparación de tierra, siembra, etiquetado. Se documenta el proceso. Actividad en la mañana; en la tarde los dirigentes tienen encuentro de distrito.", mats:["Guantes","Palas pequeñas","Semillas / plantas","Etiquetas","Regaderas","Cámara para registro"],             nota:"Actividad en la mañana. Coordinar espacio y materiales con anticipación." },
-  { id:6,  nombre:"Un día con la manada",              act:"Cocinar con los lobatos — Casa Centenario",                fecha:"2025-06-06", estado:"pendiente", areas:["afectividad","sociabilidad","corporalidad"],    dur:"Jornada completa",lugar:"Casa Centenario",               resp:"Akela + Clan o apoderados",      objetivo:"Fortalecer vínculos de manada y desarrollar habilidades culinarias básicas en una jornada especial.",     desc:"Jornada completa en Casa Centenario. Los lobatos cocinan juntos (menú por definir). Según el clima: película y/o juegos de mesa bajo techo, o juegos en el pasto. Pedir apoyo al Clan o apoderados para cocina.", mats:["Ingredientes según menú","Utensilios de cocina","Juegos de mesa / películas","Autorización de salida"],    nota:"Definir menú. Confirmar transporte y permisos. Opciones según clima." },
-  { id:7,  nombre:"Feria de ciencias",                 act:"Los inventos de los hombres",                              fecha:"2025-06-13", estado:"pendiente", areas:["inteligencia","creatividad"],                   dur:"2 horas",         lugar:"Cubil",                        resp:"Bagheera + antiguos dirigentes", objetivo:"Estimular la curiosidad científica y la capacidad de investigación a través de una feria de experimentos.",  desc:"Cada lobato o seisena presenta un experimento relacionado con la naturaleza o la vida selvática. Coordinar módulos. Posibilidad de invitar antiguos dirigentes como jurado o apoyo.", mats:["Materiales por experimento (cada grupo los consigue)","Mesones de exhibición","Carteles"],                  nota:"Avisar con 3 semanas. Coordinar módulos e invitar antiguos dirigentes." },
-  { id:8,  nombre:"Viaje fuera de Linares",            act:"Excursión — destino por definir con apoderados",           fecha:"2025-06-20", estado:"pendiente", areas:["corporalidad","afectividad","sociabilidad"],    dur:"Jornada completa",lugar:"Por confirmar",                 resp:"Akela + equipo + comitiva apoderados", objetivo:"Vivir una experiencia de aventura en un entorno nuevo fuera de Linares.",                               desc:"Excursión fuera de Linares. Opciones: Buin Zoo, Zoológico de Santiago, Parque Metropolitano, Parque Araucano. Presentar a apoderados: presupuesto, lugar, horarios y opciones de transporte. Pedir comitiva de apoderados que acompañen.", mats:["Transporte (gestionar opciones)","Alimentación","Autorizaciones firmadas","Botiquín","Uniformes"],          nota:"⚠ Presentar propuesta a apoderados. Confirmar destino, presupuesto y comitiva." },
-  { id:9,  nombre:"Vacaciones de invierno",            act:"Sin reunión",                                              fecha:"2025-06-27", estado:"pendiente", areas:[],                                               dur:"—",               lugar:"—",                            resp:"—",                              objetivo:"Período de vacaciones escolares.",                                                                         desc:"Vacaciones: 27 jun · 4 jul. Sin reunión de manada. Los lobatos deben preparar sus talentos para el Show del 11 de julio.", mats:[],                                                                                                                          nota:"Recordar a los lobatos preparar talentos durante vacaciones." },
-  { id:10, nombre:"Show de talentos e intereses",      act:"Talentos de la manada",                                   fecha:"2025-07-11", estado:"pendiente", areas:["creatividad","afectividad","sociabilidad"],    dur:"90 min",          lugar:"Cubil / salón",                resp:"Akela",                          objetivo:"Valorar los talentos individuales de cada lobato. Fortalecer autoestima y el reconocimiento entre pares.",  desc:"Cada lobato muestra algo preparado en vacaciones: pintar, videojuegos, magia, chistes, cantar, baile, deportes, disfraces, etc. La manada celebra y aplaude a cada uno.", mats:["Escenario simple","Decoración festiva","Diplomas de reconocimiento"],                                        nota:"Avisar a los lobatos antes de las vacaciones para que lo preparen." },
-  { id:11, nombre:"Búsqueda del tesoro",               act:"Las huellas de Bagheera — con pistas",                   fecha:"2025-07-18", estado:"pendiente", areas:["corporalidad","inteligencia","caracter"],       dur:"2 horas",         lugar:"Plaza / barrio (según clima)", resp:"Bagheera",                       objetivo:"Desarrollar observación, deducción y trabajo en equipo siguiendo señales selváticas.",                     desc:"Los lobatos siguen pistas escondidas por el territorio usando señales de rastreo scout. Se prepara el recorrido según el clima disponible. Cada seisena recibe una ruta y convergen al final para descubrir el tesoro.", mats:["Sobres con pistas","Señales scout (yeso / cintas)","Premio (cofre decorado)"],                             nota:"Preparar el recorrido según las condiciones climáticas previstas." },
-  { id:12, nombre:"Juego de ciudad",                   act:"Bomberos · CFT · Panadería · UTAL · Parroquia",          fecha:"2025-07-25", estado:"pendiente", areas:["sociabilidad","caracter","inteligencia"],       dur:"Jornada",         lugar:"Linares (recorrido urbano)",   resp:"Akela + equipo",                objetivo:"Conocer instituciones de la comunidad local. Desarrollar sentido de servicio y ciudadanía.",               desc:"Rally urbano por instituciones de Linares: Bomberos, CFT, Panadería, UTAL y Parroquia. En cada lugar los lobatos realizan una actividad o aprendizaje puntual. Se deben coordinar previamente los tiempos y disponibilidad de cada institución.", mats:["Mapa del recorrido","Cuaderno de misiones por seisena","Autorización salida"],                              nota:"⚠ Coordinar con cada institución con anticipación. Definir tiempos." },
-  { id:13, nombre:"Amanecer Scout",                    act:"Actividad distrital en Plaza de Armas",                  fecha:"2025-08-01", estado:"pendiente", areas:["afectividad","espiritualidad","sociabilidad"],  dur:"Madrugada / mañana",lugar:"Plaza de Armas de Linares", resp:"Akela + equipo + distrito",     objetivo:"Vivir una experiencia única de hermandad y espiritualidad al amanecer junto a otros grupos.",              desc:"Actividad distrital que requiere confirmación. Nos juntamos con otros grupos de la ciudad y hacemos actividades en la mañana en la Plaza de Armas de Linares.", mats:["Frazadas","Infusión","Linternas","Autorización especial apoderados"],                                        nota:"⚠ Actividad distrital — requiere confirmación. Coordinar con otros grupos." },
-  { id:14, nombre:"Día del niño — Campismo",           act:"Taller: armado de carpa y mochila",                      fecha:"2025-08-08", estado:"pendiente", areas:["corporalidad","caracter","inteligencia"],       dur:"2.5 horas",       lugar:"Cubil / patio",                resp:"Akela + Bagheera",              objetivo:"Preparar a los lobatos para el Raid de cierre: armar carpa, organizar mochila, normas de seguridad.",      desc:"Taller práctico por el Día del Niño. Los lobatos aprenden a armar una tienda de campaña, organizar su mochila y conocer las normas de seguridad. Se presenta el programa del Raid del 15 de agosto.", mats:["Tiendas de campaña","Mochilas de ejemplo","Lista de equipamiento","Checklist personal"],                    nota:"Ficha PDF ya existente. Usar como preparación directa para el Raid." },
-  { id:15, nombre:"Raid — Acampada y Flor Roja",       act:"Campamento de cierre · sábado y domingo",               fecha:"2025-08-15", estado:"pendiente", areas:["corporalidad","caracter","afectividad","espiritualidad","sociabilidad"], dur:"Sáb–Dom (pernocte)",lugar:"Por confirmar: Palmilla u otro",resp:"Equipo completo", objetivo:"Integrar todas las habilidades del ciclo en un campamento. Cerrar con la ceremonia de Flor Roja.",      desc:"Campamento de fin de ciclo, sábado y domingo. Raid de actividades durante el día. En la noche, ceremonia de Flor Roja: fogón central, cada lobato comparte un logro del ciclo, entrega de reconocimientos e insignias. Opciones de lugar: Palmilla, colegio rural. Apoderados apoyan en alimentación.", mats:["Equipamiento de campamento completo","Velas o fogón","Pergaminos de promesa","Insignias de etapa","Carta personalizada por lobato"], nota:"⚠ Definir lugar, costos y transporte. Pedir apoyo apoderados para alimentación. Máxima planificación." },
+  { id:1,  nombre:"Presentación del calendario",       act:"Gritos y dinámicas · Globos en los pies · Submarino",      fecha:"2026-05-02", estado:"proxima",   areas:["afectividad","sociabilidad","corporalidad"],    dur:"2 horas",         lugar:"Cubil",                        resp:"Akela + equipo",                objetivo:"Presentar y ratificar el calendario del ciclo con la manada. Reforzar gritos, dinámicas e identidad de grupo.", desc:"Se presenta el calendario definitivo a la manada. Actividades de integración y energía: refuerzo de gritos de seisena, reventar globos en los pies, juego submarino.", mats:["Calendario impreso o proyectado","Globos","Espacio amplio"],                                                nota:"Primera reunión formal del ciclo. El calendario puede ajustarse con propuestas de los lobatos." },
+  { id:2,  nombre:"Prueba de la manada",               act:"Juegos de módulos · Cumpleaños Bagheera",                  fecha:"2026-05-09", estado:"pendiente", areas:["corporalidad","caracter","sociabilidad"],       dur:"2 horas",         lugar:"Cancha / patio",               resp:"Bagheera + apoyo Clan",          objetivo:"Desarrollar habilidades físicas, trabajo en equipo y cooperación inter-ramas a través de un circuito de módulos.", desc:"5–6 módulos de habilidades y destreza. Módulos definidos: Memorice de la selva, Voleibol toalla, Gato gigante, Acertijos, Slackline. Se invita al Clan a apoyar. Actividad especial por el cumpleaños de Bagheera.", mats:["Memorice de la selva","Red de voleibol + toallas","Gato gigante","Tarjetas de acertijos","Slackline","Cronómetro","Fichas de puntuación"], nota:"Coordinar con Clan con anticipación. Definir módulos adicionales." },
+  { id:3,  nombre:"Encuentro de Manadas",              act:"Actividad distrital — Yerbas Buenas",                      fecha:"2026-05-16", estado:"pendiente", areas:["sociabilidad","afectividad","corporalidad"],    dur:"11:30 a 18:00 hrs",lugar:"Yerbas Buenas",               resp:"Akela + coordinación districal", objetivo:"Fortalecer vínculos con otras manadas del distrito en una jornada de fraternidad scout.",                   desc:"Encuentro de manadas del distrito en la comuna de Yerbas Buenas. Horario: 11:30 a 18:00 hrs. Los lobatos y lobatas deben llevar comida fría. Coordinar transporte con apoderados.", mats:["Comida fría (cada lobato trae la suya)","Uniforme completo","Ficha de registro","Botiquín"], nota:"⚠ Pendiente: coordinar transporte con apoderados." },
+  { id:4,  nombre:"Los nudos de Akela",                act:"Taller de nudos y construcciones",                         fecha:"2026-05-23", estado:"pendiente", areas:["caracter","inteligencia","corporalidad"],       dur:"2 horas",         lugar:"Cubil / patio",                resp:"Akela",                          objetivo:"Aprender y practicar nudos básicos scouts aplicándolos en construcciones reales.",                         desc:"Taller de nudos: cuadrado, vuelta de escota, ballestrinque y otros. Los lobatos construyen estructuras con colihues o troncos similares. Posibles construcciones: mochilero, tendedero. Ver posibilidad de conseguir colihues.", mats:["Cuerdas 3mm (2m por lobato)","Colihues o troncos similares","Hoja guía de nudos","Tijeras"],               nota:"Verificar disponibilidad de colihues. Ficha PDF ya existente." },
+  { id:5,  nombre:"Cuidemos la selva",                 act:"Huerta en el Rincón Scout",                                fecha:"2026-05-30", estado:"pendiente", areas:["espiritualidad","sociabilidad","caracter"],     dur:"3 horas (mañana)",lugar:"Rincón Scout",                 resp:"Bagheera + Akela",               objetivo:"Desarrollar conciencia ambiental construyendo una huerta a un costado del Rincón Scout.",                  desc:"La manada construye una huerta en el espacio disponible al costado del Rincón Scout. Preparación de tierra, siembra, etiquetado. Se documenta el proceso. Actividad en la mañana; en la tarde los dirigentes tienen encuentro de distrito.", mats:["Guantes","Palas pequeñas","Semillas / plantas","Etiquetas","Regaderas","Cámara para registro"],             nota:"Actividad en la mañana. Coordinar espacio y materiales con anticipación." },
+  { id:6,  nombre:"Un día con la manada",              act:"Cocinar con los lobatos — Casa Centenario",                fecha:"2026-06-06", estado:"pendiente", areas:["afectividad","sociabilidad","corporalidad"],    dur:"Jornada completa",lugar:"Casa Centenario",               resp:"Akela + Clan o apoderados",      objetivo:"Fortalecer vínculos de manada y desarrollar habilidades culinarias básicas en una jornada especial.",     desc:"Jornada completa en Casa Centenario. Los lobatos cocinan juntos (menú por definir). Según el clima: película y/o juegos de mesa bajo techo, o juegos en el pasto. Pedir apoyo al Clan o apoderados para cocina.", mats:["Ingredientes según menú","Utensilios de cocina","Juegos de mesa / películas","Autorización de salida"],    nota:"Definir menú. Confirmar transporte y permisos. Opciones según clima." },
+  { id:7,  nombre:"Feria de ciencias",                 act:"Los inventos de los hombres",                              fecha:"2026-06-13", estado:"pendiente", areas:["inteligencia","creatividad"],                   dur:"2 horas",         lugar:"Cubil",                        resp:"Bagheera + antiguos dirigentes", objetivo:"Estimular la curiosidad científica y la capacidad de investigación a través de una feria de experimentos.",  desc:"Cada lobato o seisena presenta un experimento relacionado con la naturaleza o la vida selvática. Coordinar módulos. Posibilidad de invitar antiguos dirigentes como jurado o apoyo.", mats:["Materiales por experimento (cada grupo los consigue)","Mesones de exhibición","Carteles"],                  nota:"Avisar con 3 semanas. Coordinar módulos e invitar antiguos dirigentes." },
+  { id:8,  nombre:"Viaje fuera de Linares",            act:"Excursión — destino por definir con apoderados",           fecha:"2026-06-20", estado:"pendiente", areas:["corporalidad","afectividad","sociabilidad"],    dur:"Jornada completa",lugar:"Por confirmar",                 resp:"Akela + equipo + comitiva apoderados", objetivo:"Vivir una experiencia de aventura en un entorno nuevo fuera de Linares.",                               desc:"Excursión fuera de Linares. Opciones: Buin Zoo, Zoológico de Santiago, Parque Metropolitano, Parque Araucano. Presentar a apoderados: presupuesto, lugar, horarios y opciones de transporte. Pedir comitiva de apoderados que acompañen.", mats:["Transporte (gestionar opciones)","Alimentación","Autorizaciones firmadas","Botiquín","Uniformes"],          nota:"⚠ Presentar propuesta a apoderados. Confirmar destino, presupuesto y comitiva." },
+  { id:9,  nombre:"Vacaciones de invierno",            act:"Sin reunión",                                              fecha:"2026-06-27", estado:"pendiente", areas:[],                                               dur:"—",               lugar:"—",                            resp:"—",                              objetivo:"Período de vacaciones escolares.",                                                                         desc:"Vacaciones: 27 jun · 4 jul. Sin reunión de manada. Los lobatos deben preparar sus talentos para el Show del 11 de julio.", mats:[],                                                                                                                          nota:"Recordar a los lobatos preparar talentos durante vacaciones." },
+  { id:10, nombre:"Show de talentos e intereses",      act:"Talentos de la manada",                                   fecha:"2026-07-11", estado:"pendiente", areas:["creatividad","afectividad","sociabilidad"],    dur:"90 min",          lugar:"Cubil / salón",                resp:"Akela",                          objetivo:"Valorar los talentos individuales de cada lobato. Fortalecer autoestima y el reconocimiento entre pares.",  desc:"Cada lobato muestra algo preparado en vacaciones: pintar, videojuegos, magia, chistes, cantar, baile, deportes, disfraces, etc. La manada celebra y aplaude a cada uno.", mats:["Escenario simple","Decoración festiva","Diplomas de reconocimiento"],                                        nota:"Avisar a los lobatos antes de las vacaciones para que lo preparen." },
+  { id:11, nombre:"Búsqueda del tesoro",               act:"Las huellas de Bagheera — con pistas",                   fecha:"2026-07-18", estado:"pendiente", areas:["corporalidad","inteligencia","caracter"],       dur:"2 horas",         lugar:"Plaza / barrio (según clima)", resp:"Bagheera",                       objetivo:"Desarrollar observación, deducción y trabajo en equipo siguiendo señales selváticas.",                     desc:"Los lobatos siguen pistas escondidas por el territorio usando señales de rastreo scout. Se prepara el recorrido según el clima disponible. Cada seisena recibe una ruta y convergen al final para descubrir el tesoro.", mats:["Sobres con pistas","Señales scout (yeso / cintas)","Premio (cofre decorado)"],                             nota:"Preparar el recorrido según las condiciones climáticas previstas." },
+  { id:12, nombre:"Juego de ciudad",                   act:"Bomberos · CFT · Panadería · UTAL · Parroquia",          fecha:"2026-07-25", estado:"pendiente", areas:["sociabilidad","caracter","inteligencia"],       dur:"Jornada",         lugar:"Linares (recorrido urbano)",   resp:"Akela + equipo",                objetivo:"Conocer instituciones de la comunidad local. Desarrollar sentido de servicio y ciudadanía.",               desc:"Rally urbano por instituciones de Linares: Bomberos, CFT, Panadería, UTAL y Parroquia. En cada lugar los lobatos realizan una actividad o aprendizaje puntual. Se deben coordinar previamente los tiempos y disponibilidad de cada institución.", mats:["Mapa del recorrido","Cuaderno de misiones por seisena","Autorización salida"],                              nota:"⚠ Coordinar con cada institución con anticipación. Definir tiempos." },
+  { id:13, nombre:"Amanecer Scout",                    act:"Actividad distrital en Plaza de Armas",                  fecha:"2026-08-01", estado:"pendiente", areas:["afectividad","espiritualidad","sociabilidad"],  dur:"Madrugada / mañana",lugar:"Plaza de Armas de Linares", resp:"Akela + equipo + distrito",     objetivo:"Vivir una experiencia única de hermandad y espiritualidad al amanecer junto a otros grupos.",              desc:"Actividad distrital que requiere confirmación. Nos juntamos con otros grupos de la ciudad y hacemos actividades en la mañana en la Plaza de Armas de Linares.", mats:["Frazadas","Infusión","Linternas","Autorización especial apoderados"],                                        nota:"⚠ Actividad distrital — requiere confirmación. Coordinar con otros grupos." },
+  { id:14, nombre:"Día del niño — Campismo",           act:"Taller: armado de carpa y mochila",                      fecha:"2026-08-08", estado:"pendiente", areas:["corporalidad","caracter","inteligencia"],       dur:"2.5 horas",       lugar:"Cubil / patio",                resp:"Akela + Bagheera",              objetivo:"Preparar a los lobatos para el Raid de cierre: armar carpa, organizar mochila, normas de seguridad.",      desc:"Taller práctico por el Día del Niño. Los lobatos aprenden a armar una tienda de campaña, organizar su mochila y conocer las normas de seguridad. Se presenta el programa del Raid del 15 de agosto.", mats:["Tiendas de campaña","Mochilas de ejemplo","Lista de equipamiento","Checklist personal"],                    nota:"Ficha PDF ya existente. Usar como preparación directa para el Raid." },
+  { id:15, nombre:"Raid — Acampada y Flor Roja",       act:"Campamento de cierre · sábado y domingo",               fecha:"2026-08-15", estado:"pendiente", areas:["corporalidad","caracter","afectividad","espiritualidad","sociabilidad"], dur:"Sáb–Dom (pernocte)",lugar:"Por confirmar: Palmilla u otro",resp:"Equipo completo", objetivo:"Integrar todas las habilidades del ciclo en un campamento. Cerrar con la ceremonia de Flor Roja.",      desc:"Campamento de fin de ciclo, sábado y domingo. Raid de actividades durante el día. En la noche, ceremonia de Flor Roja: fogón central, cada lobato comparte un logro del ciclo, entrega de reconocimientos e insignias. Opciones de lugar: Palmilla, colegio rural. Apoderados apoyan en alimentación.", mats:["Equipamiento de campamento completo","Velas o fogón","Pergaminos de promesa","Insignias de etapa","Carta personalizada por lobato"], nota:"⚠ Definir lugar, costos y transporte. Pedir apoyo apoderados para alimentación. Máxima planificación." },
 ];
 
 /* ══════════════════════════════════════════
@@ -1245,24 +1363,217 @@ function renderActividades() {
 /* ══════════════════════════════════════════
    CALENDARIO
 ══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   EVENTOS FIJOS (grupo, distrito, externos)
+   tipo: "distrito" | "fija" | "vacacion"
+══════════════════════════════════════════ */
+const EVENTOS_FIJOS = [
+  // ── FERIADOS / VACACIONES ──
+  { id:"v1",  nombre:"Vacaciones de invierno",     sub:"Sin reunión de manada",                fecha:"2026-06-27", tipo:"vacacion" },
+  { id:"v2",  nombre:"Vacaciones de invierno",     sub:"Sin reunión de manada",                fecha:"2026-07-04", tipo:"vacacion" },
+
+  // ── GRUPO / DISTRITO ──
+  { id:"d1",  nombre:"Desfile 21 de Mayo",         sub:"Actividad conjunta del distrito",      fecha:"2026-05-21", tipo:"distrito",
+    desc:"Desfile conjunto del distrito por las Glorias Navales, 21 de Mayo. Todas las ramas participan. Uniforme completo. Coordinar punto de encuentro con responsables de grupo.", mats:["Uniforme completo","Pañoleta","Banderín de manada"] },
+  { id:"d2",  nombre:"Encuentro dirigentes distrito", sub:"En la tarde — solo equipo",         fecha:"2026-05-30", tipo:"distrito",
+    desc:"Reunión de dirigentes del distrito. Solo equipo adulto. La actividad de la manada (Cuidemos la Selva) es en la mañana.", mats:[] },
+  { id:"d3",  nombre:"Amanecer Scout",             sub:"Actividad distrital — Plaza de Armas", fecha:"2026-08-01", tipo:"distrito",
+    desc:"Actividad distrital. Todos los grupos de la ciudad se reúnen en la Plaza de Armas de Linares para hacer actividades al amanecer. Requiere confirmación.", mats:["Frazadas","Linterna","Autorización especial"] },
+
+  // ── ACTIVIDADES FIJAS DEL GRUPO ──
+  { id:"f1",  nombre:"Día del Niño",               sub:"Celebración fija del grupo",           fecha:"2026-08-08", tipo:"fija",
+    desc:"El Día del Niño es una fecha fija de celebración para todo el grupo. La manada aprovecha para hacer el Taller de Campismo como actividad de la jornada.", mats:["Según actividad de cada rama"] },
+  { id:"f2",  nombre:"Aniversario de la Asociación", sub:"Celebración conjunta",               fecha:"2026-09-01", tipo:"fija",
+    desc:"Aniversario de la Asociación. Fecha fija de celebración grupal. Confirmar programa con grupo.", mats:[] },
+];
+
+let calMesActual = 4; // mayo (0-indexed)
+let calAnioActual = 2026;
+
 function renderCalendario() {
-  const ord = [...ACTIVIDADES].sort((a,b)=>new Date(a.fecha)-new Date(b.fecha));
-  document.getElementById("timeline").innerHTML = ord.map(a => {
-    const dots = a.areas.map(ar=>`<div style="width:7px;height:7px;border-radius:50%;background:${AREAS[ar]?.color||'#555'};display:inline-block" title="${AREAS[ar]?.label||ar}"></div>`).join("");
+  actualizarEnfasis();
+  renderMes(calMesActual, calAnioActual);
+}
+
+function calMes(dir) {
+  calMesActual += dir;
+  if (calMesActual < 0)  { calMesActual = 11; calAnioActual--; }
+  if (calMesActual > 11) { calMesActual = 0;  calAnioActual++; }
+  renderMes(calMesActual, calAnioActual);
+}
+
+function renderMes(mes, anio) {
+  const MESES_NOMBRE = ["Enero","Febrero","Marzo","Abril","Mayo","Junio",
+                         "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+  document.getElementById("cal-mes-titulo").textContent =
+    MESES_NOMBRE[mes] + " " + anio;
+
+  const hoy = new Date();
+  const primerDia = new Date(anio, mes, 1).getDay();
+  const diasMes   = new Date(anio, mes+1, 0).getDate();
+  const diasAntes = new Date(anio, mes, 0).getDate();
+
+  // Construir mapa fecha→eventos
+  const mapaEventos = {};
+  const agregarEv = (fechaStr, ev) => {
+    mapaEventos[fechaStr] = mapaEventos[fechaStr] || [];
+    mapaEventos[fechaStr].push(ev);
+  };
+
+  // Actividades de la manada
+  ACTIVIDADES.forEach(a => {
+    if (!a.fecha) return;
+    const [y,m,d] = a.fecha.split("-").map(Number);
+    if (m-1 !== mes || y !== anio) return;
     const esVac = a.id === 9;
-    const est = esVac ? "vacaciones" : a.estado;
-    const estadoLbl = esVac ? "Vacaciones" : a.estado==="proxima"?"Próxima":a.estado==="realizada"?"Realizada":"Pendiente";
-    return `
-    <div class="tl-item tl-${est} ${esVac?'tl-vacaciones':''}" ${!esVac?`onclick="abrirModalById(${a.id})"`:""}>
-      <div class="tl-dot"></div>
-      <div class="tl-card" style="${esVac?'opacity:0.38;cursor:default':''}">
-        <div class="tl-fecha">${fmt(a.fecha)}</div>
-        <div class="tl-nombre">${a.nombre}</div>
-        <div class="tl-dots">${dots}</div>
-        <div class="epill ep-${est}" style="font-size:0.65rem;padding:1px 6px"><span class="edot"></span>${estadoLbl}</div>
-      </div>
+    agregarEv(a.fecha, {
+      label: a.nombre,
+      tipo: esVac ? "vacacion" : "manada",
+      estado: a.estado,
+      accion: esVac ? null : () => abrirModalById(a.id),
+      ref: a,
+      esManada: !esVac,
+    });
+  });
+
+  // Eventos fijos
+  EVENTOS_FIJOS.forEach(e => {
+    const [y,m,d] = e.fecha.split("-").map(Number);
+    if (m-1 !== mes || y !== anio) return;
+    agregarEv(e.fecha, {
+      label: e.nombre,
+      tipo: e.tipo,
+      accion: () => abrirModalFijo(e.id),
+      ref: e,
+    });
+  });
+
+  // Render grilla
+  let celdas = "";
+  let total = primerDia + diasMes;
+  let filas = Math.ceil(total / 7);
+
+  for (let i = 0; i < filas * 7; i++) {
+    const diaNum = i - primerDia + 1;
+    const esEstesMes = diaNum >= 1 && diaNum <= diasMes;
+    const diaReal = esEstesMes ? diaNum : (diaNum <= 0 ? diasAntes + diaNum : diaNum - diasMes);
+    const esHoy = esEstesMes && hoy.getDate()===diaNum && hoy.getMonth()===mes && hoy.getFullYear()===anio;
+    const esDomingo = i % 7 === 0;
+
+    const fechaKey = esEstesMes
+      ? `${anio}-${String(mes+1).padStart(2,"0")}-${String(diaNum).padStart(2,"0")}`
+      : null;
+    const evs = fechaKey ? (mapaEventos[fechaKey] || []) : [];
+
+    const clases = [
+      "cal-celda",
+      !esEstesMes ? "otro-mes" : "",
+      esHoy ? "hoy" : "",
+      esDomingo ? "domingo" : "",
+      evs.length > 0 ? "tiene-eventos" : "",
+    ].filter(Boolean).join(" ");
+
+    const evHtml = evs.map(ev => {
+      const cls = `ev-${ev.tipo}`;
+      return `<div class="cal-evento ${cls}" title="${ev.label}">${ev.label}</div>`;
+    }).join("");
+
+    const clickHandler = evs.length > 0 && fechaKey
+      ? `onclick="abrirDia('${fechaKey}')"`
+      : "";
+
+    celdas += `<div class="${clases}" ${clickHandler}>
+      <span class="cal-num">${diaReal}</span>
+      ${evHtml}
     </div>`;
-  }).join("");
+  }
+  document.getElementById("cal-grid").innerHTML = celdas;
+
+  // Lista debajo
+  const todasFecha = Object.keys(mapaEventos).sort();
+  if (todasFecha.length === 0) {
+    document.getElementById("cal-lista-mes").innerHTML =
+      `<p style="font-size:0.82rem;color:var(--muted);text-align:center;padding:1rem 0">Sin actividades este mes.</p>`;
+    return;
+  }
+
+  const colTipo = { manada:"var(--verde2)", distrito:"var(--amber)", fija:"#C77DFF", vacacion:"#444" };
+  const bgTipo  = { manada:"rgba(82,183,136,0.12)", distrito:"rgba(233,168,76,0.12)", fija:"rgba(155,93,229,0.12)", vacacion:"rgba(80,80,80,0.08)" };
+  const lblTipo = { manada:"🐺 Manada", distrito:"🏛 Grupo/Distrito", fija:"⭐ Fija del grupo", vacacion:"🗓 Vacaciones" };
+
+  let lista = `<div class="cal-lista-titulo">Actividades de ${MESES_NOMBRE[mes]}</div>`;
+  todasFecha.forEach(fk => {
+    (mapaEventos[fk] || []).forEach(ev => {
+      const col = colTipo[ev.tipo] || "#888";
+      const bg  = bgTipo[ev.tipo]  || "transparent";
+      const lbl = lblTipo[ev.tipo] || ev.tipo;
+      const sub = ev.ref.sub || ev.ref.act || "";
+      const [,mm,dd] = fk.split("-");
+      lista += `
+      <div class="cal-lista-item" style="border-left-color:${col};background:${bg}"
+           onclick="${ev.tipo==="manada"?`abrirModalById(${ev.ref.id})`:ev.tipo==="vacacion"?"":(`abrirModalFijo('${ev.ref.id}')`)}">
+        <div class="cli-fecha">${parseInt(dd)} ${MESES[parseInt(mm)-1]}</div>
+        <div style="min-width:0">
+          <div class="cli-nombre">${ev.label}</div>
+          ${sub ? `<div class="cli-sub">${sub}</div>` : ""}
+          <span class="cli-tipo" style="background:${col}18;color:${col}">${lbl}</span>
+        </div>
+      </div>`;
+    });
+  });
+  document.getElementById("cal-lista-mes").innerHTML = lista;
+}
+
+// Modal para eventos fijos/distrito
+function abrirModalFijo(id) {
+  const ev = EVENTOS_FIJOS.find(e => e.id === id);
+  if (!ev) return;
+  const colMap = { distrito:"var(--amber)", fija:"#C77DFF", vacacion:"#555" };
+  const lblMap = { distrito:"🏛 Grupo / Distrito", fija:"⭐ Fija del grupo", vacacion:"🗓 Vacaciones" };
+  const col = colMap[ev.tipo] || "#888";
+  document.getElementById("m-acc").style.background = col;
+  document.getElementById("m-chips").innerHTML = `
+    <span style="background:${col}18;color:${col};border:1px solid ${col}44;padding:2px 9px;border-radius:10px;font-size:0.7rem;font-weight:600">${lblMap[ev.tipo]||ev.tipo}</span>
+  `;
+  document.getElementById("m-tit").textContent = ev.nombre;
+  document.getElementById("m-sub").textContent = ev.sub || "";
+  const [y,m,d] = ev.fecha.split("-");
+  const mats = (ev.mats||[]).map(m=>`<li>${m}</li>`).join("");
+  document.getElementById("m-bd").innerHTML = `
+    <div class="mg2">
+      <div class="md"><div class="md-lbl">📅 Fecha</div><div class="md-val">${parseInt(d)} ${MESES[parseInt(m)-1]} ${y}</div></div>
+      <div class="md"><div class="md-lbl">Tipo</div><div class="md-val">${lblMap[ev.tipo]||ev.tipo}</div></div>
+    </div>
+    ${ev.desc ? `<div class="ms"><span class="ms-lbl">Descripción</span><p class="ms-txt">${ev.desc}</p></div>` : ""}
+    ${mats ? `<div class="ms"><span class="ms-lbl">Materiales / consideraciones</span><ul class="m-mats">${mats}</ul></div>` : ""}
+  `;
+  document.getElementById("m-cnt").textContent = "";
+  document.getElementById("m-prev").disabled = true;
+  document.getElementById("m-next").disabled = true;
+  document.getElementById("modal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+// Abrir todos los eventos de un día
+function abrirDia(fechaKey) {
+  const mapaEventos = {};
+  [...ACTIVIDADES, ...EVENTOS_FIJOS].forEach(a => {
+    if (!a.fecha) return;
+    mapaEventos[a.fecha] = mapaEventos[a.fecha] || [];
+    mapaEventos[a.fecha].push(a);
+  });
+  const evs = mapaEventos[fechaKey] || [];
+  if (evs.length === 0) return;
+  if (evs.length === 1) {
+    const ev = evs[0];
+    if (ev.id !== 9 && typeof ev.id === "number") abrirModalById(ev.id);
+    else if (typeof ev.id === "string") abrirModalFijo(ev.id);
+    return;
+  }
+  // Múltiples eventos: abrir el primero de la manada, o el primero disponible
+  const manada = evs.find(e => typeof e.id === "number" && e.id !== 9);
+  if (manada) abrirModalById(manada.id);
+  else abrirModalFijo(evs[0].id);
 }
 
 /* ══════════════════════════════════════════
