@@ -1429,8 +1429,6 @@ function renderCalendario() {
 function renderMesHTML(mes, anio) {
   const MESES_NOMBRE = ["Enero","Febrero","Marzo","Abril","Mayo","Junio",
                          "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
-  document.getElementById("cal-mes-titulo").textContent =
-    MESES_NOMBRE[mes] + " " + anio;
 
   const hoy = new Date();
   const primerDia = new Date(anio, mes, 1).getDay();
@@ -1447,27 +1445,24 @@ function renderMesHTML(mes, anio) {
   // Actividades de la manada
   ACTIVIDADES.forEach(a => {
     if (!a.fecha) return;
-    const [y,m,d] = a.fecha.split("-").map(Number);
-    if (m-1 !== mes || y !== anio) return;
+    const [ay, am, ad] = a.fecha.split("-").map(Number);
+    if (am-1 !== mes || ay !== anio) return;
     const esVac = a.id === 9;
     agregarEv(a.fecha, {
       label: a.nombre,
       tipo: esVac ? "vacacion" : "manada",
       estado: a.estado,
-      accion: esVac ? null : () => abrirModalById(a.id),
       ref: a,
-      esManada: !esVac,
     });
   });
 
   // Eventos fijos
   EVENTOS_FIJOS.forEach(e => {
-    const [y,m,d] = e.fecha.split("-").map(Number);
-    if (m-1 !== mes || y !== anio) return;
+    const [ey, em, ed] = e.fecha.split("-").map(Number);
+    if (em-1 !== mes || ey !== anio) return;
     agregarEv(e.fecha, {
       label: e.nombre,
       tipo: e.tipo,
-      accion: () => abrirModalFijo(e.id),
       ref: e,
     });
   });
@@ -1575,11 +1570,11 @@ function abrirModalFijo(id) {
   `;
   document.getElementById("m-tit").textContent = ev.nombre;
   document.getElementById("m-sub").textContent = ev.sub || "";
-  const [y,m,d] = ev.fecha.split("-");
-  const mats = (ev.mats||[]).map(m=>`<li>${m}</li>`).join("");
+  const [fy,fm,fd] = ev.fecha.split("-");
+  const mats = (ev.mats||[]).map(mat=>`<li>${mat}</li>`).join("");
   document.getElementById("m-bd").innerHTML = `
     <div class="mg2">
-      <div class="md"><div class="md-lbl">📅 Fecha</div><div class="md-val">${parseInt(d)} ${MESES[parseInt(m)-1]} ${y}</div></div>
+      <div class="md"><div class="md-lbl">📅 Fecha</div><div class="md-val">${parseInt(fd)} ${MESES[parseInt(fm)-1]} ${fy}</div></div>
       <div class="md"><div class="md-lbl">Tipo</div><div class="md-val">${lblMap[ev.tipo]||ev.tipo}</div></div>
     </div>
     ${ev.desc ? `<div class="ms"><span class="ms-lbl">Descripción</span><p class="ms-txt">${ev.desc}</p></div>` : ""}
