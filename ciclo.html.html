@@ -266,8 +266,8 @@ body {
   font-size: 0.68rem;
   font-weight: 600;
 }
-.badge-akela    { background: rgba(233,168,76,0.15); color: var(--amber); }
-.badge-guiadora { background: rgba(155,93,229,0.15); color: #C77DFF; }
+.badge-responsable  { background: rgba(233,168,76,0.15); color: var(--amber); border: 1px solid rgba(233,168,76,0.3); }
+.badge-asistente { background: rgba(155,93,229,0.15); color: #C77DFF; }
 
 /* ═══════════════════════════════════════════
    MIEMBROS DEL EQUIPO
@@ -582,7 +582,7 @@ body.publico .solo-privado { display: none !important; }
     <div class="ph-logo">🐺</div>
     <div class="ph-grupo">Guías y Scouts Don Bosco Linares</div>
     <div class="ph-nombre" id="pub-nombre">Manada Seeonee</div>
-    <div class="ph-sub" id="pub-sub">Ciclo de programa 2025</div>
+    <div class="ph-sub" id="pub-sub">Ciclo de programa 1-2026</div>
   </div>
 
   <h2 class="section-title solo-privado">Configuración de la unidad</h2>
@@ -597,7 +597,7 @@ body.publico .solo-privado { display: none !important; }
       </div>
       <div class="field">
         <label>Año / ciclo</label>
-        <input id="u-ciclo" type="text" value="2025" oninput="actualizarDatos()">
+        <input id="u-ciclo" type="text" value="Ciclo 1 · 2026" oninput="actualizarDatos()">
       </div>
     </div>
     <div class="sep"></div>
@@ -825,34 +825,34 @@ const UNIDADES = {
     nombre: "Manada Seeonee",
     tipo: "Manada de Lobatos",
     edades: "7–10 años",
-    ciclo: "2025",
+    ciclo: "Ciclo 1 · 2026",
     equipo: [
-      { nombre:"Jairo Arellano",     selva:"Akela",    rol:"akela" },
-      { nombre:"Rosa Sepúlveda",     selva:"Raksha",   rol:"guiadora" },
-      { nombre:"Constanza Vásquez",  selva:"Bagheera", rol:"guiadora" },
-      { nombre:"Paula Cisterna",     selva:"",         rol:"guiadora" },
+      { nombre:"Jairo Arellano",     selva:"Akela",    rol:"responsable" },
+      { nombre:"Rosa Sepúlveda",     selva:"Raksha",   rol:"asistente" },
+      { nombre:"Constanza Vásquez",  selva:"Bagheera", rol:"asistente" },
+      { nombre:"Paula Cisterna",     selva:"",         rol:"asistente" },
     ],
     lobatos: [
       // ⚠ REVISAR: Mateo Jiménez (6 años) y Támara Cury (6 años) están bajo el rango de la manada (7-10).
       // ⚠ REVISAR: Matías Orellana aparece con 17 años — probable error en fecha de nacimiento (¿2019 en vez de 2009?).
-      { nombre:"Rafaela Paz Droguett Lagos",           fn:"2017-08-31", genero:"F", etapa:"activo",   intereses:"" },
-      { nombre:"María José Pereda Yañez",              fn:"2017-01-16", genero:"F", etapa:"activo",   intereses:"" },
-      { nombre:"Maite Hinojosa",                       fn:"2015-06-24", genero:"F", etapa:"veterano", intereses:"" },
-      { nombre:"Gonzalo Hinojosa",                     fn:"2018-12-09", genero:"M", etapa:"nuevo",    intereses:"" },
-      { nombre:"Fernando Ethan Altair Contreras Barrera", fn:"2018-01-07", genero:"M", etapa:"activo", intereses:"" },
-      { nombre:"Amaro Alexander González González",    fn:"2019-01-04", genero:"M", etapa:"nuevo",    intereses:"" },
-      { nombre:"Luciano Nicolas Ruiz Vergara",         fn:"2017-04-23", genero:"M", etapa:"activo",   intereses:"" },
-      { nombre:"Maximo Alberto Gamboni Vergara",       fn:"2015-12-17", genero:"M", etapa:"veterano", intereses:"" },
-      { nombre:"Mateo Jimenez",                        fn:"2019-06-11", genero:"M", etapa:"nuevo",    intereses:"", alerta:"6 años — verificar" },
-      { nombre:"Benjamin Héctor Carrillo Sepulveda",   fn:"2016-05-27", genero:"M", etapa:"activo",   intereses:"" },
-      { nombre:"Joaquin Andrés Orellana Sepúlveda",    fn:"2016-04-04", genero:"M", etapa:"veterano", intereses:"" },
-      { nombre:"Elías Felipe de Jesús Figueroa López", fn:"2018-12-08", genero:"M", etapa:"nuevo",    intereses:"" },
-      { nombre:"Salvador Prandi Galvez",               fn:"2019-02-20", genero:"M", etapa:"nuevo",    intereses:"" },
-      { nombre:"Matías Alonso Orellana Sepúlveda",     fn:"2009-03-12", genero:"M", etapa:"veterano", intereses:"", alerta:"17 años — verificar fecha" },
-      { nombre:"Támara Anjhelin Cury Yuja",            fn:"2019-05-03", genero:"F", etapa:"nuevo",    intereses:"", alerta:"6 años — verificar" },
-      { nombre:"Jesús Andres Ruiz Vásquez",            fn:"2016-04-07", genero:"M", etapa:"veterano", intereses:"" },
-      { nombre:"Jacinta Paz Sanhueza Salazar",         fn:"2017-01-26", genero:"F", etapa:"activo",   intereses:"" },
-      { nombre:"Ailen Ignacia Figueroa Ramos",         fn:"2016-05-11", genero:"F", etapa:"activo",   intereses:"" },
+      { nombre:"Rafaela Paz Droguett Lagos",           fn:"2017-08-31", genero:"F",   intereses:"" },
+      { nombre:"María José Pereda Yañez",              fn:"2017-01-16", genero:"F",   intereses:"" },
+      { nombre:"Maite Hinojosa",                       fn:"2015-06-24", genero:"F", intereses:"" },
+      { nombre:"Gonzalo Hinojosa",                     fn:"2018-12-09", genero:"M",    intereses:"" },
+      { nombre:"Fernando Ethan Altair Contreras Barrera", fn:"2018-01-07", genero:"M", intereses:"" },
+      { nombre:"Amaro Alexander González González",    fn:"2019-01-04", genero:"M",    intereses:"" },
+      { nombre:"Luciano Nicolas Ruiz Vergara",         fn:"2017-04-23", genero:"M",   intereses:"" },
+      { nombre:"Maximo Alberto Gamboni Vergara",       fn:"2015-12-17", genero:"M", intereses:"" },
+      { nombre:"Mateo Jimenez",                        fn:"2019-06-11", genero:"M",    intereses:"", alerta:"6 años — verificar" },
+      { nombre:"Benjamin Héctor Carrillo Sepulveda",   fn:"2016-05-27", genero:"M",   intereses:"" },
+      { nombre:"Joaquin Andrés Orellana Sepúlveda",    fn:"2016-04-04", genero:"M", intereses:"" },
+      { nombre:"Elías Felipe de Jesús Figueroa López", fn:"2018-12-08", genero:"M",    intereses:"" },
+      { nombre:"Salvador Prandi Galvez",               fn:"2019-02-20", genero:"M",    intereses:"" },
+      { nombre:"Matías Alonso Orellana Sepúlveda",     fn:"2009-03-12", genero:"M", intereses:"", alerta:"17 años — verificar fecha" },
+      { nombre:"Támara Anjhelin Cury Yuja",            fn:"2019-05-03", genero:"F",    intereses:"", alerta:"6 años — verificar" },
+      { nombre:"Jesús Andres Ruiz Vásquez",            fn:"2016-04-07", genero:"M", intereses:"" },
+      { nombre:"Jacinta Paz Sanhueza Salazar",         fn:"2017-01-26", genero:"F",   intereses:"" },
+      { nombre:"Ailen Ignacia Figueroa Ramos",         fn:"2016-05-11", genero:"F",   intereses:"" },
     ],
     diagObs: "Más del 50% son lobatos/as nuevos/as. Se debe reforzar el marco simbólico desde el inicio: libro de la selva, historia, personajes, ley de la selva, cómo funciona la manada.",
     diagSintesis: "La mayoría de la manada son lobatos/as nuevos/as: se debe reforzar el marco simbólico desde el inicio. Es el primer ciclo formal: el seguimiento de progresión personal se construirá desde cero. Las seisenas están en formación.",
@@ -864,7 +864,7 @@ const UNIDADES = {
     nombre: "Compañía (por configurar)",
     tipo: "Compañía de Guías",
     edades: "11–15 años",
-    ciclo: "2025",
+    ciclo: "Ciclo 1 · 2026",
     equipo: [],
     lobatos: [],
     diagObs: "",
@@ -1043,8 +1043,8 @@ function irA(n) {
 function renderEquipo() {
   const g = document.getElementById("team-grid");
   g.innerHTML = DATA.equipo.map(m => {
-    const rolColor = m.rol === "akela" ? "#E9A84C" : "#C77DFF";
-    const rolLabel = m.rol === "akela" ? "Akela" : "Guiadora/o";
+    const rolColor = m.rol === "responsable" ? "#E9A84C" : "#C77DFF";
+    const rolLabel = m.rol === "responsable" ? "Responsable" : "Asistente";
     const ini = m.nombre.split(" ").slice(0,2).map(p=>p[0]).join("").toUpperCase();
     return `
     <div class="member-card">
@@ -1064,8 +1064,8 @@ function renderEquipoForm() {
   f.innerHTML = DATA.equipo.map((m, i) => `
   <div class="card" style="margin-bottom:0.65rem">
     <div class="card-label">
-      ${m.rol === "akela" ? "Akela — Jefe/a de Manada" : "Guiadora/o " + i}
-      <span class="badge badge-${m.rol}">${m.rol === "akela" ? "Akela" : "Guiadora"}</span>
+      ${m.rol === "responsable" ? "Responsable de Manada" : "Asistente de Manada"}
+      <span class="badge badge-${m.rol}">${m.rol === "responsable" ? "Responsable" : "Asistente"}</span>
     </div>
     <div class="field-row">
       <div class="field" style="margin:0"><label>Nombre</label><input type="text" value="${m.nombre}"></div>
@@ -1075,7 +1075,7 @@ function renderEquipoForm() {
 }
 
 function agregarGuiadora() {
-  DATA.equipo.push({ nombre:"", selva:"", rol:"guiadora" });
+  DATA.equipo.push({ nombre:"", selva:"", rol:"asistente" });
   renderEquipoForm();
   renderEquipo();
 }
@@ -1095,8 +1095,22 @@ function calcEdad(fn) {
   if (h < new Date(h.getFullYear(), n.getMonth(), n.getDate())) e--;
   return e;
 }
-function etapaCol(e) { return e==="veterano"?"#C9A87C":e==="activo"?"#52B788":"#888"; }
-function etapaLbl(e) { return e==="veterano"?"Veterano/a":e==="activo"?"Activo/a":"Nuevo/a"; }
+function etapaDesdeEdad(edad) {
+  if (edad <= 6) return "menor";
+  if (edad === 7) return "lobezno";
+  if (edad === 8) return "saltador";
+  if (edad === 9) return "diestro";
+  if (edad >= 10) return "cazador";
+  return "lobezno";
+}
+function etapaCol(e) {
+  const m = { menor:"#E76F51", lobezno:"#888", saltador:"#52B788", diestro:"#E9A84C", cazador:"#9B5DE5" };
+  return m[e] || "#888";
+}
+function etapaLbl(e) {
+  const m = { lobezno:"Lobezno/a", saltador:"Saltador/a", diestro:"Diestro/a", cazador:"Cazador/a", menor:"Menor de 7 años" };
+  return m[e] || e;
+}
 function ini(n) { return n.split(" ").slice(0,2).map(p=>p[0]).join("").toUpperCase(); }
 function gCol(g) { return g==="F"?"#C77DFF":"#457B9D"; }
 
@@ -1105,16 +1119,17 @@ function renderLobatos() {
   g.innerHTML = DATA.lobatos.map(l => {
     const edad = calcEdad(l.fn);
     const gc = gCol(l.genero);
-    const ec = etapaCol(l.etapa);
+    const etapa = etapaDesdeEdad(edad);
+    const ec = etapaCol(etapa);
     return `
     <div class="lobato-card">
       <div class="lobato-avatar" style="background:${gc}18;color:${gc};border:1.5px solid ${gc}33">${ini(l.nombre)}</div>
       <div>
         <div class="lobato-nombre">${l.nombre}</div>
         <div class="lobato-meta">${edad} años · ${l.genero==="F"?"Lobata":"Lobato"}</div>
-        <div class="lobato-etapa" style="color:${ec}">${etapaLbl(l.etapa)}</div>
+        <div class="lobato-etapa" style="color:${ec}">${etapaLbl(etapa)}</div>
         ${l.alerta ? `<div style="font-size:0.67rem;color:#E76F51;margin-top:2px">⚠ ${l.alerta}</div>` : ""}
-        ${l.intereses ? `<div style="font-size:0.68rem;color:var(--muted);margin-top:1px">${l.intereses}</div>` : ""}
+        ${l.intereses ? `<div style="font-size:0.68rem;color:var(--muted);margin-top:1px">🎯 ${l.intereses}</div>` : '<div style="font-size:0.67rem;color:#444;margin-top:2px;font-style:italic">sin intereses registrados</div>'}
       </div>
     </div>`;
   }).join("");
