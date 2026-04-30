@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ciclo de Programa · Manada Seeonee · Guías y Scouts Don Bosco Linares</title>
+<title>Ciclo de Programa · Guías y Scouts Don Bosco Linares</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════
@@ -621,7 +621,9 @@ body.publico .solo-privado { display: none !important; }
 .ev-manada    { background:rgba(82,183,136,0.12); color:#a8d5b5; border-color:var(--verde2); }
 .ev-distrito  { background:rgba(233,168,76,0.12); color:#d4b87a; border-color:var(--amber); }
 .ev-fija      { background:rgba(155,93,229,0.12); color:#d4b8f5; border-color:#C77DFF; }
-.ev-vacacion  { background:rgba(80,80,80,0.12); color:#555; border-color:#444; font-style:italic; }
+.ev-vacacion   { background:rgba(80,80,80,0.12); color:#555; border-color:#444; font-style:italic; }
+.ev-cumple     { background:rgba(249,200,14,0.1); color:#d4b000; border-color:#d4b000; }
+.ev-cumple_dir { background:rgba(233,168,76,0.15); color:var(--amber); border-color:var(--amber); }
 
 /* Lista debajo del calendario */
 .cal-lista-titulo {
@@ -656,7 +658,7 @@ body.publico .solo-privado { display: none !important; }
     <div class="topbar-logo">🐺</div>
     <div class="topbar-texts">
       <div class="topbar-name" id="tb-nombre">Don Bosco Linares</div>
-      <div class="topbar-sub" id="tb-sub">GGSDBL · Fundado 12 oct 1970</div>
+      <div class="topbar-sub" id="tb-sub">Grupo de Guías y Scouts Don Bosco Linares · Fundado el 12 de octubre de 1970</div>
     </div>
   </div>
   <div class="topbar-badges">
@@ -723,10 +725,6 @@ body.publico .solo-privado { display: none !important; }
 <div class="screen" id="screen-1">
   <h2 class="section-title">Integrantes de la manada</h2>
   <p class="section-sub">Lobatos y lobatas de 7–10 años. <span class="solo-privado">En la versión conectada, esta lista se importa desde el formulario de registro.</span></p>
-
-  <div class="info-box solo-privado">
-    <p>Etapas: <strong>Nuevo/a</strong> (1er año) · <strong>Activo/a</strong> (2do año) · <strong>Veterano/a</strong> (3er año+). Se determina por tiempo en la manada, no por edad.</p>
-  </div>
 
   <div class="lobatos-grid" id="lobatos-grid"></div>
 
@@ -876,23 +874,11 @@ body.publico .solo-privado { display: none !important; }
     <span class="cal-leyenda" style="background:rgba(82,183,136,0.15);color:var(--verde2);border-color:rgba(82,183,136,0.3)">🐺 Manada</span>
     <span class="cal-leyenda" style="background:rgba(233,168,76,0.15);color:var(--amber);border-color:rgba(233,168,76,0.3)">🏛 Grupo / Distrito</span>
     <span class="cal-leyenda" style="background:rgba(155,93,229,0.15);color:#C77DFF;border-color:rgba(155,93,229,0.3)">⭐ Fija del grupo</span>
+    <span class="cal-leyenda" style="background:rgba(249,200,14,0.1);color:#d4b000;border-color:rgba(249,200,14,0.3)">🎂 Cumpleaños</span>
     <span class="cal-leyenda" style="background:rgba(120,120,120,0.1);color:#666;border-color:rgba(120,120,120,0.2)">🗓 Vacaciones</span>
   </div>
 
-  <div class="cal-nav">
-    <button class="cal-nav-btn" onclick="calMes(-1)">&#8249;</button>
-    <div class="cal-mes-titulo" id="cal-mes-titulo">—</div>
-    <button class="cal-nav-btn" onclick="calMes(1)">&#8250;</button>
-  </div>
-
-  <div class="cal-grid-wrap">
-    <div class="cal-dias-header">
-      <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
-    </div>
-    <div class="cal-grid" id="cal-grid"></div>
-  </div>
-
-  <div id="cal-lista-mes" style="margin-top:1.25rem"></div>
+  <div id="cal-anio-completo"></div>
 
   <div class="btn-row solo-privado" style="margin-top:1.5rem">
     <button class="btn btn-outline" onclick="irA(4)">&#8592; Volver</button>
@@ -1369,12 +1355,24 @@ function renderActividades() {
 ══════════════════════════════════════════ */
 const EVENTOS_FIJOS = [
   // ── FERIADOS / VACACIONES ──
-  { id:"v1",  nombre:"Vacaciones de invierno",     sub:"Sin reunión de manada",                fecha:"2026-06-27", tipo:"vacacion" },
-  { id:"v2",  nombre:"Vacaciones de invierno",     sub:"Sin reunión de manada",                fecha:"2026-07-04", tipo:"vacacion" },
+  { id:"v1a", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 1)", fecha:"2026-06-22", tipo:"vacacion" },
+  { id:"v1b", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 1)", fecha:"2026-06-23", tipo:"vacacion" },
+  { id:"v1c", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 1)", fecha:"2026-06-24", tipo:"vacacion" },
+  { id:"v1d", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 1)", fecha:"2026-06-25", tipo:"vacacion" },
+  { id:"v1e", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 1)", fecha:"2026-06-26", tipo:"vacacion" },
+  { id:"v1f", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 1)", fecha:"2026-06-27", tipo:"vacacion" },
+  { id:"v1g", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 1)", fecha:"2026-06-28", tipo:"vacacion" },
+  { id:"v2a", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 2)", fecha:"2026-06-29", tipo:"vacacion" },
+  { id:"v2b", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 2)", fecha:"2026-06-30", tipo:"vacacion" },
+  { id:"v2c", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 2)", fecha:"2026-07-01", tipo:"vacacion" },
+  { id:"v2d", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 2)", fecha:"2026-07-02", tipo:"vacacion" },
+  { id:"v2e", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 2)", fecha:"2026-07-03", tipo:"vacacion" },
+  { id:"v2f", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 2)", fecha:"2026-07-04", tipo:"vacacion" },
+  { id:"v2g", nombre:"Vacaciones de invierno",  sub:"Sin reunión (semana 2)", fecha:"2026-07-05", tipo:"vacacion" },
 
   // ── GRUPO / DISTRITO ──
-  { id:"d1",  nombre:"Desfile 21 de Mayo",         sub:"Actividad conjunta del distrito",      fecha:"2026-05-21", tipo:"distrito",
-    desc:"Desfile conjunto del distrito por las Glorias Navales, 21 de Mayo. Todas las ramas participan. Uniforme completo. Coordinar punto de encuentro con responsables de grupo.", mats:["Uniforme completo","Pañoleta","Banderín de manada"] },
+  { id:"d1",  nombre:"Desfile 21 de Mayo",         sub:"Aniversario Grupo Don Bosco Linares · Desfile conjunto",      fecha:"2026-05-21", tipo:"distrito",
+    desc:"El 21 de mayo marca el Aniversario del Grupo de Guías y Scouts Don Bosco Linares. Desfile conjunto del distrito. Todas las ramas participan. Uniforme completo. Coordinar punto de encuentro y horario con el equipo de grupo.", mats:["Uniforme completo","Pañoleta","Banderín de manada"] },
   { id:"d2",  nombre:"Encuentro dirigentes distrito", sub:"En la tarde — solo equipo",         fecha:"2026-05-30", tipo:"distrito",
     desc:"Reunión de dirigentes del distrito. Solo equipo adulto. La actividad de la manada (Cuidemos la Selva) es en la mañana.", mats:[] },
   { id:"d3",  nombre:"Amanecer Scout",             sub:"Actividad distrital — Plaza de Armas", fecha:"2026-08-01", tipo:"distrito",
@@ -1383,8 +1381,34 @@ const EVENTOS_FIJOS = [
   // ── ACTIVIDADES FIJAS DEL GRUPO ──
   { id:"f1",  nombre:"Día del Niño",               sub:"Celebración fija del grupo",           fecha:"2026-08-08", tipo:"fija",
     desc:"El Día del Niño es una fecha fija de celebración para todo el grupo. La manada aprovecha para hacer el Taller de Campismo como actividad de la jornada.", mats:["Según actividad de cada rama"] },
-  { id:"f2",  nombre:"Aniversario de la Asociación", sub:"Celebración conjunta",               fecha:"2026-09-01", tipo:"fija",
-    desc:"Aniversario de la Asociación. Fecha fija de celebración grupal. Confirmar programa con grupo.", mats:[] },
+  { id:"f2",  nombre:"Aniversario del Grupo",       sub:"Celebración conjunta",               fecha:"2026-09-01", tipo:"fija",
+    desc:"Aniversario del Grupo de Guías y Scouts Don Bosco Linares. Fecha fija de celebración grupal. Confirmar programa con el equipo de grupo.", mats:[] },
+
+  // ── CUMPLEAÑOS DIRIGENTES ──
+  { id:"cum-d-jairo",    nombre:"🎂 Cumpleaños Jairo",    sub:"Jairo Arellano · 37 años",          fecha:"2026-05-06", tipo:"cumple_dir" },
+  { id:"cum-d-constanza",nombre:"🎂 Cumpleaños Constanza",sub:"Constanza Vásquez · 19 años",       fecha:"2026-05-09", tipo:"cumple_dir" },
+  { id:"cum-d-rosa",     nombre:"🎂 Cumpleaños Rosa",     sub:"Rosa Sepúlveda · 42 años",          fecha:"2026-08-30", tipo:"cumple_dir" },
+
+  // ── CUMPLEAÑOS LOBATOS ──
+  // (Maite y Máximo cumplen 11 en 2026 — ya habrán egresado de la manada)
+  { id:"cum-l-maria",    nombre:"🎂 María José",  sub:"María José Pereda · 9 años",         fecha:"2026-01-16", tipo:"cumple" },
+  { id:"cum-l-amaro",    nombre:"🎂 Amaro",       sub:"Amaro González · 7 años",            fecha:"2026-01-04", tipo:"cumple" },
+  { id:"cum-l-fernando", nombre:"🎂 Fernando",    sub:"Fernando Contreras · 8 años",        fecha:"2026-01-07", tipo:"cumple" },
+  { id:"cum-l-jacinta",  nombre:"🎂 Jacinta",     sub:"Jacinta Sanhueza · 9 años",          fecha:"2026-01-26", tipo:"cumple" },
+  { id:"cum-l-salvador", nombre:"🎂 Salvador",    sub:"Salvador Prandi · 7 años",           fecha:"2026-02-20", tipo:"cumple" },
+  { id:"cum-l-matias",   nombre:"🎂 Matías",      sub:"Matías Orellana · 7 años",           fecha:"2026-03-12", tipo:"cumple" },
+  { id:"cum-l-joaquin",  nombre:"🎂 Joaquín",     sub:"Joaquín Orellana · 10 años",         fecha:"2026-04-04", tipo:"cumple" },
+  { id:"cum-l-jesus",    nombre:"🎂 Jesús",       sub:"Jesús Ruiz · 10 años",               fecha:"2026-04-07", tipo:"cumple" },
+  { id:"cum-l-luciano",  nombre:"🎂 Luciano",     sub:"Luciano Ruiz · 9 años",              fecha:"2026-04-23", tipo:"cumple" },
+  { id:"cum-l-tamara",   nombre:"🎂 Támara",      sub:"Támara Cury · 7 años",               fecha:"2026-05-03", tipo:"cumple" },
+  { id:"cum-l-ailen",    nombre:"🎂 Ailen",       sub:"Ailen Figueroa · 10 años",           fecha:"2026-05-11", tipo:"cumple" },
+  { id:"cum-l-benjamin", nombre:"🎂 Benjamín",    sub:"Benjamín Carrillo · 10 años",        fecha:"2026-05-27", tipo:"cumple" },
+  { id:"cum-l-mateo",    nombre:"🎂 Mateo",       sub:"Mateo Jiménez · 7 años",             fecha:"2026-06-11", tipo:"cumple" },
+  { id:"cum-l-maite",    nombre:"🎂 Maite",       sub:"Maite Hinojosa · 11 años (egresa)",  fecha:"2026-06-24", tipo:"cumple" },
+  { id:"cum-l-rafaela",  nombre:"🎂 Rafaela",     sub:"Rafaela Droguett · 9 años",          fecha:"2026-08-31", tipo:"cumple" },
+  { id:"cum-l-gonzalo",  nombre:"🎂 Gonzalo",     sub:"Gonzalo Hinojosa · 8 años",          fecha:"2026-12-09", tipo:"cumple" },
+  { id:"cum-l-elias",    nombre:"🎂 Elías",       sub:"Elías Figueroa · 8 años",            fecha:"2026-12-08", tipo:"cumple" },
+  { id:"cum-l-maximo",   nombre:"🎂 Máximo",      sub:"Máximo Gamboni · 11 años (egresa)",  fecha:"2026-12-17", tipo:"cumple" },
 ];
 
 let calMesActual = 4; // mayo (0-indexed)
@@ -1392,17 +1416,17 @@ let calAnioActual = 2026;
 
 function renderCalendario() {
   actualizarEnfasis();
-  renderMes(calMesActual, calAnioActual);
+  const cont = document.getElementById("cal-anio-completo");
+  if (!cont) return;
+  // Renderizar todos los meses del ciclo (enero a diciembre 2026)
+  let html = "";
+  for (let m = 0; m < 12; m++) {
+    html += `<div id="cal-mes-${m}" style="margin-bottom:2rem">${renderMesHTML(m, 2026)}</div>`;
+  }
+  cont.innerHTML = html;
 }
 
-function calMes(dir) {
-  calMesActual += dir;
-  if (calMesActual < 0)  { calMesActual = 11; calAnioActual--; }
-  if (calMesActual > 11) { calMesActual = 0;  calAnioActual++; }
-  renderMes(calMesActual, calAnioActual);
-}
-
-function renderMes(mes, anio) {
+function renderMesHTML(mes, anio) {
   const MESES_NOMBRE = ["Enero","Febrero","Marzo","Abril","Mayo","Junio",
                          "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
   document.getElementById("cal-mes-titulo").textContent =
@@ -1487,31 +1511,44 @@ function renderMes(mes, anio) {
       ${evHtml}
     </div>`;
   }
-  document.getElementById("cal-grid").innerHTML = celdas;
+  const colTipo = { manada:"var(--verde2)", distrito:"var(--amber)", fija:"#C77DFF", vacacion:"#444", cumple:"#d4b000", cumple_dir:"var(--amber)" };
+  const bgTipo  = { manada:"rgba(82,183,136,0.12)", distrito:"rgba(233,168,76,0.12)", fija:"rgba(155,93,229,0.12)", vacacion:"rgba(80,80,80,0.08)", cumple:"rgba(249,200,14,0.07)", cumple_dir:"rgba(233,168,76,0.1)" };
+  const lblTipo = { manada:"🐺 Manada", distrito:"🏛 Grupo/Distrito", fija:"⭐ Fija del grupo", vacacion:"🗓 Vacaciones", cumple:"🎂 Cumpleaños", cumple_dir:"🎂 Cumpleaños" };
 
-  // Lista debajo
+  // Cabecera del mes
+  let out = `
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem">
+    <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--crema);font-weight:600">${MESES_NOMBRE[mes]} ${anio}</div>
+  </div>
+  <div class="cal-grid-wrap">
+    <div class="cal-dias-header">
+      <div>Dom</div><div>Lun</div><div>Mar</div><div>Mié</div><div>Jue</div><div>Vie</div><div>Sáb</div>
+    </div>
+    <div class="cal-grid">${celdas}</div>
+  </div>`;
+
+  // Lista debajo solo si hay eventos de manada, distrito o fijos (no cumples, no vacaciones)
   const todasFecha = Object.keys(mapaEventos).sort();
-  if (todasFecha.length === 0) {
-    document.getElementById("cal-lista-mes").innerHTML =
-      `<p style="font-size:0.82rem;color:var(--muted);text-align:center;padding:1rem 0">Sin actividades este mes.</p>`;
-    return;
-  }
-
-  const colTipo = { manada:"var(--verde2)", distrito:"var(--amber)", fija:"#C77DFF", vacacion:"#444" };
-  const bgTipo  = { manada:"rgba(82,183,136,0.12)", distrito:"rgba(233,168,76,0.12)", fija:"rgba(155,93,229,0.12)", vacacion:"rgba(80,80,80,0.08)" };
-  const lblTipo = { manada:"🐺 Manada", distrito:"🏛 Grupo/Distrito", fija:"⭐ Fija del grupo", vacacion:"🗓 Vacaciones" };
-
-  let lista = `<div class="cal-lista-titulo">Actividades de ${MESES_NOMBRE[mes]}</div>`;
+  const evtsRelevantes = [];
   todasFecha.forEach(fk => {
     (mapaEventos[fk] || []).forEach(ev => {
+      if (ev.tipo !== "vacacion") evtsRelevantes.push({fk, ev});
+    });
+  });
+
+  if (evtsRelevantes.length > 0) {
+    out += `<div style="margin-top:0.75rem">`;
+    evtsRelevantes.forEach(({fk, ev}) => {
       const col = colTipo[ev.tipo] || "#888";
       const bg  = bgTipo[ev.tipo]  || "transparent";
       const lbl = lblTipo[ev.tipo] || ev.tipo;
       const sub = ev.ref.sub || ev.ref.act || "";
       const [,mm,dd] = fk.split("-");
-      lista += `
-      <div class="cal-lista-item" style="border-left-color:${col};background:${bg}"
-           onclick="${ev.tipo==="manada"?`abrirModalById(${ev.ref.id})`:ev.tipo==="vacacion"?"":(`abrirModalFijo('${ev.ref.id}')`)}">
+      const clickAct = ev.tipo==="manada"
+        ? `abrirModalById(${ev.ref.id})`
+        : (ev.tipo==="vacacion" ? "" : `abrirModalFijo('${ev.ref.id}')`);
+      out += `
+      <div class="cal-lista-item" style="border-left-color:${col};background:${bg}" onclick="${clickAct}">
         <div class="cli-fecha">${parseInt(dd)} ${MESES[parseInt(mm)-1]}</div>
         <div style="min-width:0">
           <div class="cli-nombre">${ev.label}</div>
@@ -1520,8 +1557,9 @@ function renderMes(mes, anio) {
         </div>
       </div>`;
     });
-  });
-  document.getElementById("cal-lista-mes").innerHTML = lista;
+    out += `</div>`;
+  }
+  return out;
 }
 
 // Modal para eventos fijos/distrito
