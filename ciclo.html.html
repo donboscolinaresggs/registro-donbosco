@@ -1415,7 +1415,7 @@ let calMesActual = 4; // mayo (0-indexed)
 let calAnioActual = 2026;
 
 function renderCalendario() {
-  actualizarEnfasis();
+  syncEnfasis();
   const cont = document.getElementById("cal-anio-completo");
   if (!cont) return;
   // Renderizar todos los meses del ciclo (enero a diciembre 2026)
