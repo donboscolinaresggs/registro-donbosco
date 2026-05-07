@@ -249,6 +249,7 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--cre
     <h4>Síntesis del diagnóstico</h4>
     <p>Más del 50% son lobatos/as nuevos/as. El ciclo prioriza el conocimiento del marco simbólico (El Libro de la Selva, personajes, ley de la manada), la construcción de identidad de grupo y la aventura compartida. Las seisenas están en formación y el seguimiento de progresión personal se construye desde cero.</p>
   </div>
+  <div style="margin-top:1.25rem" id="pub-recursos"></div>
 </div>
 
 <div class="tab-panel" id="tab-4">
@@ -351,6 +352,10 @@ diagObs: "Más del 50% son lobatos/as nuevos/as. Se debe reforzar el marco simb�
     enfasis: "Viviendo la aventura en la selva de Seeonee",
     marco: "El Libro de la Selva — Seeonee",
     enfasisFund: "Basado en el diagnóstico: la mayoría de integrantes son nuevos/as. Se priorizará el conocimiento del marco simbólico y la construcción de identidad de grupo.",
+    recursos: [
+      { titulo: "El Libro de las Tierras Vírgenes", subtitulo: "Rudyard Kipling · Currículum Nacional MINEDUC", url: "https://www.curriculumnacional.cl/recursos/libro-tierras-virgenes", icono: "📖" },
+      { titulo: "Manual de Rama Lobatos AGSCH", subtitulo: "Guías y Scouts de Chile · PDF oficial", url: "https://guiasyscoutsdechile.org/wp-content/uploads/2020/09/Agsch-Manual-Rama-Lobatos-1.pdf", icono: "📋" },
+    ],
   },
   compania: {
     nombre: "Compañía (por configurar)",
@@ -478,7 +483,7 @@ const EVENTOS_FIJOS = [
 
   // ── CUMPLEAÑOS DIRIGENTES ──
   { id:"cum-d-jairo",    nombre:"🎂 Cumpleaños Jairo",    sub:"Jairo Arellano · 37 años",          fecha:"2026-05-06", tipo:"cumple_dir" },
-  { id:"cum-d-constanza",nombre:"🎂 Cumpleaños Constanza",sub:"Constanza Vásquez · 19 años",       fecha:"2026-07-18", tipo:"cumple_dir" },
+  { id:"cum-d-constanza",nombre:"🎂 Cumpleaños Constanza",sub:"Constanza Vásquez · 19 años",       fecha:"2026-05-09", tipo:"cumple_dir" },
   { id:"cum-d-rosa",     nombre:"🎂 Cumpleaños Rosa",     sub:"Rosa Sepúlveda · 42 años",          fecha:"2026-08-30", tipo:"cumple_dir" },
 
   // ── CUMPLEAÑOS LOBATOS ──
@@ -790,51 +795,56 @@ document.addEventListener("keydown", e => {
 
 
 function calcEdad(fn) {
-  const h = new Date(), n = new Date(fn);
-  let e = h.getFullYear() - n.getFullYear();
-  if ((h.getMonth()*100+h.getDate()) < (n.getMonth()*100+n.getDate())) e--;
-  return e;
+  const h=new Date(),n=new Date(fn);let e=h.getFullYear()-n.getFullYear();
+  if((h.getMonth()*100+h.getDate())<(n.getMonth()*100+n.getDate()))e--;return e;
 }
-function ini(n) { return n.split(" ").slice(0,2).map(p=>p[0]).join("").toUpperCase(); }
-function gCol(g) { return g==="F"?"#C77DFF":"#457B9D"; }
+function ini(n){return n.split(" ").slice(0,2).map(p=>p[0]).join("").toUpperCase();}
+function gCol(g){return g==="F"?"#C77DFF":"#457B9D";}
 
-function cambiarTab(n, btn) {
+function cambiarTab(n,btn){
   document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
   document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
   document.getElementById("tab-"+n).classList.add("active");
   btn.classList.add("active");
-  if (n===5) renderCal();
+  if(n===3) renderRecursosPub();
+  if(n===5) renderCal();
 }
 
-function renderEquipo() {
-  document.getElementById("team-grid").innerHTML = DATA.equipo.map(m => {
-    const rc=m.rol==="responsable"?"#E9A84C":"#C77DFF";
-    const rl=m.rol==="responsable"?"Responsable de Manada":"Asistente de Manada";
-    const sl=(m.selva||"").toLowerCase();
+function renderRecursosPub() {
+  const cont=document.getElementById("pub-recursos");
+  if(!cont||!DATA.recursos) return;
+  const items=DATA.recursos.map(r=>{
+    if(!r.url) return `<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:0.85rem 1.1rem;display:flex;align-items:center;gap:0.75rem;opacity:0.5"><span style="font-size:1.4rem">${r.icono}</span><div><div style="font-size:0.88rem;font-weight:600;color:var(--crema)">${r.titulo}</div><div style="font-size:0.75rem;color:var(--muted)">${r.subtitulo}</div><div style="font-size:0.72rem;color:#555;margin-top:2px;font-style:italic">Próximamente</div></div></div>`;
+    return `<a href="${r.url}" target="_blank" rel="noopener" style="text-decoration:none"><div style="background:var(--bg2);border:1px solid rgba(82,183,136,0.25);border-radius:var(--r);padding:0.85rem 1.1rem;display:flex;align-items:center;gap:0.75rem;cursor:pointer"><span style="font-size:1.4rem">${r.icono}</span><div style="flex:1;min-width:0"><div style="font-size:0.88rem;font-weight:600;color:var(--crema)">${r.titulo}</div><div style="font-size:0.75rem;color:var(--muted)">${r.subtitulo}</div></div><span style="font-size:0.75rem;color:var(--verde2);flex-shrink:0">Abrir →</span></div></a>`;
+  }).join("");
+  cont.innerHTML=`<h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.09em;color:var(--cafe);font-weight:600;margin-bottom:0.75rem">Recursos del ciclo</h3><div style="display:flex;flex-direction:column;gap:0.5rem">${items}</div>`;
+}
+
+function renderEquipo(){
+  document.getElementById("team-grid").innerHTML=DATA.equipo.map(m=>{
+    const rc=m.rol==="responsable"?"#E9A84C":"#C77DFF",rl=m.rol==="responsable"?"Responsable de Manada":"Asistente de Manada",sl=(m.selva||"").toLowerCase();
     const av=sl==="akela"?`<div class="member-avatar" style="background:rgba(233,168,76,0.15);border:1.5px solid rgba(233,168,76,0.4)">🐺</div>`:sl==="raksha"?`<div class="member-avatar" style="background:rgba(201,168,124,0.15);border:1.5px solid rgba(201,168,124,0.4)">🦊</div>`:sl==="bagheera"?`<div class="member-avatar" style="background:rgba(155,93,229,0.15);border:1.5px solid rgba(155,93,229,0.4);padding:0"><svg width="32" height="32" viewBox="0 0 48 48"><path d="M14 20 L17 14 L20 19 Z" fill="#2a2a3a"/><path d="M28 19 L31 14 L34 20 Z" fill="#2a2a3a"/><ellipse cx="24" cy="27" rx="10" ry="9" fill="#2a2a3a"/><circle cx="20" cy="25" r="1.5" fill="#F9C80E"/><circle cx="28" cy="25" r="1.5" fill="#F9C80E"/><path d="M22 31 Q24 33 26 31" stroke="#F2E8D5" stroke-width="1" fill="none" stroke-linecap="round"/></svg></div>`:`<div class="member-avatar" style="background:${rc}18;color:${rc};border:1.5px solid ${rc}33;font-size:0.85rem;font-weight:600">${ini(m.nombre)}</div>`;
     return `<div class="member-card">${av}<div><div class="member-name">${m.nombre}</div><div class="member-role"><span class="badge badge-${m.rol}">${rl}</span></div>${m.selva?`<div class="member-selva">${m.selva}</div>`:""}</div></div>`;
   }).join("");
 }
 
-function renderLobatos() {
-  document.getElementById("lobatos-grid").innerHTML = DATA.lobatos.map(l => {
-    const edad=calcEdad(l.fn), etapa=etapaDesdeEdad(edad), ec=etapaCol(etapa), gc=gCol(l.genero);
-    const insig=INSIGNIAS[etapa];
+function renderLobatos(){
+  document.getElementById("lobatos-grid").innerHTML=DATA.lobatos.map(l=>{
+    const edad=calcEdad(l.fn),etapa=etapaDesdeEdad(edad),ec=etapaCol(etapa),gc=gCol(l.genero),insig=INSIGNIAS[etapa];
     const av=insig?`<img src="${insig}" alt="${etapaLbl(etapa,l.genero)}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid ${ec}55">`:`<div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:600;flex-shrink:0;background:${gc}18;color:${gc};border:1.5px solid ${gc}33">${ini(l.nombre)}</div>`;
     return `<div class="lobato-card">${av}<div style="min-width:0"><div class="lobato-nombre">${l.nombre}</div><div class="lobato-meta">${edad} años · ${l.genero==="F"?"Lobata":"Lobato"}</div><div class="lobato-etapa" style="color:${ec}">${etapaLbl(etapa,l.genero)}</div>${l.alerta?`<div style="font-size:0.67rem;color:#E76F51;margin-top:2px">⏳ ${l.alerta}</div>`:""}${l.intereses?`<div class="lobato-intereses">🎯 ${l.intereses}</div>`:""}</div></div>`;
   }).join("");
 }
 
-function filtrar(btn) {
+function filtrar(btn){
   areaFiltro=btn.dataset.area;
   document.querySelectorAll(".fchip").forEach(b=>{b.classList.remove("on");b.style.borderColor="";b.style.color="";});
   btn.classList.add("on");
   const col=areaFiltro!=="todas"?(AREAS[areaFiltro]?.color||"var(--verde2)"):"var(--verde2)";
-  btn.style.borderColor=col; btn.style.color=col;
-  renderActs();
+  btn.style.borderColor=col;btn.style.color=col;renderActs();
 }
 
-function renderActs() {
+function renderActs(){
   const sinVac=ACTIVIDADES.filter(a=>a.id!==9);
   actsFilt=areaFiltro==="todas"?sinVac:sinVac.filter(a=>a.areas.includes(areaFiltro));
   document.getElementById("m-total").textContent=sinVac.length;
@@ -849,7 +859,7 @@ function renderActs() {
   }).join("");
 }
 
-function renderCal() {
+function renderCal(){
   const cont=document.getElementById("pub-cal");
   if(!cont||cont.innerHTML) return;
   let html="";
@@ -857,13 +867,13 @@ function renderCal() {
   cont.innerHTML=html;
 }
 
-function init() {
+function init(){
   const sinVac=ACTIVIDADES.filter(a=>a.id!==9);
   document.getElementById("s-lobatos").textContent=DATA.lobatos.length;
   document.getElementById("s-acts").textContent=sinVac.length;
   document.getElementById("s-equipo").textContent=DATA.equipo.length;
   document.getElementById("s-real").textContent=sinVac.filter(a=>a.estado==="realizada").length;
-  renderEquipo(); renderLobatos(); renderActs();
+  renderEquipo();renderLobatos();renderActs();renderRecursosPub();
 }
 init();
 </script>
