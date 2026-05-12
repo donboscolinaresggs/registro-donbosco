@@ -3,292 +3,896 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ciclo Manada 1 · 2026 · Don Bosco Linares</title>
+<title>Ciclo de Programa · Guías y Scouts Don Bosco Linares</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
+/* ═══════════════════════════════════════════
+   VARIABLES Y RESET
+═══════════════════════════════════════════ */
 :root {
-  --bg:#141412; --bg2:#1c1c19; --bg3:#242420;
-  --border:rgba(255,255,255,0.07);
-  --verde:#2D6A4F; --verde2:#52B788; --crema:#F2E8D5;
-  --cafe:#C9A87C; --amber:#E9A84C; --muted:#777; --r:10px;
-  --corporalidad:#E76F51; --creatividad:#9B5DE5; --caracter:#52B788;
-  --afectividad:#E9A84C; --sociabilidad:#457B9D;
-  --espiritualidad:#C9A87C; --inteligencia:#F9C80E;
+  --bg:      #141412;
+  --bg2:     #1c1c19;
+  --bg3:     #242420;
+  --border:  rgba(255,255,255,0.07);
+  --verde:   #2D6A4F;
+  --verde2:  #52B788;
+  --crema:   #F2E8D5;
+  --cafe:    #C9A87C;
+  --amber:   #E9A84C;
+  --muted:   #777;
+  --r:       10px;
+  /* Áreas */
+  --corporalidad:   #E76F51;
+  --creatividad:    #9B5DE5;
+  --caracter:       #52B788;
+  --afectividad:    #E9A84C;
+  --sociabilidad:   #457B9D;
+  --espiritualidad: #C9A87C;
+  --inteligencia:   #F9C80E;
 }
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--crema);min-height:100vh;}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Source Sans 3', sans-serif;
+  background: var(--bg);
+  color: var(--crema);
+  min-height: 100vh;
+}
 
-/* HERO */
-.hero{background:linear-gradient(160deg,#0d2b1e,#1a3d2b 50%,#0f1f16);border-bottom:1px solid rgba(82,183,136,0.2);padding:2rem 1.25rem 1.75rem;text-align:center;position:relative;overflow:hidden;}
-.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(82,183,136,0.12),transparent 70%);pointer-events:none;}
-.hero-logo{font-size:2.5rem;margin-bottom:0.5rem;}
-.hero-grupo{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--cafe);margin-bottom:0.35rem;}
-.hero-nombre{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,6vw,2.2rem);color:var(--crema);margin-bottom:0.2rem;}
-.hero-ciclo{font-size:0.82rem;color:var(--verde2);margin-bottom:1rem;}
-.hero-enfasis{background:rgba(82,183,136,0.08);border:1px solid rgba(82,183,136,0.2);border-radius:8px;padding:0.65rem 1rem;display:inline-block;max-width:520px;}
-.hero-enfasis-lbl{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--cafe);}
-.hero-enfasis-txt{font-family:'Playfair Display',serif;font-size:1rem;color:var(--crema);font-style:italic;}
+/* ═══════════════════════════════════════════
+   TOPBAR
+═══════════════════════════════════════════ */
+.topbar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0.6rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+  flex-shrink: 1;
+}
+.topbar-logo { font-size: 1.3rem; flex-shrink: 0; }
+.topbar-texts { min-width: 0; }
+.topbar-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--crema);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topbar-sub {
+  font-size: 0.68rem;
+  color: var(--cafe);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.topbar-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+.modo-badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+}
+.modo-privado { background: rgba(233,168,76,0.15); color: var(--amber); border: 1px solid rgba(233,168,76,0.3); }
+.modo-publico { background: rgba(82,183,136,0.15); color: var(--verde2); border: 1px solid rgba(82,183,136,0.3); }
 
-/* TABS */
-.tabs-wrap{background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50;overflow-x:auto;scrollbar-width:none;}
-.tabs-wrap::-webkit-scrollbar{display:none;}
-.tabs{display:flex;align-items:stretch;max-width:860px;margin:0 auto;padding:0 0.5rem;}
-.tab{padding:0.75rem 0.9rem;border:none;background:transparent;color:var(--muted);font-family:'Source Sans 3',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all 0.18s;display:flex;align-items:center;gap:0.3rem;}
-.tab:hover{color:var(--crema);}
-.tab.active{color:var(--cafe);border-bottom-color:var(--cafe);}
+/* ═══════════════════════════════════════════
+   NAVEGACIÓN DE PASOS
+═══════════════════════════════════════════ */
+.steps-bar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 1rem;
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: sticky;
+  top: 49px;
+  z-index: 49;
+}
+.steps-bar::-webkit-scrollbar { display: none; }
 
-/* CONTENT */
-.content{max-width:860px;margin:0 auto;padding:1.5rem 1rem 4rem;}
-.tab-panel{display:none;}
-.tab-panel.active{display:block;}
-.sec-title{font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--crema);margin-bottom:0.3rem;margin-top:0.25rem;}
-.sec-sub{font-size:0.83rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6;}
-.sep{height:1px;background:var(--border);margin:1.5rem 0;}
+.step-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.65rem 0.85rem;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  position: relative;
+}
+.step-btn:hover { color: var(--crema); }
+.step-btn.done { color: var(--verde2); }
+.step-btn.done::after {
+  content: '✓';
+  font-size: 0.65rem;
+  margin-left: 2px;
+}
+.step-btn.active {
+  color: var(--cafe);
+  border-bottom-color: var(--cafe);
+}
+.step-btn.locked {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.step-num {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  font-size: 0.65rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.step-btn.active .step-num { background: rgba(201,168,124,0.2); color: var(--cafe); }
+.step-btn.done .step-num { background: rgba(82,183,136,0.15); color: var(--verde2); }
 
-/* STATS */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0.75rem;margin-bottom:1.5rem;}
-.stat-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1rem;text-align:center;}
-.stat-num{font-family:'Playfair Display',serif;font-size:2rem;display:block;line-height:1;margin-bottom:0.2rem;}
-.stat-lbl{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);}
+/* ═══════════════════════════════════════════
+   PANTALLAS
+═══════════════════════════════════════════ */
+.screen { display: none; max-width: 820px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+.screen.active { display: block; }
 
-/* ÉQUIPO */
-.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.65rem;}
-.member-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:0.85rem 1rem;display:flex;align-items:center;gap:0.65rem;}
-.member-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
-.member-name{font-size:0.88rem;font-weight:600;color:var(--crema);}
-.member-role{font-size:0.72rem;color:var(--muted);}
-.member-selva{font-size:0.72rem;color:var(--cafe);margin-top:1px;}
-.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:0.68rem;font-weight:600;}
-.badge-responsable{background:rgba(233,168,76,0.15);color:var(--amber);}
-.badge-asistente{background:rgba(155,93,229,0.15);color:#C77DFF;}
+/* ═══════════════════════════════════════════
+   TIPOGRAFÍA Y LAYOUT GENERAL
+═══════════════════════════════════════════ */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--crema);
+  margin-bottom: 0.3rem;
+  margin-top: 0.5rem;
+}
+.section-sub {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 1.75rem;
+  line-height: 1.6;
+}
+.sep { height: 1px; background: var(--border); margin: 1.5rem 0; }
 
-/* LOBATOS */
-.lobatos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:0.65rem;}
-.lobato-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:0.8rem 0.9rem;display:flex;align-items:flex-start;gap:0.65rem;}
-.lobato-nombre{font-size:0.85rem;font-weight:600;color:var(--crema);}
-.lobato-meta{font-size:0.72rem;color:var(--muted);margin-top:1px;}
-.lobato-etapa{font-size:0.7rem;font-weight:600;margin-top:2px;}
-.lobato-intereses{font-size:0.72rem;color:#aaa;margin-top:4px;line-height:1.5;}
+/* ═══════════════════════════════════════════
+   FORMULARIOS
+═══════════════════════════════════════════ */
+.field { margin-bottom: 1.1rem; }
+.field label {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--cafe);
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+.field input, .field select, .field textarea {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.55rem 0.8rem;
+  color: var(--crema);
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.88rem;
+  transition: border-color 0.2s;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none; border-color: rgba(82,183,136,0.5);
+}
+.field textarea { min-height: 75px; resize: vertical; }
+.field-hint { font-size: 0.72rem; color: var(--muted); margin-top: 0.25rem; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+@media (max-width: 480px) { .field-row { grid-template-columns: 1fr; } }
 
-/* ÉNFASIS */
-.enfasis-banner{background:linear-gradient(135deg,#1a3d2b,#2D6A4F 70%,#1a3d2b);border:1px solid rgba(82,183,136,0.25);border-radius:var(--r);padding:1.1rem 1.35rem;margin-bottom:1.35rem;}
-.enfasis-lbl{font-size:0.67rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--cafe);font-weight:600;margin-bottom:0.25rem;}
-.enfasis-txt{font-family:'Playfair Display',serif;font-size:clamp(1rem,3vw,1.2rem);color:var(--crema);line-height:1.3;}
-.enfasis-fund{font-size:0.8rem;color:#a8d5b5;margin-top:0.5rem;line-height:1.55;}
-.diag-box{background:rgba(45,106,79,0.08);border:1px solid rgba(82,183,136,0.2);border-radius:var(--r);padding:1rem 1.25rem;margin-bottom:0.75rem;}
-.diag-box h4{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--verde2);margin-bottom:0.45rem;}
-.diag-box p{font-size:0.88rem;color:#a8d5b5;line-height:1.65;}
-.obs-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;}
-.obs-box p{font-size:0.86rem;color:#c5c2b8;line-height:1.65;}
+/* ═══════════════════════════════════════════
+   BOTONES
+═══════════════════════════════════════════ */
+.btn {
+  padding: 0.6rem 1.35rem;
+  border-radius: 8px;
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.btn-primary { background: var(--verde); color: white; }
+.btn-primary:hover { background: #1f4d38; }
+.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+.btn-outline:hover { border-color: var(--verde2); color: var(--verde2); }
+.btn-row { display: flex; gap: 0.6rem; justify-content: flex-end; flex-wrap: wrap; margin-top: 1.5rem; }
 
-/* ACTIVIDADES */
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin-bottom:1.25rem;}
-@media(max-width:400px){.metrics{grid-template-columns:repeat(2,1fr);}}
-.metric{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:0.75rem 0.5rem;text-align:center;}
-.metric-num{font-family:'Playfair Display',serif;font-size:1.75rem;display:block;line-height:1;margin-bottom:0.15rem;}
-.metric-lbl{font-size:0.66rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);}
-.filter-bar{display:flex;flex-wrap:wrap;gap:0.35rem;margin-bottom:1rem;align-items:center;}
-.filter-bar>span{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;}
-.fchip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;border:1px solid var(--border);color:var(--muted);font-size:0.75rem;cursor:pointer;background:transparent;font-family:'Source Sans 3',sans-serif;transition:all 0.18s;}
-.fchip .fdot{width:7px;height:7px;border-radius:50%;}
-.fchip.on{color:var(--crema);}
-.act-list{display:flex;flex-direction:column;gap:0.5rem;}
-.act-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color 0.18s,transform 0.15s;}
-.act-card:hover{border-color:rgba(82,183,136,0.3);transform:translateX(2px);}
-.act-inner{display:flex;align-items:stretch;}
-.act-accent{width:4px;flex-shrink:0;}
-.act-body{flex:1;padding:0.75rem 0.9rem;min-width:0;}
-.act-top{display:flex;align-items:flex-start;justify-content:space-between;gap:0.5rem;}
-.act-nombre{font-size:0.9rem;font-weight:600;color:var(--crema);}
-.act-actividad{font-size:0.76rem;color:var(--muted);margin-top:2px;}
-.act-right{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
-.act-fecha{font-size:0.7rem;color:var(--muted);white-space:nowrap;}
-.epill{display:inline-flex;align-items:center;gap:3px;font-size:0.68rem;font-weight:600;padding:2px 7px;border-radius:12px;}
-.ep-pendiente{background:rgba(120,120,120,0.12);color:var(--muted);}
-.ep-proxima{background:rgba(233,168,76,0.15);color:var(--amber);}
-.ep-realizada{background:rgba(82,183,136,0.15);color:var(--verde2);}
-.edot{width:5px;height:5px;border-radius:50%;background:currentColor;}
-.ep-proxima .edot{animation:blink 1.8s infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-.act-areas-dots{display:flex;gap:3px;margin-top:0.4rem;}
-.adot{width:7px;height:7px;border-radius:50%;}
+/* ═══════════════════════════════════════════
+   CARDS GENÉRICAS
+═══════════════════════════════════════════ */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1rem 1.2rem;
+}
+.card + .card { margin-top: 0.65rem; }
+.card-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--cafe);
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-/* CALENDARIO */
-.cal-leyenda{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:10px;font-size:0.72rem;font-weight:600;border:1px solid;}
-.cal-grid-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:2rem;}
-.cal-dias-header{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--border);}
-.cal-dias-header>div{text-align:center;padding:0.45rem 0;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--muted);font-weight:600;}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);}
-.cal-celda{min-height:64px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:0.3rem;overflow:hidden;transition:background 0.15s;}
-.cal-celda:nth-child(7n){border-right:none;}
-.cal-celda.otro-mes{opacity:0.25;}
-.cal-celda.hoy{background:rgba(82,183,136,0.06);}
-.cal-celda.tiene-eventos{cursor:pointer;}
-.cal-celda.tiene-eventos:hover{background:rgba(255,255,255,0.03);}
-.cal-num{font-size:0.7rem;color:var(--muted);font-weight:600;margin-bottom:0.2rem;display:block;}
-.cal-celda.hoy .cal-num{background:var(--verde2);color:#141410;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;}
-.cal-celda.domingo .cal-num{color:#E76F51;}
-.cal-evento{font-size:0.6rem;line-height:1.15;padding:1px 3px;border-radius:3px;margin-bottom:1px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;border-left:2px solid;}
-.ev-manada{background:rgba(82,183,136,0.12);color:#a8d5b5;border-color:var(--verde2);}
-.ev-distrito{background:rgba(233,168,76,0.12);color:#d4b87a;border-color:var(--amber);}
-.ev-fija{background:rgba(155,93,229,0.12);color:#d4b8f5;border-color:#C77DFF;}
-.ev-vacacion{background:rgba(80,80,80,0.1);color:#555;border-color:#444;font-style:italic;}
-.ev-cumple{background:rgba(249,200,14,0.1);color:#c9a800;border-color:#d4b000;}
-.ev-cumple_dir{background:rgba(233,168,76,0.12);color:#d4b87a;border-color:var(--amber);}
-.cal-lista-titulo{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.09em;color:var(--cafe);font-weight:600;margin-bottom:0.6rem;margin-top:0.75rem;}
-.cal-lista-item{display:flex;align-items:flex-start;gap:0.75rem;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:0.65rem 0.9rem;margin-bottom:0.5rem;cursor:pointer;transition:border-color 0.18s;border-left:3px solid;}
-.cal-lista-item:hover{border-color:rgba(255,255,255,0.12);}
-.cli-fecha{font-size:0.7rem;color:var(--muted);min-width:50px;font-weight:600;white-space:nowrap;}
-.cli-nombre{font-size:0.86rem;color:var(--crema);font-weight:600;}
-.cli-sub{font-size:0.75rem;color:var(--muted);margin-top:1px;}
-.cli-tipo{font-size:0.65rem;font-weight:600;padding:1px 6px;border-radius:8px;margin-top:3px;display:inline-block;}
+/* ═══════════════════════════════════════════
+   BADGES
+═══════════════════════════════════════════ */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+.badge-responsable  { background: rgba(233,168,76,0.15); color: var(--amber); border: 1px solid rgba(233,168,76,0.3); }
+.badge-asistente { background: rgba(155,93,229,0.15); color: #C77DFF; }
 
-/* MODAL */
-.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:200;overflow-y:auto;padding:1.5rem 0.75rem;align-items:flex-start;justify-content:center;}
-.modal-ov.open{display:flex;}
-.modal{background:#1c1c19;border:1px solid rgba(82,183,136,0.2);border-radius:14px;max-width:620px;width:100%;overflow:hidden;margin:auto;}
-.modal-acc{height:4px;}
-.modal-hd{padding:1.1rem 1.35rem 0.9rem;border-bottom:1px solid var(--border);position:relative;}
-.modal-chips{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:0.55rem;margin-top:0.2rem;}
-.modal-tit{font-family:'Playfair Display',serif;font-size:1.25rem;color:var(--crema);margin-bottom:0.15rem;}
-.modal-sub{font-size:0.82rem;color:var(--cafe);}
-.modal-x{position:absolute;top:0.9rem;right:0.9rem;background:rgba(255,255,255,0.07);border:none;color:#aaa;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:0.95rem;display:flex;align-items:center;justify-content:center;}
-.modal-x:hover{background:rgba(255,255,255,0.14);color:white;}
-.modal-bd{padding:1.1rem 1.35rem;}
-.mg2{display:grid;grid-template-columns:1fr 1fr;gap:0.55rem;margin-bottom:1.1rem;}
-@media(max-width:420px){.mg2{grid-template-columns:1fr;}}
-.md{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:0.65rem;}
-.md-lbl{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.07em;color:#555;font-weight:600;margin-bottom:0.1rem;}
-.md-val{font-size:0.84rem;color:#ccc;}
-.ms{margin-bottom:1rem;}
-.ms-lbl{font-size:0.66rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--cafe);font-weight:600;margin-bottom:0.35rem;display:block;}
-.ms-txt{font-size:0.86rem;color:#c0bdb3;line-height:1.65;}
-.m-areas{display:flex;flex-wrap:wrap;gap:0.3rem;}
-.m-achip{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:12px;font-size:0.73rem;font-weight:600;border:1px solid;}
-.m-mats{list-style:none;display:flex;flex-direction:column;gap:0.2rem;}
-.m-mats li{font-size:0.83rem;color:#bbb;padding-left:1rem;position:relative;}
-.m-mats li::before{content:"·";position:absolute;left:0;color:var(--verde2);font-size:1.1rem;line-height:1;}
-.m-nota{background:rgba(233,168,76,0.07);border:1px solid rgba(233,168,76,0.2);border-radius:8px;padding:0.65rem 0.9rem;font-size:0.83rem;color:#d4b87a;line-height:1.55;}
-.modal-ft{padding:0.8rem 1.35rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
-.mnav{background:transparent;border:1px solid var(--border);color:#aaa;padding:4px 13px;border-radius:7px;font-size:0.76rem;cursor:pointer;font-family:'Source Sans 3',sans-serif;transition:all 0.18s;}
-.mnav:hover{border-color:var(--verde2);color:var(--verde2);}
-.mnav:disabled{opacity:0.22;cursor:default;}
+/* ═══════════════════════════════════════════
+   MIEMBROS DEL EQUIPO
+═══════════════════════════════════════════ */
+.team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); gap: 0.6rem; }
+.member-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 0.8rem 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.member-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 0.8rem;
+  flex-shrink: 0;
+}
+.member-name { font-size: 0.86rem; font-weight: 600; color: var(--crema); }
+.member-role { font-size: 0.72rem; color: var(--muted); }
+.member-selva { font-size: 0.72rem; color: var(--cafe); margin-top: 1px; }
 
-/* MOBILE */
-@media(max-width:520px){
-  .cal-dias-header>div{font-size:0.55rem;padding:0.3rem 0;}
-  .cal-celda{min-height:48px;padding:0.18rem;}
-  .cal-evento{font-size:0.52rem;padding:1px 2px;}
-  .cal-num{font-size:0.62rem;}
+/* ═══════════════════════════════════════════
+   LOBATOS
+═══════════════════════════════════════════ */
+.lobatos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 0.6rem; }
+.lobato-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 0.75rem 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.lobato-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 600;
+  flex-shrink: 0;
+}
+.lobato-nombre { font-size: 0.84rem; font-weight: 600; color: var(--crema); }
+.lobato-meta { font-size: 0.72rem; color: var(--muted); margin-top: 1px; }
+.lobato-etapa { font-size: 0.7rem; margin-top: 2px; font-weight: 600; }
+
+/* ═══════════════════════════════════════════
+   INFO BOX
+═══════════════════════════════════════════ */
+.info-box {
+  background: rgba(45,106,79,0.08);
+  border: 1px solid rgba(82,183,136,0.2);
+  border-radius: var(--r);
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.1rem;
+}
+.info-box p { font-size: 0.83rem; color: #a8d5b5; line-height: 1.6; }
+.info-box strong { color: var(--verde2); }
+
+.warn-box {
+  background: rgba(233,168,76,0.07);
+  border: 1px solid rgba(233,168,76,0.2);
+  border-radius: var(--r);
+  padding: 0.85rem 1.1rem;
+  margin-bottom: 1.1rem;
+  font-size: 0.83rem;
+  color: #d4b87a;
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════
+   DIAGNÓSTICO
+═══════════════════════════════════════════ */
+.diag-q {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1rem 1.1rem;
+  margin-bottom: 0.65rem;
+  transition: border-color 0.2s;
+}
+.diag-q.respondida { border-color: rgba(82,183,136,0.2); }
+.diag-q-label { font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.09em; color: var(--cafe); font-weight: 600; margin-bottom: 0.3rem; }
+.diag-q-texto { font-size: 0.87rem; color: var(--crema); line-height: 1.5; margin-bottom: 0.65rem; }
+.radio-group { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.radio-opt {
+  padding: 4px 11px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.18s;
+  user-select: none;
+}
+.radio-opt.sel {
+  border-color: var(--verde2);
+  color: var(--verde2);
+  background: rgba(82,183,136,0.1);
+}
+.diag-sintesis {
+  background: rgba(45,106,79,0.1);
+  border: 1px solid rgba(82,183,136,0.25);
+  border-radius: var(--r);
+  padding: 1rem 1.15rem;
+  margin-top: 1.1rem;
+}
+.diag-sintesis h4 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--verde2); margin-bottom: 0.45rem; }
+.diag-sintesis p { font-size: 0.86rem; color: #a8d5b5; line-height: 1.65; }
+
+/* ═══════════════════════════════════════════
+   ÉNFASIS BANNER
+═══════════════════════════════════════════ */
+.enfasis-banner {
+  background: linear-gradient(135deg, #1a3d2b, #2D6A4F 70%, #1a3d2b);
+  border: 1px solid rgba(82,183,136,0.25);
+  border-radius: var(--r);
+  padding: 1.1rem 1.35rem;
+  margin-bottom: 1.35rem;
+}
+.enfasis-lbl { font-size: 0.67rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cafe); font-weight: 600; margin-bottom: 0.25rem; }
+.enfasis-txt { font-family: 'Playfair Display', serif; font-size: clamp(1rem, 3vw, 1.25rem); color: var(--crema); line-height: 1.3; }
+.enfasis-fund { font-size: 0.8rem; color: #a8d5b5; margin-top: 0.5rem; line-height: 1.55; }
+
+/* ═══════════════════════════════════════════
+   ACTIVIDADES
+═══════════════════════════════════════════ */
+.metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 0.5rem; margin-bottom: 1.25rem; }
+@media (max-width: 400px) { .metrics { grid-template-columns: repeat(2,1fr); } }
+.metric {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+}
+.metric-num { font-family: 'Playfair Display', serif; font-size: 1.75rem; display: block; line-height: 1; margin-bottom: 0.15rem; }
+.metric-lbl { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+
+.filter-bar { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 1rem; align-items: center; }
+.filter-bar > span { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; }
+.fchip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 20px;
+  border: 1px solid var(--border); color: var(--muted);
+  font-size: 0.75rem; cursor: pointer; background: transparent;
+  font-family: 'Source Sans 3', sans-serif; transition: all 0.18s;
+}
+.fchip .fdot { width: 7px; height: 7px; border-radius: 50%; }
+.fchip.on { color: var(--crema); }
+
+.act-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.act-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.18s, transform 0.15s;
+}
+.act-card:hover { border-color: rgba(82,183,136,0.3); transform: translateX(2px); }
+.act-inner { display: flex; align-items: stretch; }
+.act-accent { width: 4px; flex-shrink: 0; }
+.act-body { flex: 1; padding: 0.75rem 0.9rem; min-width: 0; }
+.act-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; }
+.act-nombre { font-size: 0.9rem; font-weight: 600; color: var(--crema); }
+.act-actividad { font-size: 0.76rem; color: var(--muted); margin-top: 2px; }
+.act-right { flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.act-fecha { font-size: 0.7rem; color: var(--muted); white-space: nowrap; }
+.epill {
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 0.68rem; font-weight: 600;
+  padding: 2px 7px; border-radius: 12px;
+}
+.ep-pendiente { background: rgba(120,120,120,0.12); color: var(--muted); }
+.ep-proxima   { background: rgba(233,168,76,0.15); color: var(--amber); }
+.ep-realizada { background: rgba(82,183,136,0.15); color: var(--verde2); }
+.ep-vacaciones{ background: rgba(120,120,120,0.08); color: #555; }
+.edot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+.ep-proxima .edot { animation: blink 1.8s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.act-areas-dots { display: flex; gap: 3px; margin-top: 0.4rem; }
+.adot { width: 7px; height: 7px; border-radius: 50%; }
+
+/* ═══════════════════════════════════════════
+   TIMELINE
+═══════════════════════════════════════════ */
+.timeline { position: relative; padding-left: 1.75rem; }
+.timeline::before { content:''; position:absolute; left:0.55rem; top:0; bottom:0; width:1px; background:var(--border); }
+.tl-item { position: relative; margin-bottom: 0.55rem; cursor: pointer; }
+.tl-item.tl-vacaciones { cursor: default; }
+.tl-dot { position:absolute; left:-1.75rem; top:0.65rem; width:9px; height:9px; border-radius:50%; border:2px solid var(--border); z-index:1; }
+.tl-pendiente .tl-dot { background:#2a2a28; border-color:#444; }
+.tl-proxima .tl-dot   { background:var(--amber); border-color:var(--amber); animation:blink 1.8s infinite; }
+.tl-realizada .tl-dot { background:var(--verde2); border-color:var(--verde2); }
+.tl-vacaciones .tl-dot{ background:#222; border-color:#333; }
+.tl-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 0.55rem 0.85rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 0.6rem;
+  transition: border-color 0.18s;
+}
+.tl-item:not(.tl-vacaciones):hover .tl-card { border-color: rgba(82,183,136,0.25); }
+.tl-fecha { font-size: 0.7rem; color: var(--muted); min-width: 75px; font-weight: 600; }
+.tl-nombre { font-size: 0.83rem; color: #ccc; flex: 1; }
+.tl-dots { display: flex; gap: 3px; }
+
+/* ═══════════════════════════════════════════
+   MODAL FICHA
+═══════════════════════════════════════════ */
+.modal-ov {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.88); z-index: 200;
+  overflow-y: auto; padding: 1.5rem 0.75rem;
+  align-items: flex-start; justify-content: center;
+}
+.modal-ov.open { display: flex; }
+.modal {
+  background: #1c1c19;
+  border: 1px solid rgba(82,183,136,0.2);
+  border-radius: 14px;
+  max-width: 620px; width: 100%;
+  overflow: hidden; margin: auto;
+}
+.modal-acc { height: 4px; }
+.modal-hd { padding: 1.1rem 1.35rem 0.9rem; border-bottom: 1px solid var(--border); position: relative; }
+.modal-chips { display: flex; gap: 0.35rem; flex-wrap: wrap; margin-bottom: 0.55rem; margin-top: 0.2rem; }
+.modal-tit { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--crema); margin-bottom: 0.15rem; }
+.modal-sub { font-size: 0.82rem; color: var(--cafe); }
+.modal-x { position: absolute; top: 0.9rem; right: 0.9rem; background: rgba(255,255,255,0.07); border: none; color: #aaa; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; }
+.modal-x:hover { background: rgba(255,255,255,0.14); color: white; }
+.modal-bd { padding: 1.1rem 1.35rem; }
+.mg2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; margin-bottom: 1.1rem; }
+@media (max-width: 420px) { .mg2 { grid-template-columns: 1fr; } }
+.md { background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 0.65rem; }
+.md-lbl { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.07em; color: #555; font-weight: 600; margin-bottom: 0.1rem; }
+.md-val { font-size: 0.84rem; color: #ccc; }
+.ms { margin-bottom: 1rem; }
+.ms-lbl { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cafe); font-weight: 600; margin-bottom: 0.35rem; display: block; }
+.ms-txt { font-size: 0.86rem; color: #c0bdb3; line-height: 1.65; }
+.m-areas { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.m-achip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 12px; font-size: 0.73rem; font-weight: 600; border: 1px solid; }
+.m-mats { list-style: none; display: flex; flex-direction: column; gap: 0.2rem; }
+.m-mats li { font-size: 0.83rem; color: #bbb; padding-left: 1rem; position: relative; }
+.m-mats li::before { content:'·'; position:absolute; left:0; color:var(--verde2); font-size:1.1rem; line-height:1; }
+.m-nota { background: rgba(233,168,76,0.07); border: 1px solid rgba(233,168,76,0.2); border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.83rem; color: #d4b87a; line-height: 1.55; }
+.modal-ft { padding: 0.8rem 1.35rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.mnav { background: transparent; border: 1px solid var(--border); color: #aaa; padding: 4px 13px; border-radius: 7px; font-size: 0.76rem; cursor: pointer; font-family: 'Source Sans 3', sans-serif; transition: all 0.18s; }
+.mnav:hover { border-color: var(--verde2); color: var(--verde2); }
+.mnav:disabled { opacity: 0.22; cursor: default; }
+
+/* ═══════════════════════════════════════════
+   MODO PÚBLICO — estilos extra
+═══════════════════════════════════════════ */
+body.publico .section-sub { color: #999; }
+.publico-header {
+  background: linear-gradient(135deg, #0f2b1d, #1a3d2b 60%, #0f2b1d);
+  border-bottom: 1px solid rgba(82,183,136,0.15);
+  padding: 1.5rem 1rem 1.25rem;
+  text-align: center;
+}
+.ph-logo { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.ph-grupo { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--cafe); margin-bottom: 0.25rem; }
+.ph-nombre { font-family: 'Playfair Display', serif; font-size: clamp(1.3rem, 5vw, 2rem); color: var(--crema); margin-bottom: 0.2rem; }
+.ph-sub { font-size: 0.8rem; color: var(--muted); }
+
+/* Ocultar en público */
+.solo-privado { display: block; }
+body.publico .solo-privado { display: none !important; }
+
+/* Responsive general */
+@media (max-width: 520px) {
+  .step-btn { padding: 0.6rem 0.6rem; font-size: 0.7rem; }
+  .step-btn .step-lbl { display: none; }
+  .modal-bd { padding: 0.9rem 1rem; }
+  .modal-hd { padding: 0.9rem 1rem 0.75rem; }
+  .modal-ft { padding: 0.7rem 1rem; }
+}
+
+/* ═══════════════════════════════════════════
+   CALENDARIO MENSUAL
+═══════════════════════════════════════════ */
+.cal-leyenda {
+  display:inline-flex; align-items:center; gap:4px;
+  padding:3px 9px; border-radius:10px; font-size:0.72rem;
+  font-weight:600; border:1px solid;
+}
+.cal-nav {
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:0.75rem;
+}
+.cal-nav-btn {
+  background:var(--bg2); border:1px solid var(--border); color:var(--crema);
+  width:32px; height:32px; border-radius:8px; font-size:1.1rem;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:all 0.18s;
+}
+.cal-nav-btn:hover { border-color:var(--verde2); color:var(--verde2); }
+.cal-mes-titulo {
+  font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--crema);
+  font-weight:600; text-align:center;
+}
+.cal-grid-wrap {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:var(--r); overflow:hidden;
+}
+.cal-dias-header {
+  display:grid; grid-template-columns:repeat(7,1fr);
+  border-bottom:1px solid var(--border);
+}
+.cal-dias-header > div {
+  text-align:center; padding:0.5rem 0;
+  font-size:0.68rem; text-transform:uppercase;
+  letter-spacing:0.08em; color:var(--muted); font-weight:600;
+}
+.cal-grid {
+  display:grid; grid-template-columns:repeat(7,1fr);
+}
+.cal-celda {
+  min-height:80px; border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border); padding:0.35rem;
+  position:relative; vertical-align:top;
+  transition:background 0.15s;
+}
+.cal-celda:nth-child(7n) { border-right:none; }
+.cal-celda.otro-mes { opacity:0.3; }
+.cal-celda.hoy { background:rgba(82,183,136,0.06); }
+.cal-celda.tiene-eventos { cursor:pointer; }
+.cal-celda.tiene-eventos:hover { background:rgba(255,255,255,0.03); }
+.cal-num {
+  font-size:0.75rem; color:var(--muted); font-weight:600;
+  margin-bottom:0.25rem; display:block;
+}
+.cal-celda.hoy .cal-num {
+  background:var(--verde2); color:#141410;
+  width:20px; height:20px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.7rem;
+}
+.cal-celda.domingo .cal-num { color:#E76F51; }
+.cal-evento {
+  font-size:0.65rem; line-height:1.2;
+  padding:2px 4px; border-radius:4px; margin-bottom:2px;
+  cursor:pointer; overflow:hidden;
+  white-space:nowrap; text-overflow:ellipsis;
+  border-left:2px solid;
+}
+.ev-manada    { background:rgba(82,183,136,0.12); color:#a8d5b5; border-color:var(--verde2); }
+.ev-distrito  { background:rgba(233,168,76,0.12); color:#d4b87a; border-color:var(--amber); }
+.ev-fija      { background:rgba(155,93,229,0.12); color:#d4b8f5; border-color:#C77DFF; }
+.ev-vacacion   { background:rgba(80,80,80,0.12); color:#555; border-color:#444; font-style:italic; }
+.ev-cumple     { background:rgba(249,200,14,0.1); color:#d4b000; border-color:#d4b000; }
+.ev-cumple_dir { background:rgba(233,168,76,0.15); color:var(--amber); border-color:var(--amber); }
+
+/* Lista debajo del calendario */
+.cal-lista-titulo {
+  font-size:0.7rem; text-transform:uppercase; letter-spacing:0.09em;
+  color:var(--cafe); font-weight:600; margin-bottom:0.6rem;
+}
+.cal-lista-item {
+  display:flex; align-items:flex-start; gap:0.75rem;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:8px; padding:0.7rem 0.9rem; margin-bottom:0.5rem;
+  cursor:pointer; transition:border-color 0.18s;
+  border-left:3px solid;
+}
+.cal-lista-item:hover { border-color:rgba(255,255,255,0.15); }
+.cli-fecha { font-size:0.7rem; color:var(--muted); min-width:55px; font-weight:600; white-space:nowrap; }
+.cli-nombre { font-size:0.86rem; color:var(--crema); font-weight:600; }
+.cli-sub { font-size:0.75rem; color:var(--muted); margin-top:1px; }
+.cli-tipo { font-size:0.65rem; font-weight:600; padding:1px 6px; border-radius:8px; margin-top:3px; display:inline-block; }
+
+@media(max-width:480px) {
+  .cal-celda { min-height:55px; padding:0.2rem; }
+  .cal-evento { font-size:0.58rem; }
+  .cal-num { font-size:0.68rem; }
 }
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-logo">🐺</div>
-  <div class="hero-grupo">Grupo de Guías y Scouts Don Bosco Linares · Fundado el 12 de octubre de 1970</div>
-  <div class="hero-nombre">Manada Seeonee</div>
-  <div class="hero-ciclo">Ciclo 1 · 2026</div>
-  <div class="hero-enfasis">
-    <div class="hero-enfasis-lbl">Énfasis del ciclo</div>
-    <div class="hero-enfasis-txt">Viviendo la aventura en la selva de Seeonee</div>
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-logo">🐺</div>
+    <div class="topbar-texts">
+      <div class="topbar-name" id="tb-nombre">Don Bosco Linares</div>
+      <div class="topbar-sub" id="tb-sub">Grupo de Guías y Scouts Don Bosco Linares · Fundado el 12 de octubre de 1970</div>
+    </div>
+  </div>
+  <div class="topbar-badges">
+    <div class="modo-badge" id="modo-badge">Cargando…</div>
   </div>
 </div>
 
-<div class="tabs-wrap">
-  <div class="tabs">
-    <button class="tab active" onclick="cambiarTab(0,this)">🏠 Inicio</button>
-    <button class="tab" onclick="cambiarTab(1,this)">👥 Equipo</button>
-    <button class="tab" onclick="cambiarTab(2,this)">🐾 Lobatos</button>
-    <button class="tab" onclick="cambiarTab(3,this)">🌿 Énfasis</button>
-    <button class="tab" onclick="cambiarTab(4,this)">🗂 Actividades</button>
-    <button class="tab" onclick="cambiarTab(5,this)">📅 Calendario</button>
-  </div>
+<!-- BARRA DE PASOS -->
+<div class="steps-bar" id="steps-bar">
+  <!-- generada por JS -->
 </div>
 
-<div class="content">
+<!-- ════════════════════════════════════════
+     PANTALLA 0: UNIDAD + EQUIPO
+════════════════════════════════════════ -->
+<div class="screen active" id="screen-0">
 
-<div class="tab-panel active" id="tab-0">
-  <h2 class="sec-title" style="margin-top:0.5rem">Bienvenidos al Ciclo 1 · 2026</h2>
-  <p class="sec-sub">Planificación del ciclo de programa de la Manada Seeonee del Grupo Don Bosco Linares. Aquí encontrarás el equipo, los integrantes, las actividades y el calendario.</p>
-  <div class="enfasis-banner" style="margin-bottom:1.5rem">
-    <div class="enfasis-lbl">Énfasis del ciclo</div>
-    <div class="enfasis-txt">Viviendo la aventura en la selva de Seeonee</div>
-    <div class="enfasis-fund">Más del 50% son nuevos/as. El ciclo prioriza el marco simbólico del Libro de la Selva, la identidad de grupo y la aventura compartida. Las seisenas están en formación.</div>
+  <!-- HEADER PÚBLICO (solo visible en modo público) -->
+  <div class="publico-header" id="pub-header" style="display:none;margin:-1.5rem -1rem 1.5rem;padding:1.5rem 1rem 1.25rem">
+    <div class="ph-logo">🐺</div>
+    <div class="ph-grupo">Guías y Scouts Don Bosco Linares</div>
+    <div class="ph-nombre" id="pub-nombre">Manada Seeonee</div>
+    <div class="ph-sub" id="pub-sub">Ciclo de programa 2025</div>
   </div>
-  <div class="stats-grid">
-    <div class="stat-box"><span class="stat-num" id="s-lobatos" style="color:var(--verde2)">—</span><span class="stat-lbl">Lobatos y lobatas</span></div>
-    <div class="stat-box"><span class="stat-num" id="s-acts"    style="color:var(--amber)">—</span><span class="stat-lbl">Actividades</span></div>
-    <div class="stat-box"><span class="stat-num" id="s-equipo"  style="color:var(--cafe)">—</span><span class="stat-lbl">Animadores</span></div>
-    <div class="stat-box"><span class="stat-num" id="s-real"    style="color:var(--corporalidad)">—</span><span class="stat-lbl">Realizadas</span></div>
-  </div>
-</div>
 
-<div class="tab-panel" id="tab-1">
-  <h2 class="sec-title">Equipo de animadores</h2>
-  <p class="sec-sub">Quienes trabajan directamente con la Manada Seeonee.</p>
+  <h2 class="section-title solo-privado">Configuración de la unidad</h2>
+  <p class="section-sub solo-privado">Datos básicos de la manada. Esta información se usa en todo el ciclo.</p>
+
+  <!-- DATOS EDITABLES (solo privado) -->
+  <div class="solo-privado">
+    <div class="field-row">
+      <div class="field">
+        <label>Nombre de la unidad</label>
+        <input id="u-nombre" type="text" value="Manada Seeonee" oninput="actualizarDatos()">
+      </div>
+      <div class="field">
+        <label>Año / ciclo</label>
+        <input id="u-ciclo" type="text" value="Ciclo 1 · 2026" oninput="actualizarDatos()">
+      </div>
+    </div>
+    <div class="sep"></div>
+  </div>
+
+  <!-- EQUIPO DIRIGENTES — visible en ambos modos -->
+  <h3 style="font-size:0.95rem;font-weight:600;color:var(--crema);margin-bottom:0.2rem">Equipo de animadores</h3>
+  <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.9rem">Quienes trabajan directamente con la manada.</p>
+
   <div class="team-grid" id="team-grid"></div>
+
+  <!-- FORMULARIO EQUIPO (solo privado) -->
+  <div class="solo-privado" style="margin-top:1.1rem">
+    <div id="equipo-form"></div>
+    <button class="btn btn-outline" style="font-size:0.8rem;margin-top:0.6rem" onclick="agregarGuiadora()">+ Agregar guiadora/o</button>
+  </div>
+
+  <div class="btn-row solo-privado">
+    <button class="btn btn-primary" onclick="irA(1)">Continuar → Lobatos</button>
+  </div>
 </div>
 
-<div class="tab-panel" id="tab-2">
-  <h2 class="sec-title">Lobatos y lobatas</h2>
-  <p class="sec-sub">Integrantes de la Manada Seeonee · 7 a 10 años.</p>
+<!-- ════════════════════════════════════════
+     PANTALLA 1: LOBATOS
+════════════════════════════════════════ -->
+<div class="screen" id="screen-1">
+  <h2 class="section-title">Integrantes de la manada</h2>
+  <p class="section-sub">Lobatos y lobatas de 7–10 años. <span class="solo-privado">En la versión conectada, esta lista se importa desde el formulario de registro.</span></p>
+
   <div class="lobatos-grid" id="lobatos-grid"></div>
+
+  <div class="btn-row solo-privado">
+    <button class="btn btn-outline" onclick="irA(0)">← Volver</button>
+    <button class="btn btn-primary" onclick="irA(2)">Continuar → Diagnóstico</button>
+  </div>
 </div>
 
-<div class="tab-panel" id="tab-3">
-  <h2 class="sec-title">Énfasis del ciclo</h2>
-  <p class="sec-sub">El énfasis define el foco educativo del ciclo, determinado a partir del diagnóstico del equipo.</p>
+<!-- ════════════════════════════════════════
+     PANTALLA 2: DIAGNÓSTICO
+════════════════════════════════════════ -->
+<div class="screen" id="screen-2">
+  <h2 class="section-title">Diagnóstico de la manada</h2>
+
+  <!-- MODO PÚBLICO: solo síntesis -->
+  <div id="diag-pub-view" style="display:none">
+    <p class="section-sub">Evaluación del estado de la manada realizada por el equipo de Viejos Lobos al inicio del ciclo.</p>
+    <div class="diag-sintesis" style="margin-top:0">
+      <h4>Síntesis del diagnóstico</h4>
+      <p id="diag-pub-txt">—</p>
+    </div>
+    <div class="field" style="margin-top:1rem">
+      <label>Observaciones del equipo</label>
+      <div style="font-size:0.86rem;color:#a8d5b5;line-height:1.65;padding:0.6rem 0" id="diag-pub-obs">—</div>
+    </div>
+  </div>
+
+  <!-- MODO PRIVADO: cuestionario completo -->
+  <div class="solo-privado" id="diag-priv-view">
+    <p class="section-sub">Según el manual AGSCH, el diagnóstico examina el clima educativo, el avance en actividades y la progresión personal. Es realizado por el equipo al inicio de cada ciclo.</p>
+    <div id="diag-preguntas"></div>
+    <div class="diag-sintesis" id="diag-sintesis-box" style="display:none">
+      <h4>Síntesis automática</h4>
+      <p id="diag-sintesis-txt"></p>
+    </div>
+    <div class="field" style="margin-top:1rem">
+      <label>Observaciones adicionales del equipo</label>
+      <textarea id="diag-obs" placeholder="Ej: Más del 50% son lobatos nuevos. Se debe reforzar el marco simbólico: libro de la selva, personajes, ley...">Más del 50% son lobatos/as nuevos/as. Se debe reforzar el marco simbólico desde el inicio: libro de la selva, historia, personajes, ley de la selva, cómo funciona la manada.</textarea>
+    </div>
+  </div>
+
+  <div class="btn-row solo-privado">
+    <button class="btn btn-outline" onclick="irA(1)">← Volver</button>
+    <button class="btn btn-primary" onclick="irA(3)">Continuar → Énfasis</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     PANTALLA 3: ÉNFASIS
+════════════════════════════════════════ -->
+<div class="screen" id="screen-3">
+  <h2 class="section-title">Énfasis del ciclo</h2>
+  <p class="section-sub">El énfasis es una visión global del futuro a la luz del diagnóstico. Define el foco educativo y orienta todas las actividades. Cambia en cada ciclo.</p>
+
   <div class="enfasis-banner">
-    <div class="enfasis-lbl">Énfasis</div>
-    <div class="enfasis-txt">Viviendo la aventura en la selva de Seeonee</div>
-    <div class="enfasis-fund">La mayoría de los integrantes son nuevos/as en la manada. El ciclo prioriza el conocimiento del marco simbólico (El Libro de la Selva, personajes, ley de la manada), la construcción de identidad de grupo y la aventura compartida.</div>
+    <div class="enfasis-lbl">Énfasis del ciclo</div>
+    <div class="enfasis-txt" id="enfasis-preview">Viviendo la aventura en la selva de Seeonee</div>
+    <div class="enfasis-fund" id="enfasis-fund-preview">Basado en el diagnóstico: la mayoría de integrantes son nuevos/as. Se priorizará el conocimiento del marco simbólico y la construcción de identidad de grupo.</div>
   </div>
-  <div class="diag-box">
-    <h4>Síntesis del diagnóstico</h4>
-    <p>Más del 50% son lobatos/as nuevos/as. El ciclo prioriza el conocimiento del marco simbólico (El Libro de la Selva, personajes, ley de la manada), la construcción de identidad de grupo y la aventura compartida. Las seisenas están en formación y el seguimiento de progresión personal se construye desde cero.</p>
+
+  <div class="solo-privado">
+    <div class="field">
+      <label>Énfasis (motto del ciclo)</label>
+      <input id="enfasis-input" type="text" value="Viviendo la aventura en la selva de Seeonee" oninput="syncEnfasis()">
+      <p class="field-hint">Frase que define el foco educativo. Todas las actividades deben relacionarse con este énfasis.</p>
+    </div>
+    <div class="field">
+      <label>Marco simbólico</label>
+      <input id="marco-input" type="text" value="El Libro de la Selva — Seeonee">
+    </div>
+    <div class="field">
+      <label>Fundamentación</label>
+      <textarea id="enfasis-fund-input" oninput="syncEnfasis()">Basado en el diagnóstico: la mayoría de integrantes son nuevos/as. Se priorizará el conocimiento del marco simbólico y la construcción de identidad de grupo.</textarea>
+    </div>
   </div>
-  <div style="margin-top:1.25rem" id="pub-recursos"></div>
+
+  <div class="sep solo-privado"></div>
+  <div class="solo-privado" id="recursos-section" style="margin-top:0"></div>
+
+  <div class="btn-row solo-privado">
+    <button class="btn btn-outline" onclick="irA(2)">← Volver</button>
+    <button class="btn btn-primary" onclick="irA(4)">Continuar → Actividades</button>
+  </div>
 </div>
 
-<div class="tab-panel" id="tab-4">
-  <h2 class="sec-title">Actividades del ciclo</h2>
-  <p class="sec-sub">Actividades ratificadas por la manada. Toca cualquier actividad para ver el detalle.</p>
+<!-- ════════════════════════════════════════
+     PANTALLA 4: ACTIVIDADES
+════════════════════════════════════════ -->
+<div class="screen" id="screen-4">
+  <h2 class="section-title">Actividades del ciclo</h2>
+  <p class="section-sub">
+    <span class="solo-privado">Actividades preseleccionadas, pendientes de ratificación por la manada. Los lobatos pueden proponer cambios.</span>
+    <span id="act-pub-sub" style="display:none">Actividades del ciclo de programa.</span>
+    Filtra por área de desarrollo según el manual AGSCH.
+  </p>
+
   <div class="metrics">
     <div class="metric"><span class="metric-num" id="m-total" style="color:var(--crema)">—</span><span class="metric-lbl">Total</span></div>
     <div class="metric"><span class="metric-num" id="m-real"  style="color:var(--verde2)">—</span><span class="metric-lbl">Realizadas</span></div>
     <div class="metric"><span class="metric-num" id="m-prox"  style="color:var(--amber)">—</span><span class="metric-lbl">Próximas</span></div>
     <div class="metric"><span class="metric-num" id="m-pend"  style="color:var(--muted)">—</span><span class="metric-lbl">Pendientes</span></div>
   </div>
+
   <div class="filter-bar">
     <span>Área:</span>
     <button class="fchip on" data-area="todas" onclick="filtrar(this)" style="border-color:var(--verde2);color:var(--verde2)">Todas</button>
-    <button class="fchip" data-area="corporalidad"   onclick="filtrar(this)"><span class="fdot" style="background:var(--corporalidad)"></span>Corporalidad</button>
-    <button class="fchip" data-area="creatividad"    onclick="filtrar(this)"><span class="fdot" style="background:var(--creatividad)"></span>Creatividad</button>
-    <button class="fchip" data-area="caracter"       onclick="filtrar(this)"><span class="fdot" style="background:var(--caracter)"></span>Carácter</button>
-    <button class="fchip" data-area="afectividad"    onclick="filtrar(this)"><span class="fdot" style="background:var(--afectividad)"></span>Afectividad</button>
-    <button class="fchip" data-area="sociabilidad"   onclick="filtrar(this)"><span class="fdot" style="background:var(--sociabilidad)"></span>Sociabilidad</button>
-    <button class="fchip" data-area="espiritualidad" onclick="filtrar(this)"><span class="fdot" style="background:var(--espiritualidad)"></span>Espiritualidad</button>
+    <button class="fchip" data-area="corporalidad" onclick="filtrar(this)">
+      <span class="fdot" style="background:var(--corporalidad)"></span>Corporalidad
+    </button>
+    <button class="fchip" data-area="creatividad" onclick="filtrar(this)">
+      <span class="fdot" style="background:var(--creatividad)"></span>Creatividad
+    </button>
+    <button class="fchip" data-area="caracter" onclick="filtrar(this)">
+      <span class="fdot" style="background:var(--caracter)"></span>Carácter
+    </button>
+    <button class="fchip" data-area="afectividad" onclick="filtrar(this)">
+      <span class="fdot" style="background:var(--afectividad)"></span>Afectividad
+    </button>
+    <button class="fchip" data-area="sociabilidad" onclick="filtrar(this)">
+      <span class="fdot" style="background:var(--sociabilidad)"></span>Sociabilidad
+    </button>
+    <button class="fchip" data-area="espiritualidad" onclick="filtrar(this)">
+      <span class="fdot" style="background:var(--espiritualidad)"></span>Espiritualidad
+    </button>
   </div>
+
   <div class="act-list" id="act-list"></div>
+
+  <div class="btn-row solo-privado">
+    <button class="btn btn-outline" onclick="irA(3)">← Volver</button>
+    <button class="btn btn-primary" onclick="irA(5)">Continuar → Calendario</button>
+  </div>
 </div>
 
-<div class="tab-panel" id="tab-5">
-  <h2 class="sec-title">Calendario del ciclo</h2>
-  <p class="sec-sub">Abril — Agosto 2026. Toca cualquier actividad para ver el detalle.</p>
+<!-- ════════════════════════════════════════
+     PANTALLA 5: CALENDARIO
+════════════════════════════════════════ -->
+<div class="screen" id="screen-5">
+  <h2 class="section-title">Calendario del ciclo</h2>
+  <p class="section-sub">Ciclo 1 &middot; 2026 &nbsp;&middot;&nbsp; <span class="solo-privado">Calendarización presentada y ratificada por la manada.</span></p>
+
+  <div class="enfasis-banner" style="margin-bottom:1.25rem">
+    <div class="enfasis-lbl">Énfasis</div>
+    <div class="enfasis-txt" id="cal-enfasis">—</div>
+  </div>
+
   <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.1rem;align-items:center">
     <span style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em">Tipo:</span>
     <span class="cal-leyenda" style="background:rgba(82,183,136,0.15);color:var(--verde2);border-color:rgba(82,183,136,0.3)">🐺 Manada</span>
-    <span class="cal-leyenda" style="background:rgba(233,168,76,0.15);color:var(--amber);border-color:rgba(233,168,76,0.3)">🏛 Grupo/Distrito</span>
-    <span class="cal-leyenda" style="background:rgba(155,93,229,0.15);color:#C77DFF;border-color:rgba(155,93,229,0.3)">⭐ Fija</span>
+    <span class="cal-leyenda" style="background:rgba(233,168,76,0.15);color:var(--amber);border-color:rgba(233,168,76,0.3)">🏛 Grupo / Distrito</span>
+    <span class="cal-leyenda" style="background:rgba(155,93,229,0.15);color:#C77DFF;border-color:rgba(155,93,229,0.3)">⭐ Fija del grupo</span>
     <span class="cal-leyenda" style="background:rgba(249,200,14,0.1);color:#d4b000;border-color:rgba(249,200,14,0.3)">🎂 Cumpleaños</span>
+    <span class="cal-leyenda" style="background:rgba(120,120,120,0.1);color:#666;border-color:rgba(120,120,120,0.2)">🗓 Vacaciones</span>
   </div>
-  <div id="pub-cal"></div>
+
+  <div id="cal-anio-completo"></div>
+
+  <div class="btn-row solo-privado" style="margin-top:1.5rem">
+    <button class="btn btn-outline" onclick="irA(4)">&#8592; Volver</button>
+    <button class="btn btn-primary" style="background:var(--cafe);color:#141410"
+      onclick="alert('En la versión conectada a Google Sheets, esto guardará el ciclo completo.')">
+      &#10003; Guardar ciclo de programa
+    </button>
+  </div>
 </div>
 
-</div>
-
+<!-- MODAL FICHA ACTIVIDAD -->
 <div class="modal-ov" id="modal" onclick="cerrarFuera(event)">
   <div class="modal">
     <div class="modal-acc" id="m-acc"></div>
@@ -308,7 +912,21 @@ body{font-family:'Source Sans 3',sans-serif;background:var(--bg);color:var(--cre
 </div>
 
 <script>
-const UNIDAD = "manada";
+/* ══════════════════════════════════════════
+   LEER PARÁMETROS URL
+   ?unidad=manada&modo=publico
+   ?unidad=compania
+   etc.
+══════════════════════════════════════════ */
+const params  = new URLSearchParams(location.search);
+const UNIDAD  = params.get("unidad") || "manada";
+const PUBLICO = params.get("modo") === "publico";
+
+/* ══════════════════════════════════════════
+   DATOS POR UNIDAD
+   En producción: fetch a Google Apps Script
+   pasando el parámetro de unidad.
+══════════════════════════════════════════ */
 const UNIDADES = {
   manada: {
     nombre: "Manada Seeonee",
@@ -397,6 +1015,8 @@ diagObs: "",
   }
 };
 
+const DATA = UNIDADES[UNIDAD] || UNIDADES.manada;
+
 /* ══════════════════════════════════════════
    ACTIVIDADES (Manada — calendario real)
 ══════════════════════════════════════════ */
@@ -408,22 +1028,19 @@ const ACTIVIDADES = [
 
   // ── CICLO ACTIVO ──
   { id:1,  nombre:"Presentación del calendario",       act:"Gritos y dinámicas · Globos en los pies · Submarino",      fecha:"2026-05-02", estado:"realizada",   areas:["afectividad","sociabilidad","corporalidad"],    dur:"2 horas",         lugar:"Cubil",                        resp:"Akela + equipo",                objetivo:"Presentar y ratificar el calendario del ciclo con la manada. Reforzar gritos, dinámicas e identidad de grupo.", desc:"Se presenta el calendario definitivo a la manada. Actividades de integración y energía: refuerzo de gritos de seisena, reventar globos en los pies, juego submarino.", mats:["Calendario impreso o proyectado","Globos","Espacio amplio"],                                                nota:"Primera reunión formal del ciclo. El calendario puede ajustarse con propuestas de los lobatos." },
-  { id:2,  nombre:"Prueba de la manada",               act:"Juegos de módulos · Cumpleaños Bagheera",                  fecha:"2026-05-23", estado:"pendiente", areas:["corporalidad","caracter","sociabilidad"],       dur:"2 horas",         lugar:"Cancha / patio",               resp:"Bagheera + apoyo Clan",          objetivo:"Desarrollar habilidades físicas, trabajo en equipo y cooperación inter-ramas a través de un circuito de módulos.", desc:"5–6 módulos de habilidades y destreza. Módulos definidos: Memorice de la selva, Voleibol toalla, Gato gigante, Acertijos, Slackline. Se invita al Clan a apoyar. Actividad especial por el cumpleaños de Bagheera.", mats:["Memorice de la selva","Red de voleibol + toallas","Gato gigante","Tarjetas de acertijos","Slackline","Cronómetro","Fichas de puntuación"], nota:"Coordinar con Clan con anticipación. Definir módulos adicionales." },
+  { id:2,  nombre:"Prueba de la manada",               act:"Juegos de módulos · Cumpleaños Bagheera",                  fecha:"2026-05-30", estado:"pendiente", areas:["corporalidad","caracter","sociabilidad"],       dur:"2 horas",         lugar:"Cancha / patio",               resp:"Bagheera + apoyo Clan",          objetivo:"Desarrollar habilidades físicas, trabajo en equipo y cooperación inter-ramas a través de un circuito de módulos.", desc:"5–6 módulos de habilidades y destreza. Módulos definidos: Memorice de la selva, Voleibol toalla, Gato gigante, Acertijos, Slackline. Se invita al Clan a apoyar. Actividad especial por el cumpleaños de Bagheera.", mats:["Memorice de la selva","Red de voleibol + toallas","Gato gigante","Tarjetas de acertijos","Slackline","Cronómetro","Fichas de puntuación"], nota:"Coordinar con Clan con anticipación. Definir módulos adicionales." },
   { id:3,  nombre:"Encuentro de Manadas",              act:"Encuentro Distrital de Lobatos — 5 manadas",              fecha:"2026-05-16", estado:"pendiente", areas:["sociabilidad","afectividad","corporalidad"],    dur:"11:00 a 19:00 hrs",lugar:"Liceo Agrícola Marta Martínez Cruz, Yerbas Buenas",resp:"Viejos Lobos de los distintos grupos del distrito", objetivo:"Generar una instancia de integración entre lobatos de 5 manadas, reforzando el marco simbólico del Libro de la Selva.",desc:"Encuentro Distrital de Lobatos con 5 manadas participantes. Marco motivador: El Libro de la Selva. <strong>Salida</strong> desde Colegio Salesianos a las 11:00 hrs. Llegada al Liceo Agrícola a las 11:30 hrs.<br><br><strong>Programa:</strong><br>11:30–12:00 · Recepción de manadas<br>12:00–12:30 · Formación inicial (Colores)<br>12:30–13:30 · Juego a cargo de Manada Libertad + Zona de Kaa<br>13:30–14:15 · Almuerzo (colación fría)<br>14:30–15:00 · Batalla de pañolines<br>15:15–15:45 · Juego en equipo<br>16:00–16:30 · Taller de turcos (masa Das + materiales reciclados)<br>17:00–17:15 · Preparación de sketch por manadas<br>17:15–18:00 · Colores de cierre + Flor Roja (fogón de luz) + Entrega de recuerdos<br><br><strong>Equipos:</strong> circunstanciales por diferencia en cantidad de lobatos por manada. <strong>Traslado:</strong> coordinado como Manada Seeonee en conjunto con los apoderados.",
     mats:["Colación fría (cada lobato la trae)","Algo para compartir en el cierre","Uniforme","Ficha de autorización","$2.000 por lobato (insignia + materiales) · $1.000 dirigentes"],
     nota:"📍 <a href='https://maps.app.goo.gl/gAUvzRGEBe1L6vAW8' target='_blank' style='color:var(--verde2)'>Ver ubicación en Google Maps</a>" },
-  { id:4,  nombre:"Los nudos de Akela",                act:"Taller de nudos y construcciones",                         fecha:"2026-07-18", estado:"pendiente", areas:["caracter","inteligencia","corporalidad"],       dur:"2 horas",         lugar:"Cubil / patio",                resp:"Akela",                          objetivo:"Aprender y practicar nudos básicos scouts aplicándolos en construcciones reales.",                         desc:"Taller de nudos: cuadrado, vuelta de escota, ballestrinque y otros. Los lobatos construyen estructuras con colihues o troncos similares. Posibles construcciones: mochilero, tendedero. Ver posibilidad de conseguir colihues.", mats:["Cuerdas 3mm (2m por lobato)","Colihues o troncos similares","Hoja guía de nudos","Tijeras"],               nota:"Verificar disponibilidad de colihues. Ficha PDF ya existente." },
-  { id:5,  nombre:"Cuidemos la selva",                 act:"Huerta en el Rincón Scout",                                fecha:"2026-05-30", estado:"pendiente", areas:["espiritualidad","sociabilidad","caracter"],     dur:"3 horas (mañana)",lugar:"Rincón Scout",                 resp:"Bagheera + Akela",               objetivo:"Desarrollar conciencia ambiental construyendo una huerta a un costado del Rincón Scout.",                  desc:"La manada construye una huerta en el espacio disponible al costado del Rincón Scout. Preparación de tierra, siembra, etiquetado. Se documenta el proceso. Actividad en la mañana; en la tarde los dirigentes tienen encuentro de distrito.", mats:["Guantes","Palas pequeñas","Semillas / plantas","Etiquetas","Regaderas","Cámara para registro"],             nota:"Actividad en la mañana. Coordinar espacio y materiales con anticipación." },
+  { id:4,  nombre:"Los nudos de Akela",                act:"Taller de nudos y construcciones",                         fecha:"2026-07-11", estado:"pendiente", areas:["caracter","inteligencia","corporalidad"],       dur:"2 horas",         lugar:"Cubil / patio",                resp:"Akela",                          objetivo:"Aprender y practicar nudos básicos scouts aplicándolos en construcciones reales.",                         desc:"Taller de nudos: cuadrado, vuelta de escota, ballestrinque y otros. Los lobatos construyen estructuras con colihues o troncos similares. Posibles construcciones: mochilero, tendedero. Ver posibilidad de conseguir colihues.", mats:["Cuerdas 3mm (2m por lobato)","Colihues o troncos similares","Hoja guía de nudos","Tijeras"],               nota:"Verificar disponibilidad de colihues. Ficha PDF ya existente." },
+  { id:5,  nombre:"Cuidemos la selva",                 act:"Huerta en el Rincón Scout",                                fecha:"2026-05-23", estado:"pendiente", areas:["espiritualidad","sociabilidad","caracter"],     dur:"3 horas (mañana)",lugar:"Rincón Scout",                 resp:"Bagheera + Akela",               objetivo:"Desarrollar conciencia ambiental construyendo una huerta a un costado del Rincón Scout.",                  desc:"La manada construye una huerta en el espacio disponible al costado del Rincón Scout. Preparación de tierra, siembra, etiquetado. Se documenta el proceso. Actividad en la mañana; en la tarde los dirigentes tienen encuentro de distrito.", mats:["Guantes","Palas pequeñas","Semillas / plantas","Etiquetas","Regaderas","Cámara para registro"],             nota:"Actividad en la mañana. Coordinar espacio y materiales con anticipación." },
   { id:6,  nombre:"Un día con la manada",              act:"Cocinar con los lobatos — Casa Centenario",                fecha:"2026-06-06", estado:"pendiente", areas:["afectividad","sociabilidad","corporalidad"],    dur:"Jornada completa",lugar:"Casa Centenario",               resp:"Akela + Clan o apoderados",      objetivo:"Fortalecer vínculos de manada y desarrollar habilidades culinarias básicas en una jornada especial.",     desc:"Jornada completa en Casa Centenario. Los lobatos cocinan juntos (menú por definir). Según el clima: película y/o juegos de mesa bajo techo, o juegos en el pasto. Pedir apoyo al Clan o apoderados para cocina.", mats:["Ingredientes según menú","Utensilios de cocina","Juegos de mesa / películas","Autorización de salida"],    nota:"Definir menú. Confirmar transporte y permisos. Opciones según clima." },
   { id:7,  nombre:"Feria de ciencias",                 act:"Los inventos de los hombres",                              fecha:"2026-06-13", estado:"pendiente", areas:["inteligencia","creatividad"],                   dur:"2 horas",         lugar:"Cubil",                        resp:"Bagheera + antiguos dirigentes", objetivo:"Estimular la curiosidad científica y la capacidad de investigación a través de una feria de experimentos.",  desc:"Cada lobato o seisena presenta un experimento relacionado con la naturaleza o la vida selvática. Coordinar módulos. Posibilidad de invitar antiguos dirigentes como jurado o apoyo.", mats:["Materiales por experimento (cada grupo los consigue)","Mesones de exhibición","Carteles"],                  nota:"Avisar con 3 semanas. Coordinar módulos e invitar antiguos dirigentes." },
-  { id:8,  nombre:"Viaje fuera de Linares",            act:"Excursión — destino por definir con apoderados",           fecha:"2026-06-20", estado:"pendiente", areas:["corporalidad","afectividad","sociabilidad"],    dur:"Jornada completa",lugar:"Por confirmar",                 resp:"Akela + equipo + comitiva apoderados", objetivo:"Vivir una experiencia de aventura en un entorno nuevo fuera de Linares.",                               desc:"Excursión fuera de Linares. Opciones: Buin Zoo, Zoológico de Santiago, Parque Metropolitano, Parque Araucano. Presentar a apoderados: presupuesto, lugar, horarios y opciones de transporte. Pedir comitiva de apoderados que acompañen.", mats:["Transporte (gestionar opciones)","Alimentación","Autorizaciones firmadas","Botiquín","Uniformes"],          nota:"⚠ Presentar propuesta a apoderados. Confirmar destino, presupuesto y comitiva." },
+  { id:8,  nombre:"Visitando la casa de Noé",            act:"Zoológico Buin Zoo / Santiago",           fecha:"2026-06-20", estado:"pendiente", areas:["corporalidad","afectividad","sociabilidad"],    dur:"Jornada completa",lugar:"Por confirmar",                 resp:"Akela + equipo + comitiva apoderados", objetivo:"Vivir una experiencia de aventura en un entorno nuevo fuera de Linares.",                               desc:"Excursión fuera de Linares. Opciones: Buin Zoo, Zoológico de Santiago, Parque Metropolitano, Parque Araucano. Presentar a apoderados: presupuesto, lugar, horarios y opciones de transporte. Pedir comitiva de apoderados que acompañen.", mats:["Transporte (gestionar opciones)","Alimentación","Autorizaciones firmadas","Botiquín","Uniformes"],          nota:"⚠ Presentar propuesta a apoderados. Confirmar destino, presupuesto y comitiva." },
   { id:9,  nombre:"Vacaciones de invierno",            act:"Sin reunión",                                              fecha:"2026-06-27", estado:"pendiente", areas:[],                                               dur:"—",               lugar:"—",                            resp:"—",                              objetivo:"Período de vacaciones escolares.",                                                                         desc:"Vacaciones: 27 jun · 4 jul. Sin reunión de manada. Los lobatos deben preparar sus talentos para el Show del 11 de julio.", mats:[],                                                                                                                          nota:"Recordar a los lobatos preparar talentos durante vacaciones." },
-  { id:10, nombre:"Show de talentos e intereses",      act:"Talentos de la manada",                                   fecha:"2026-07-11", estado:"pendiente", areas:["creatividad","afectividad","sociabilidad"],    dur:"90 min",          lugar:"Cubil / salón",                resp:"Akela",                          objetivo:"Valorar los talentos individuales de cada lobato. Fortalecer autoestima y el reconocimiento entre pares.",  desc:"Cada lobato muestra algo preparado en vacaciones: pintar, videojuegos, magia, chistes, cantar, baile, deportes, disfraces, etc. La manada celebra y aplaude a cada uno.", mats:["Escenario simple","Decoración festiva","Diplomas de reconocimiento"],                                        nota:"Avisar a los lobatos antes de las vacaciones para que lo preparen." },
   { id:11, nombre:"Búsqueda del tesoro",               act:"Las huellas de Bagheera — con pistas",                   fecha:"2026-05-09", estado:"pendiente", areas:["corporalidad","inteligencia","caracter"],       dur:"2 horas",         lugar:"Plaza / barrio (según clima)", resp:"Bagheera",                       objetivo:"Desarrollar observación, deducción y trabajo en equipo siguiendo señales selváticas.",                     desc:"Los lobatos siguen pistas escondidas por el territorio usando señales de rastreo scout. Se prepara el recorrido según el clima disponible. Cada seisena recibe una ruta y convergen al final para descubrir el tesoro.", mats:["Sobres con pistas","Señales scout (yeso / cintas)","Premio (cofre decorado)"],                             nota:"Preparar el recorrido según las condiciones climáticas previstas." },
-  { id:12, nombre:"Juego de ciudad",                   act:"Bomberos · CFT · Panadería · UTAL · Parroquia",          fecha:"2026-07-25", estado:"pendiente", areas:["sociabilidad","caracter","inteligencia"],       dur:"Jornada",         lugar:"Linares (recorrido urbano)",   resp:"Akela + equipo",                objetivo:"Conocer instituciones de la comunidad local. Desarrollar sentido de servicio y ciudadanía.",               desc:"Rally urbano por instituciones de Linares: Bomberos, CFT, Panadería, UTAL y Parroquia. En cada lugar los lobatos realizan una actividad o aprendizaje puntual. Se deben coordinar previamente los tiempos y disponibilidad de cada institución.", mats:["Mapa del recorrido","Cuaderno de misiones por seisena","Autorización salida"],                              nota:"⚠ Coordinar con cada institución con anticipación. Definir tiempos." },
-  { id:13, nombre:"Amanecer Scout",                    act:"Actividad distrital en Plaza de Armas",                  fecha:"2026-08-01", estado:"pendiente", areas:["afectividad","espiritualidad","sociabilidad"],  dur:"Madrugada / mañana",lugar:"Plaza de Armas de Linares", resp:"Akela + equipo + distrito",     objetivo:"Vivir una experiencia única de hermandad y espiritualidad al amanecer junto a otros grupos.",              desc:"Actividad distrital que requiere confirmación. Nos juntamos con otros grupos de la ciudad y hacemos actividades en la mañana en la Plaza de Armas de Linares.", mats:["Frazadas","Infusión","Linternas","Autorización especial apoderados"],                                        nota:"⚠ Actividad distrital — requiere confirmación. Coordinar con otros grupos." },
-  { id:14, nombre:"Día del niño — Campismo",           act:"Taller: armado de carpa y mochila",                      fecha:"2026-08-08", estado:"pendiente", areas:["corporalidad","caracter","inteligencia"],       dur:"2.5 horas",       lugar:"Cubil / patio",                resp:"Akela + Bagheera",              objetivo:"Preparar a los lobatos para el Raid de cierre: armar carpa, organizar mochila, normas de seguridad.",      desc:"Taller práctico por el Día del Niño. Los lobatos aprenden a armar una tienda de campaña, organizar su mochila y conocer las normas de seguridad. Se presenta el programa del Raid del 15 de agosto.", mats:["Tiendas de campaña","Mochilas de ejemplo","Lista de equipamiento","Checklist personal"],                    nota:"Ficha PDF ya existente. Usar como preparación directa para el Raid." },
-  { id:15, nombre:"Raid — Acampada y Flor Roja",       act:"Campamento de cierre · sábado y domingo",               fecha:"2026-08-15", estado:"pendiente", areas:["corporalidad","caracter","afectividad","espiritualidad","sociabilidad"], dur:"Sáb–Dom (pernocte)",lugar:"Por confirmar: Palmilla u otro",resp:"Equipo completo", objetivo:"Integrar todas las habilidades del ciclo en un campamento. Cerrar con la ceremonia de Flor Roja.",      desc:"Campamento de fin de ciclo, sábado y domingo. Raid de actividades durante el día. En la noche, ceremonia de Flor Roja: fogón central, cada lobato comparte un logro del ciclo, entrega de reconocimientos e insignias. Opciones de lugar: Palmilla, colegio rural. Apoderados apoyan en alimentación.", mats:["Equipamiento de campamento completo","Velas o fogón","Pergaminos de promesa","Insignias de etapa","Carta personalizada por lobato"], nota:"⚠ Definir lugar, costos y transporte. Pedir apoyo apoderados para alimentación. Máxima planificación." },
+  { id:14, nombre:"Día del niño — Campismo",           act:"Taller: armado de carpa y mochila",                      fecha:"2026-07-18", estado:"pendiente", areas:["corporalidad","caracter","inteligencia"],       dur:"2.5 horas",       lugar:"Cubil / patio",                resp:"Akela + Bagheera",              objetivo:"Preparar a los lobatos para el Raid de cierre: armar carpa, organizar mochila, normas de seguridad.",      desc:"Taller práctico por el Día del Niño. Los lobatos aprenden a armar una tienda de campaña, organizar su mochila y conocer las normas de seguridad. Se presenta el programa del Raid del 15 de agosto.", mats:["Tiendas de campaña","Mochilas de ejemplo","Lista de equipamiento","Checklist personal"],                    nota:"Ficha PDF ya existente. Usar como preparación directa para el Raid." },
+  { id:15, nombre:"Raid — Acampada y Flor Roja",       act:"Campamento de cierre · sábado y domingo",               fecha:"2026-07-25", estado:"pendiente", areas:["corporalidad","caracter","afectividad","espiritualidad","sociabilidad"], dur:"Sábado y domingo",lugar:"Por confirmar: Palmilla u otro",resp:"Equipo completo", objetivo:"Integrar todas las habilidades del ciclo en un campamento. Cerrar con la ceremonia de Flor Roja.",      desc:"Campamento de fin de ciclo, sábado y domingo. Raid de actividades durante el día. En la noche, ceremonia de Flor Roja: fogón central, cada lobato comparte un logro del ciclo, entrega de reconocimientos e insignias. Opciones de lugar: Palmilla, colegio rural. Apoderados apoyan en alimentación.", mats:["Equipamiento de campamento completo","Velas o fogón","Pergaminos de promesa","Insignias de etapa","Carta personalizada por lobato"], nota:"⚠ Definir lugar, costos y transporte. Pedir apoyo apoderados para alimentación. Máxima planificación." },
 ];
 
 /* ══════════════════════════════════════════
@@ -439,6 +1056,7 @@ const INSIGNIAS = {
   diestro:  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAAu/klEQVR42u28eZhc1XUv+lt773NOTd3V86RWa2yNLSQhECAwQmDARmbwBezEMTHgIfGNyUvsl7x4eLGf7WeebzzFGAeb2Mb3MwabISAbsLGQEZJAEwjNLSR1q6WWelKrx6o6w957vT9OV6sFxjQIcvMl93zV9VWf2nXO2Wuv/Vvzwr333suvOfL5/Oc///mDBw8++eSTPOnDWvsHzwdBsHv37jd7naNHj372s5/94yP3798/ODg4ycv6vv/xj398aGjoVecfe+yxf/mXf3m9KciWlpYrrrhiw4YN+/fv9zwvk8k89thjhw4dOn78+KWXXiqEKCsrW7t27e7du2fMmCGlJKLOzs61a9eWlJSEYfjss8/29PTU19cLIYjowIEDW7Zs8X0/k8msX79+69atg4ODxpgvfvGLy5cv37Zt2/79+2tqajZs2NDe3l5fX3/kyJFNmzbt2LGjtrb24MGDzzzzTHl5eWlpKRGNjIzs2rVrxYoVzz333NatWxsbGz3PI6J8Pv/ss88ePny4rKzszjvvBFBWVvbUU08NDAw0NDQ888wz7e3tO3bsmDNnzsGDB59++mkAtbW18eTXrVt3+eWXe55nrX3uuef27NnjOE4QBK2trUNDQ11dXTNmzHj55ZdfeuklrXVJSckTTzwhjDEbN2587LHHysvLv/Wtb919992jo6NLly5l5mPHjj388MOe5y1cuHD79u1r164lIgDf+MY3ANTX13/xi19MJpO///3vH3zwQSLq7u6+88476+rq7r333t/+9rePPPLIihUr7r///sHBwfnz50sp77nnnubm5rvuuqu3t7e7u/vrX//6fffdd9FFF23cuHF0dLSxsdF13R/84AfxXeJ3x3HmzZvX2dn50EMPxWfuueeew4cPj46O/vCHP2xubq6trc1ms4sWLfrZz37W3t5+zz33LFq0qKOj45e//GVdXV1TU9Pdd99trY1/K6XUWltr77///tbW1gsvvPAnP/lJR0eH1vr8889/+OGH165de88999TX13/9618/duzYihUrBDO/+OKL2Wy2srLytttu279//8UXXzxjxox0Oi2lrK2t3bNnT2tra3V1tbUWgDHmYx/72IYNG37605+OjIyUlZVdc801K1asANDT0xOGYUVF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",
   cazador:  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAIAAABt+uBvAAAtu0lEQVR42u28eZhdV3Un+lt77zPcocZbJZVq1GRJlpA8IGFb2PAMwhZmcMCxOyQ4ECBADziNk9AJJP3ywvMjPNKQBrcNJGCGBLDBxiayQTEY2ZKx5EGWVJosyZqqVFINqlu37nTuOWev1X+cqlJplojtpLtzvvrqO/fec/fd+7fXtNeEX/3qVyISx7GIiMjPfvazL3/5y3LxFzNPf/mnf/qnx44dS+6feeaZTZs2Tf90y5YtURT90z/908svvywi1toL/JW77rpry5YtUy+TL/b29t5xxx2nPPmzn/1sfHz8vFPdvXv32rVrT/90y5Yt99xzj4gYz/MAaK337dvX29t78ODB1tbWYrH45JNPZrPZq666yvd9EdmxY8eBAweuu+66Xbt2rVy5sre3t6mpaXx8fPfu3TfccEM2myWiPXv27Nu3z/f9t7zlLZ7nbdy4sVgs3nzzzW1tbQDK5fJTTz2VSqWWLVt21113ffKTn+zq6gKwfv3666677siRI9ba0dHR/v7+jo6OZcuWrV+/Po7j66+/XilFROvWrSuXy2NjY9lsduvWrf39/fPnz1+4cGEy+VQqFcfxE088kc/nc7nc0qVL77///kWLFh08eHDLli3XX399XV3dpk2bhoaGuru73/SmNz3//PPHjh2bOXNmd3d3FEWVSuWXv/wlM994443GGCJSSj388MO33HKLMsYAKJVKX/jCF6688spUKuW67t133x3H8fbt27/5zW8S0djY2Be/+MWenh7Xde+//35r7fr169evX3/ffffNmzfP930AR44cufvuu6+66qo9e/Y89NBDItLW1tba2nrvvfdu2rTp+eefv/fee8vl8u7du7/73e8uXbq0s7Pzxz/+8fDw8Jo1a44cObJjx45//Md/fPzxx1euXLlmzZp777137dq1CxcuFBEi2rhx42OPPbZ8+XKt9QsvvHDffffNmjXrrrvuGh0dBQDAdd0gCO67776rr776oYceGhwcnDVrVkNDQ3t7ezqdvu+++44ePfrggw9ee+21999//7p169asWXPNNde0tbVt3759zZo1qVRq6dKl69evf+aZZ5RSACqVys033/zVr35ViQiA48ePi0hPT8+cOXOq1Wp/f38ul7vuuutuuOEGAE1NTe97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",
 };
+
 const AREAS = {
   corporalidad:   { label:"Corporalidad",   personaje:"Bagheera",   color:"var(--corporalidad)"   },
   creatividad:    { label:"Creatividad",    personaje:"Kaa",        color:"var(--creatividad)"    },
@@ -451,6 +1069,373 @@ const AREAS = {
 
 /* ══════════════════════════════════════════
    PREGUNTAS DIAGNÓSTICO
+══════════════════════════════════════════ */
+const DIAG_Q = [
+  { id:"clima",      cat:"Clima educativo",          txt:"¿El clima educativo de la manada produce el ambiente deseado? (método, valores, convivencia)",                opts:["Muy bien","Bien","Regular","Por mejorar","Deficiente"] },
+  { id:"actividades",cat:"Actividades",              txt:"¿Las actividades han resultado desafiantes, atractivas y significativas para los lobatos?",                  opts:["Siempre","Casi siempre","A veces","Pocas veces","No aplica (ciclo nuevo)"] },
+  { id:"equilibrio", cat:"Áreas de desarrollo",      txt:"¿Las actividades ofrecen equilibrio entre las distintas áreas de desarrollo?",                               opts:["Sí, equilibrado","Falta reforzar 1–2 áreas","Muy desequilibrado","No aplica"] },
+  { id:"nuevos",     cat:"Composición de la manada", txt:"¿Qué proporción de la manada son lobatos/as nuevos/as este ciclo?",                                          opts:["Mayoría nuevos (+50%)","Mitad nuevos","Minoría nuevos","Casi ninguno nuevo"] },
+  { id:"marcosim",   cat:"Marco simbólico",          txt:"¿Los lobatos conocen el marco simbólico? (libro de la selva, personajes, ley, historia)",                    opts:["Lo conocen bien","Conocimiento parcial","Mayoría lo desconoce","No aplica"] },
+  { id:"progresion", cat:"Progresión personal",      txt:"¿El seguimiento individual de la progresión personal ha sido constante?",                                    opts:["Sí, constante","Irregular","Poco","Recién comenzamos"] },
+  { id:"seisenas",   cat:"Seisenas",                 txt:"¿Las seisenas funcionan bien como equipos autónomos?",                                                       opts:["Muy bien","Bien","En formación","Necesitan refuerzo"] },
+];
+let diagResp = {};
+
+/* ══════════════════════════════════════════
+   PASOS DE NAVEGACIÓN
+══════════════════════════════════════════ */
+const PASOS = [
+  { label:"Unidad",      icon:"🏠" },
+  { label:"Lobatos",     icon:"🐾" },
+  { label:"Diagnóstico", icon:"📋" },
+  { label:"Énfasis",     icon:"🌿" },
+  { label:"Actividades", icon:"🗂" },
+  { label:"Calendario",  icon:"📅" },
+];
+// En modo público solo mostramos algunos pasos
+const PASOS_PUBLICO = [0, 3, 4, 5]; // Unidad, Énfasis, Actividades, Calendario
+
+let currentScreen = 0;
+let actsFilt = ACTIVIDADES.filter(a => a.id !== 9);
+let modalIdx = -1;
+
+/* ══════════════════════════════════════════
+   INIT
+══════════════════════════════════════════ */
+function init() {
+  // Modo público
+  if (PUBLICO) {
+    document.body.classList.add("publico");
+    document.getElementById("modo-badge").textContent = "Vista pública";
+    document.getElementById("modo-badge").className = "modo-badge modo-publico";
+    document.getElementById("pub-header").style.display = "block";
+    document.getElementById("act-pub-sub").style.display = "inline";
+    document.getElementById("diag-pub-view").style.display = "block";
+    document.getElementById("diag-pub-txt").textContent = DATA.diagSintesis || "No disponible.";
+    document.getElementById("diag-pub-obs").textContent = DATA.diagObs || "—";
+  } else {
+    document.getElementById("modo-badge").textContent = "Dirigentes";
+    document.getElementById("modo-badge").className = "modo-badge modo-privado";
+    document.getElementById("diag-priv-view").style.display = "block";
+    renderDiagnostico();
+    renderEquipoForm();
+  }
+
+  // Topbar
+  document.getElementById("tb-nombre").textContent = DATA.nombre + " · " + DATA.tipo;
+
+  // Énfasis
+  if (document.getElementById("enfasis-input"))
+    document.getElementById("enfasis-input").value = DATA.enfasis;
+  if (document.getElementById("enfasis-fund-input"))
+    document.getElementById("enfasis-fund-input").value = DATA.enfasisFund;
+  document.getElementById("enfasis-preview").textContent = DATA.enfasis || "—";
+  document.getElementById("enfasis-fund-preview").textContent = DATA.enfasisFund || "";
+  document.getElementById("cal-enfasis").textContent = DATA.enfasis || "—";
+
+  // Pub header
+  document.getElementById("pub-nombre").textContent = DATA.nombre;
+  document.getElementById("pub-sub").textContent = "Ciclo de programa " + DATA.ciclo;
+
+  // Render nav
+  renderNav();
+  renderEquipo();
+  renderLobatos();
+  renderActividades();
+  renderCalendario();
+  actualizarNav();
+}
+
+/* ══════════════════════════════════════════
+   NAVEGACIÓN
+══════════════════════════════════════════ */
+function renderNav() {
+  const bar = document.getElementById("steps-bar");
+  const visibles = PUBLICO ? PASOS_PUBLICO : PASOS.map((_,i)=>i);
+  bar.innerHTML = visibles.map(i => `
+    <button class="step-btn" id="ns-${i}" onclick="irA(${i})">
+      <span class="step-num">${PASOS[i].icon}</span>
+      <span class="step-lbl">${PASOS[i].label}</span>
+    </button>
+  `).join("");
+}
+
+function actualizarNav() {
+  const visibles = PUBLICO ? PASOS_PUBLICO : PASOS.map((_,i)=>i);
+  visibles.forEach(i => {
+    const el = document.getElementById("ns-"+i);
+    if (!el) return;
+    el.classList.remove("active","done");
+    if (i === currentScreen) el.classList.add("active");
+    else if (i < currentScreen) el.classList.add("done");
+  });
+}
+
+function irA(n) {
+  // En modo público, solo permitir pasos visibles
+  if (PUBLICO && !PASOS_PUBLICO.includes(n)) return;
+
+  document.getElementById("screen-"+currentScreen).classList.remove("active");
+  document.getElementById("screen-"+n).classList.add("active");
+  currentScreen = n;
+  actualizarNav();
+
+  // Sync énfasis en calendario
+  const cal = document.getElementById("cal-enfasis");
+  if (cal) cal.textContent = document.getElementById("enfasis-input")?.value || DATA.enfasis || "—";
+  if (n === 3) renderRecursos();
+
+  window.scrollTo(0,0);
+}
+
+/* ══════════════════════════════════════════
+   EQUIPO
+══════════════════════════════════════════ */
+function renderEquipo() {
+  const g = document.getElementById("team-grid");
+  g.innerHTML = DATA.equipo.map(m => {
+    const rolColor = m.rol === "responsable" ? "#E9A84C" : "#C77DFF";
+    const rolLabel = m.rol === "responsable" ? "Responsable" : "Asistente";
+    const inis = m.nombre.split(" ").slice(0,2).map(p=>p[0]).join("").toUpperCase();
+
+    // Iconos por nombre selvático
+    const selvaLow = (m.selva || "").toLowerCase();
+    let avatar;
+    if (selvaLow === "akela") {
+      avatar = `<div class="member-avatar" style="background:rgba(233,168,76,0.15);border:1.5px solid rgba(233,168,76,0.4);font-size:1.5rem">🐺</div>`;
+    } else if (selvaLow === "raksha") {
+      avatar = `<div class="member-avatar" style="background:rgba(201,168,124,0.15);border:1.5px solid rgba(201,168,124,0.4);font-size:1.5rem">🦊</div>`;
+    } else if (selvaLow === "bagheera") {
+      // Pantera negra SVG (geométrico)
+      avatar = `<div class="member-avatar" style="background:rgba(155,93,229,0.15);border:1.5px solid rgba(155,93,229,0.4);padding:0">
+        <svg width="36" height="36" viewBox="0 0 48 48">
+          <path d="M14 20 L17 14 L20 19 Z" fill="#2a2a3a"/>
+          <path d="M28 19 L31 14 L34 20 Z" fill="#2a2a3a"/>
+          <ellipse cx="24" cy="27" rx="10" ry="9" fill="#2a2a3a"/>
+          <circle cx="20" cy="25" r="1.5" fill="#F9C80E"/>
+          <circle cx="28" cy="25" r="1.5" fill="#F9C80E"/>
+          <ellipse cx="24" cy="29" rx="1.2" ry="0.8" fill="#F2E8D5"/>
+          <path d="M22 31 Q24 33 26 31" stroke="#F2E8D5" stroke-width="1" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>`;
+    } else {
+      avatar = `<div class="member-avatar" style="background:${rolColor}18;color:${rolColor};border:1.5px solid ${rolColor}33">${inis}</div>`;
+    }
+
+    return `
+    <div class="member-card">
+      ${avatar}
+      <div>
+        <div class="member-name">${m.nombre}</div>
+        <div class="member-role"><span class="badge badge-${m.rol}">${rolLabel}</span></div>
+        ${m.selva ? `<div class="member-selva">${m.selva}</div>` : ""}
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function renderEquipoForm() {
+  const f = document.getElementById("equipo-form");
+  if (!f) return;
+  f.innerHTML = DATA.equipo.map((m, i) => `
+  <div class="card" style="margin-bottom:0.65rem">
+    <div class="card-label">
+      ${m.rol === "responsable" ? "Responsable de Manada" : "Asistente de Manada"}
+      <span class="badge badge-${m.rol}">${m.rol === "responsable" ? "Responsable" : "Asistente"}</span>
+    </div>
+    <div class="field-row">
+      <div class="field" style="margin:0"><label>Nombre</label><input type="text" value="${m.nombre}"></div>
+      <div class="field" style="margin:0"><label>Nombre selvático</label><input type="text" value="${m.selva}" placeholder="(opcional)"></div>
+    </div>
+  </div>`).join("");
+}
+
+function agregarGuiadora() {
+  DATA.equipo.push({ nombre:"", selva:"", rol:"asistente" });
+  renderEquipoForm();
+  renderEquipo();
+}
+
+function actualizarDatos() {
+  const nb = document.getElementById("u-nombre")?.value;
+  const cy = document.getElementById("u-ciclo")?.value;
+  if (nb) document.getElementById("tb-nombre").textContent = nb + " · " + DATA.tipo;
+}
+
+/* ══════════════════════════════════════════
+   LOBATOS
+══════════════════════════════════════════ */
+function calcEdad(fn) {
+  const h = new Date(), n = new Date(fn);
+  let e = h.getFullYear() - n.getFullYear();
+  if (h < new Date(h.getFullYear(), n.getMonth(), n.getDate())) e--;
+  return e;
+}
+function etapaDesdeEdad(edad) {
+  if (edad <= 6) return "menor";
+  if (edad === 7) return "lobezno";
+  if (edad === 8) return "saltador";
+  if (edad === 9) return "diestro";
+  if (edad >= 10) return "cazador";
+  return "lobezno";
+}
+function etapaCol(e) {
+  const m = { menor:"#E76F51", lobezno:"#888", saltador:"#52B788", diestro:"#E9A84C", cazador:"#9B5DE5" };
+  return m[e] || "#888";
+}
+function etapaLbl(e, genero) {
+  const g = genero === "F";
+  const m = {
+    lobezno: g ? "Lobezna"   : "Lobezno",
+    saltador:g ? "Saltadora" : "Saltador",
+    diestro: g ? "Diestra"   : "Diestro",
+    cazador: g ? "Cazadora"  : "Cazador",
+    menor:   "Menor de 7 años",
+  };
+  return m[e] || e;
+}
+function ini(n) { return n.split(" ").slice(0,2).map(p=>p[0]).join("").toUpperCase(); }
+function gCol(g) { return g==="F"?"#C77DFF":"#457B9D"; }
+
+function renderLobatos() {
+  const g = document.getElementById("lobatos-grid");
+  g.innerHTML = DATA.lobatos.map(l => {
+    const edad = calcEdad(l.fn);
+    const gc = gCol(l.genero);
+    const etapa = etapaDesdeEdad(edad);
+    const ec = etapaCol(etapa);
+    const insignia = INSIGNIAS[etapa];
+    const avatar = insignia
+      ? `<img src="${insignia}" alt="${etapa}" style="width:44px;height:44px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid ${ec}55" title="Etapa: ${etapaLbl(etapa, l.genero)}">`
+      : `<div class="lobato-avatar" style="background:${gc}18;color:${gc};border:1.5px solid ${gc}33">${ini(l.nombre)}</div>`;
+    return `
+    <div class="lobato-card">
+      ${avatar}
+      <div>
+        <div class="lobato-nombre">${l.nombre}</div>
+        <div class="lobato-meta">${edad} años · ${l.genero==="F"?"Lobata":"Lobato"}</div>
+        <div class="lobato-etapa" style="color:${ec}">${etapaLbl(etapa, l.genero)}</div>
+        ${l.alerta ? `<div style="font-size:0.67rem;color:#E76F51;margin-top:2px">⚠ ${l.alerta}</div>` : ""}
+        ${l.intereses ? `<div style="font-size:0.68rem;color:var(--muted);margin-top:1px">🎯 ${l.intereses}</div>` : '<div style="font-size:0.67rem;color:#444;margin-top:2px;font-style:italic">sin intereses registrados</div>'}
+      </div>
+    </div>`;
+  }).join("");
+}
+
+/* ══════════════════════════════════════════
+   DIAGNÓSTICO
+══════════════════════════════════════════ */
+function renderDiagnostico() {
+  const cont = document.getElementById("diag-preguntas");
+  if (!cont) return;
+  cont.innerHTML = DIAG_Q.map((q,i) => `
+  <div class="diag-q" id="dq-${q.id}">
+    <div class="diag-q-label">Pregunta ${i+1} · ${q.cat}</div>
+    <div class="diag-q-texto">${q.txt}</div>
+    <div class="radio-group">
+      ${q.opts.map(o=>`<div class="radio-opt" onclick="selDiag('${q.id}','${o}',this)">${o}</div>`).join("")}
+    </div>
+  </div>`).join("");
+}
+
+function selDiag(id, val, el) {
+  diagResp[id] = val;
+  el.closest(".diag-q").querySelectorAll(".radio-opt").forEach(o=>o.classList.remove("sel"));
+  el.classList.add("sel");
+  el.closest(".diag-q").classList.add("respondida");
+  actualizarSintesis();
+}
+
+function actualizarSintesis() {
+  const n = Object.keys(diagResp).length;
+  const box = document.getElementById("diag-sintesis-box");
+  const txt = document.getElementById("diag-sintesis-txt");
+  if (!box || n < 3) { if(box) box.style.display="none"; return; }
+  box.style.display = "block";
+  const p = [];
+  if (diagResp.nuevos?.includes("+50%")) p.push("La mayoría son lobatos/as nuevos/as: reforzar marco simbólico desde el inicio.");
+  if (diagResp.marcosim?.includes("desconoce")) p.push("El marco simbólico no es conocido por la mayoría.");
+  if (diagResp.seisenas?.includes("refuerzo")) p.push("Las seisenas necesitan trabajo de formación.");
+  if (diagResp.progresion?.includes("comenzamos")) p.push("Es el primer ciclo: la progresión personal se construirá desde cero.");
+  if (diagResp.equilibrio?.includes("área")) p.push("Hay desequilibrio en áreas de desarrollo: revisar calendarización.");
+  if (diagResp.clima?.includes("mejorar")||diagResp.clima?.includes("Deficiente")) p.push("El clima educativo requiere atención prioritaria.");
+  txt.textContent = p.length ? p.join(" ") : "Diagnóstico en proceso. Responde más preguntas para obtener la síntesis.";
+}
+
+/* ══════════════════════════════════════════
+   ÉNFASIS
+══════════════════════════════════════════ */
+function syncEnfasis() {
+  const v = document.getElementById("enfasis-input")?.value || "";
+  const f = document.getElementById("enfasis-fund-input")?.value || "";
+  document.getElementById("enfasis-preview").textContent = v || "—";
+  document.getElementById("enfasis-fund-preview").textContent = f;
+  document.getElementById("cal-enfasis").textContent = v || "—";
+}
+
+/* ══════════════════════════════════════════
+   ACTIVIDADES
+══════════════════════════════════════════ */
+let areaFiltro = "todas";
+
+function filtrar(btn) {
+  areaFiltro = btn.dataset.area;
+  document.querySelectorAll(".fchip").forEach(b => {
+    b.classList.remove("on");
+    b.style.borderColor = "";
+    b.style.color = "";
+  });
+  btn.classList.add("on");
+  const col = areaFiltro !== "todas" ? (AREAS[areaFiltro]?.color || "var(--verde2)") : "var(--verde2)";
+  btn.style.borderColor = col;
+  btn.style.color = col;
+  renderActividades();
+}
+
+function renderActividades() {
+  const sinVac = ACTIVIDADES.filter(a => a.id !== 9);
+  actsFilt = areaFiltro === "todas"
+    ? sinVac
+    : sinVac.filter(a => a.areas.includes(areaFiltro));
+
+  document.getElementById("m-total").textContent = sinVac.length;
+  document.getElementById("m-real").textContent  = sinVac.filter(a=>estadoActual(a.fecha,a.estado)==="realizada").length;
+  document.getElementById("m-prox").textContent  = sinVac.filter(a=>estadoActual(a.fecha,a.estado)==="proxima").length;
+  document.getElementById("m-pend").textContent  = sinVac.filter(a=>estadoActual(a.fecha,a.estado)==="pendiente").length;
+
+  document.getElementById("act-list").innerHTML = actsFilt.map((a,i) => {
+    const col = a.areas[0] ? AREAS[a.areas[0]]?.color || "#555" : "#555";
+    const dots = a.areas.map(ar=>`<div class="adot" style="background:${AREAS[ar]?.color||'#555'}" title="${AREAS[ar]?.label||ar}"></div>`).join("");
+    const est = estadoActual(a.fecha, a.estado);
+    const estadoLbl = est==="proxima"?"Próxima":est==="realizada"?"Realizada":"Pendiente";
+    return `
+    <div class="act-card" onclick="abrirModal(${i})">
+      <div class="act-inner">
+        <div class="act-accent" style="background:${col}"></div>
+        <div class="act-body">
+          <div class="act-top">
+            <div>
+              <div class="act-nombre">${a.nombre}</div>
+              <div class="act-actividad">${a.act}</div>
+            </div>
+            <div class="act-right">
+              <div class="act-fecha">📅 ${fmt(a.fecha)}</div>
+              <div class="epill ep-${est}"><span class="edot"></span>${estadoLbl}</div>
+            </div>
+          </div>
+          <div class="act-areas-dots">${dots}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+/* ══════════════════════════════════════════
+   CALENDARIO
+══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   EVENTOS FIJOS (grupo, distrito, externos)
+   tipo: "distrito" | "fija" | "vacacion"
 ══════════════════════════════════════════ */
 const EVENTOS_FIJOS = [
   // ── FERIADOS / VACACIONES ──
@@ -509,184 +1494,21 @@ const EVENTOS_FIJOS = [
   { id:"cum-l-elias",    nombre:"🎂 Elías",       sub:"Elías Figueroa · 8 años",            fecha:"2026-12-08", tipo:"cumple" },
   { id:"cum-l-maximo",   nombre:"🎂 Máximo",      sub:"Máximo Gamboni · 11 años (egresa)",  fecha:"2026-12-17", tipo:"cumple" },
 ];
-const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
 
-function estadoActual(fechaStr, estadoFijo) {
-  // Si está marcada como realizada manualmente, respetar
-  if (estadoFijo === "realizada") return "realizada";
-  if (!fechaStr) return estadoFijo;
-  const hoy = new Date();
-  hoy.setHours(0,0,0,0);
-  const [y,m,d] = fechaStr.split("-").map(Number);
-  const fechaAct = new Date(y, m-1, d);
-  // Pasada: realizada
-  if (fechaAct < hoy) return "realizada";
-  // Próximos 14 días: próxima
-  const en14 = new Date(hoy); en14.setDate(hoy.getDate() + 14);
-  if (fechaAct <= en14) return "proxima";
-  return "pendiente";
-}
-const DATA = UNIDADES[UNIDAD];
+let calMesActual = 4; // mayo (0-indexed)
+let calAnioActual = 2026;
 
-let actsFilt = ACTIVIDADES.filter(a => a.id !== 9);
-let modalIdx = -1;
-let areaFiltro = "todas";
-
-function fmt(s) {
-  if (!s) return "—";
-  const [y,m,d] = s.split("-");
-  return `${parseInt(d)} ${MESES[parseInt(m)-1]} ${y}`;
-}
-
-function estadoActual(fechaStr, estadoFijo) {
-  // Si está marcada como realizada manualmente, respetar
-  if (estadoFijo === "realizada") return "realizada";
-  if (!fechaStr) return estadoFijo;
-  const hoy = new Date();
-  hoy.setHours(0,0,0,0);
-  const [y,m,d] = fechaStr.split("-").map(Number);
-  const fechaAct = new Date(y, m-1, d);
-  // Pasada: realizada
-  if (fechaAct < hoy) return "realizada";
-  // Próximos 14 días: próxima
-  const en14 = new Date(hoy); en14.setDate(hoy.getDate() + 14);
-  if (fechaAct <= en14) return "proxima";
-  return "pendiente";
-}
-
-function etapaDesdeEdad(edad) {
-  if (edad <= 6) return "menor";
-  if (edad === 7) return "lobezno";
-  if (edad === 8) return "saltador";
-  if (edad === 9) return "diestro";
-  if (edad >= 10) return "cazador";
-  return "lobezno";
-}
-
-function etapaCol(e) {
-  const m = { menor:"#E76F51", lobezno:"#888", saltador:"#52B788", diestro:"#E9A84C", cazador:"#9B5DE5" };
-  return m[e] || "#888";
-}
-
-function etapaLbl(e, genero) {
-  const g = genero === "F";
-  const m = {
-    lobezno: g ? "Lobezna"   : "Lobezno",
-    saltador:g ? "Saltadora" : "Saltador",
-    diestro: g ? "Diestra"   : "Diestro",
-    cazador: g ? "Cazadora"  : "Cazador",
-    menor:   "Menor de 7 años",
-  };
-  return m[e] || e;
-}
-
-function abrirModalFijo(id) {
-  const ev = EVENTOS_FIJOS.find(e => e.id === id);
-  if (!ev) return;
-  const colMap = { distrito:"var(--amber)", fija:"#C77DFF", vacacion:"#555" };
-  const lblMap = { distrito:"🏛 Grupo / Distrito", fija:"⭐ Fija del grupo", vacacion:"🗓 Vacaciones" };
-  const col = colMap[ev.tipo] || "#888";
-  document.getElementById("m-acc").style.background = col;
-  document.getElementById("m-chips").innerHTML = `
-    <span style="background:${col}18;color:${col};border:1px solid ${col}44;padding:2px 9px;border-radius:10px;font-size:0.7rem;font-weight:600">${lblMap[ev.tipo]||ev.tipo}</span>
-  `;
-  document.getElementById("m-tit").textContent = ev.nombre;
-  document.getElementById("m-sub").textContent = ev.sub || "";
-  const [fy,fm,fd] = ev.fecha.split("-");
-  const mats = (ev.mats||[]).map(mat=>`<li>${mat}</li>`).join("");
-  document.getElementById("m-bd").innerHTML = `
-    <div class="mg2">
-      <div class="md"><div class="md-lbl">📅 Fecha</div><div class="md-val">${parseInt(fd)} ${MESES[parseInt(fm)-1]} ${fy}</div></div>
-      <div class="md"><div class="md-lbl">Tipo</div><div class="md-val">${lblMap[ev.tipo]||ev.tipo}</div></div>
-    </div>
-    ${ev.desc ? `<div class="ms"><span class="ms-lbl">Descripción</span><p class="ms-txt">${ev.desc}</p></div>` : ""}
-    ${mats ? `<div class="ms"><span class="ms-lbl">Materiales / consideraciones</span><ul class="m-mats">${mats}</ul></div>` : ""}
-  `;
-  document.getElementById("m-cnt").textContent = "";
-  document.getElementById("m-prev").disabled = true;
-  document.getElementById("m-next").disabled = true;
-  document.getElementById("modal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-
-function abrirDia(fechaKey) {
-  const mapaEventos = {};
-  [...ACTIVIDADES, ...EVENTOS_FIJOS].forEach(a => {
-    if (!a.fecha) return;
-    mapaEventos[a.fecha] = mapaEventos[a.fecha] || [];
-    mapaEventos[a.fecha].push(a);
-  });
-  const evs = mapaEventos[fechaKey] || [];
-  if (evs.length === 0) return;
-  if (evs.length === 1) {
-    const ev = evs[0];
-    if (ev.id !== 9 && typeof ev.id === "number") abrirModalById(ev.id);
-    else if (typeof ev.id === "string") abrirModalFijo(ev.id);
-    return;
+function renderCalendario() {
+  syncEnfasis();
+  const cont = document.getElementById("cal-anio-completo");
+  if (!cont) return;
+  // Renderizar los meses del ciclo (Abril a Agosto 2026)
+  let html = "";
+  for (let m = 3; m <= 6; m++) {
+    html += `<div id="cal-mes-${m}" style="margin-bottom:2rem">${renderMesHTML(m, 2026)}</div>`;
   }
-  // Múltiples eventos: abrir el primero de la manada, o el primero disponible
-  const manada = evs.find(e => typeof e.id === "number" && e.id !== 9);
-  if (manada) abrirModalById(manada.id);
-  else abrirModalFijo(evs[0].id);
+  cont.innerHTML = html;
 }
-
-function abrirModal(i) {
-  modalIdx = i;
-  const a = actsFilt[i];
-  const col = a.areas[0] ? AREAS[a.areas[0]]?.color || "#888" : "#888";
-  document.getElementById("m-acc").style.background = col;
-
-  const est = estadoActual(a.fecha, a.estado);
-    const estadoLbl = est==="proxima"?"Próxima":est==="realizada"?"Realizada":"Pendiente";
-  document.getElementById("m-chips").innerHTML = `
-    <div class="epill ep-${est}"><span class="edot"></span>${estadoLbl}</div>
-    <span style="font-size:0.7rem;color:var(--muted)">Actividad #${a.id}</span>
-  `;
-  document.getElementById("m-tit").textContent = a.nombre;
-  document.getElementById("m-sub").textContent = a.act;
-
-  const areaChips = a.areas.map(ar => {
-    const info = AREAS[ar] || { label:ar, color:"#888" };
-    return `<span class="m-achip" style="background:${info.color}18;color:${info.color};border-color:${info.color}33">${info.label} · ${info.personaje||""}</span>`;
-  }).join("");
-
-  const mats = (a.mats||[]).map(m=>`<li>${m}</li>`).join("");
-
-  document.getElementById("m-bd").innerHTML = `
-    <div class="mg2">
-      <div class="md"><div class="md-lbl">📅 Fecha</div><div class="md-val">${fmt(a.fecha)}</div></div>
-      <div class="md"><div class="md-lbl">⏱ Duración</div><div class="md-val">${a.dur||"—"}</div></div>
-      <div class="md"><div class="md-lbl">📍 Lugar</div><div class="md-val">${a.lugar||"—"}</div></div>
-      <div class="md"><div class="md-lbl">👤 Responsable</div><div class="md-val">${a.resp||"—"}</div></div>
-    </div>
-    <div class="ms"><span class="ms-lbl">Áreas de desarrollo (Praderas)</span><div class="m-areas">${areaChips}</div></div>
-    <div class="ms"><span class="ms-lbl">Objetivo educativo</span><p class="ms-txt">${a.objetivo||"—"}</p></div>
-    <div class="ms"><span class="ms-lbl">Descripción</span><p class="ms-txt">${a.desc||"—"}</p></div>
-    ${mats ? `<div class="ms"><span class="ms-lbl">Materiales</span><ul class="m-mats">${mats}</ul></div>` : ""}
-    ${a.nota ? `<div class="m-nota">${a.nota}</div>` : ""}
-  `;
-
-  document.getElementById("m-cnt").textContent = `${i+1} de ${actsFilt.length}`;
-  document.getElementById("m-prev").disabled = i === 0;
-  document.getElementById("m-next").disabled = i === actsFilt.length - 1;
-  document.getElementById("modal").classList.add("open");
-  document.body.style.overflow = "hidden";
-}
-
-function abrirModalById(id) {
-  actsFilt = ACTIVIDADES.filter(a=>a.id!==9);
-  const i = actsFilt.findIndex(a=>a.id===id);
-  if (i >= 0) abrirModal(i);
-}
-
-function cerrarModal() {
-  document.getElementById("modal").classList.remove("open");
-  document.body.style.overflow = "";
-}
-
-function cerrarFuera(e) { if(e.target===document.getElementById("modal")) cerrarModal(); }
-
-function navModal(d) { const n=modalIdx+d; if(n>=0&&n<actsFilt.length) abrirModal(n); }
 
 function renderMesHTML(mes, anio) {
   const MESES_NOMBRE = ["Enero","Febrero","Marzo","Abril","Mayo","Junio",
@@ -821,6 +1643,118 @@ function renderMesHTML(mes, anio) {
   }
   return out;
 }
+
+// Modal para eventos fijos/distrito
+function abrirModalFijo(id) {
+  const ev = EVENTOS_FIJOS.find(e => e.id === id);
+  if (!ev) return;
+  const colMap = { distrito:"var(--amber)", fija:"#C77DFF", vacacion:"#555" };
+  const lblMap = { distrito:"🏛 Grupo / Distrito", fija:"⭐ Fija del grupo", vacacion:"🗓 Vacaciones" };
+  const col = colMap[ev.tipo] || "#888";
+  document.getElementById("m-acc").style.background = col;
+  document.getElementById("m-chips").innerHTML = `
+    <span style="background:${col}18;color:${col};border:1px solid ${col}44;padding:2px 9px;border-radius:10px;font-size:0.7rem;font-weight:600">${lblMap[ev.tipo]||ev.tipo}</span>
+  `;
+  document.getElementById("m-tit").textContent = ev.nombre;
+  document.getElementById("m-sub").textContent = ev.sub || "";
+  const [fy,fm,fd] = ev.fecha.split("-");
+  const mats = (ev.mats||[]).map(mat=>`<li>${mat}</li>`).join("");
+  document.getElementById("m-bd").innerHTML = `
+    <div class="mg2">
+      <div class="md"><div class="md-lbl">📅 Fecha</div><div class="md-val">${parseInt(fd)} ${MESES[parseInt(fm)-1]} ${fy}</div></div>
+      <div class="md"><div class="md-lbl">Tipo</div><div class="md-val">${lblMap[ev.tipo]||ev.tipo}</div></div>
+    </div>
+    ${ev.desc ? `<div class="ms"><span class="ms-lbl">Descripción</span><p class="ms-txt">${ev.desc}</p></div>` : ""}
+    ${mats ? `<div class="ms"><span class="ms-lbl">Materiales / consideraciones</span><ul class="m-mats">${mats}</ul></div>` : ""}
+  `;
+  document.getElementById("m-cnt").textContent = "";
+  document.getElementById("m-prev").disabled = true;
+  document.getElementById("m-next").disabled = true;
+  document.getElementById("modal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+// Abrir todos los eventos de un día
+function abrirDia(fechaKey) {
+  const mapaEventos = {};
+  [...ACTIVIDADES, ...EVENTOS_FIJOS].forEach(a => {
+    if (!a.fecha) return;
+    mapaEventos[a.fecha] = mapaEventos[a.fecha] || [];
+    mapaEventos[a.fecha].push(a);
+  });
+  const evs = mapaEventos[fechaKey] || [];
+  if (evs.length === 0) return;
+  if (evs.length === 1) {
+    const ev = evs[0];
+    if (ev.id !== 9 && typeof ev.id === "number") abrirModalById(ev.id);
+    else if (typeof ev.id === "string") abrirModalFijo(ev.id);
+    return;
+  }
+  // Múltiples eventos: abrir el primero de la manada, o el primero disponible
+  const manada = evs.find(e => typeof e.id === "number" && e.id !== 9);
+  if (manada) abrirModalById(manada.id);
+  else abrirModalFijo(evs[0].id);
+}
+
+/* ══════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════ */
+function abrirModal(i) {
+  modalIdx = i;
+  const a = actsFilt[i];
+  const col = a.areas[0] ? AREAS[a.areas[0]]?.color || "#888" : "#888";
+  document.getElementById("m-acc").style.background = col;
+
+  const est = estadoActual(a.fecha, a.estado);
+    const estadoLbl = est==="proxima"?"Próxima":est==="realizada"?"Realizada":"Pendiente";
+  document.getElementById("m-chips").innerHTML = `
+    <div class="epill ep-${est}"><span class="edot"></span>${estadoLbl}</div>
+    <span style="font-size:0.7rem;color:var(--muted)">Actividad #${a.id}</span>
+  `;
+  document.getElementById("m-tit").textContent = a.nombre;
+  document.getElementById("m-sub").textContent = a.act;
+
+  const areaChips = a.areas.map(ar => {
+    const info = AREAS[ar] || { label:ar, color:"#888" };
+    return `<span class="m-achip" style="background:${info.color}18;color:${info.color};border-color:${info.color}33">${info.label} · ${info.personaje||""}</span>`;
+  }).join("");
+
+  const mats = (a.mats||[]).map(m=>`<li>${m}</li>`).join("");
+
+  document.getElementById("m-bd").innerHTML = `
+    <div class="mg2">
+      <div class="md"><div class="md-lbl">📅 Fecha</div><div class="md-val">${fmt(a.fecha)}</div></div>
+      <div class="md"><div class="md-lbl">⏱ Duración</div><div class="md-val">${a.dur||"—"}</div></div>
+      <div class="md"><div class="md-lbl">📍 Lugar</div><div class="md-val">${a.lugar||"—"}</div></div>
+      <div class="md"><div class="md-lbl">👤 Responsable</div><div class="md-val">${a.resp||"—"}</div></div>
+    </div>
+    <div class="ms"><span class="ms-lbl">Áreas de desarrollo (Praderas)</span><div class="m-areas">${areaChips}</div></div>
+    <div class="ms"><span class="ms-lbl">Objetivo educativo</span><p class="ms-txt">${a.objetivo||"—"}</p></div>
+    <div class="ms"><span class="ms-lbl">Descripción</span><p class="ms-txt">${a.desc||"—"}</p></div>
+    ${mats ? `<div class="ms"><span class="ms-lbl">Materiales</span><ul class="m-mats">${mats}</ul></div>` : ""}
+    ${a.nota ? `<div class="m-nota">${a.nota}</div>` : ""}
+  `;
+
+  document.getElementById("m-cnt").textContent = `${i+1} de ${actsFilt.length}`;
+  document.getElementById("m-prev").disabled = i === 0;
+  document.getElementById("m-next").disabled = i === actsFilt.length - 1;
+  document.getElementById("modal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function abrirModalById(id) {
+  actsFilt = ACTIVIDADES.filter(a=>a.id!==9);
+  const i = actsFilt.findIndex(a=>a.id===id);
+  if (i >= 0) abrirModal(i);
+}
+
+function cerrarModal() {
+  document.getElementById("modal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+function cerrarFuera(e) { if(e.target===document.getElementById("modal")) cerrarModal(); }
+function navModal(d) { const n=modalIdx+d; if(n>=0&&n<actsFilt.length) abrirModal(n); }
+
 document.addEventListener("keydown", e => {
   if (!document.getElementById("modal").classList.contains("open")) return;
   if (e.key==="Escape") cerrarModal();
@@ -828,88 +1762,68 @@ document.addEventListener("keydown", e => {
   if (e.key==="ArrowRight") navModal(1);
 });
 
-function calcEdad(fn) {
-  const h=new Date(),n=new Date(fn);let e=h.getFullYear()-n.getFullYear();
-  if((h.getMonth()*100+h.getDate())<(n.getMonth()*100+n.getDate()))e--;return e;
-}
-function ini(n){return n.split(" ").slice(0,2).map(p=>p[0]).join("").toUpperCase();}
-function gCol(g){return g==="F"?"#C77DFF":"#457B9D";}
+/* ══════════════════════════════════════════
+   UTILS
+══════════════════════════════════════════ */
+const MESES = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
 
-function cambiarTab(n,btn){
-  document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
-  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
-  document.getElementById("tab-"+n).classList.add("active");
-  btn.classList.add("active");
-  if(n===3) renderRecursosPub();
-  if(n===5) renderCal();
+function estadoActual(fechaStr, estadoFijo) {
+  // Si está marcada como realizada manualmente, respetar
+  if (estadoFijo === "realizada") return "realizada";
+  if (!fechaStr) return estadoFijo;
+  const hoy = new Date();
+  hoy.setHours(0,0,0,0);
+  const [y,m,d] = fechaStr.split("-").map(Number);
+  const fechaAct = new Date(y, m-1, d);
+  // Pasada: realizada
+  if (fechaAct < hoy) return "realizada";
+  // Próximos 14 días: próxima
+  const en14 = new Date(hoy); en14.setDate(hoy.getDate() + 14);
+  if (fechaAct <= en14) return "proxima";
+  return "pendiente";
+}
+function fmt(s) {
+  if (!s) return "—";
+  const [y,m,d] = s.split("-");
+  return `${parseInt(d)} ${MESES[parseInt(m)-1]} ${y}`;
 }
 
-function renderRecursosPub(){
-  const cont=document.getElementById("pub-recursos");
-  if(!cont||!DATA.recursos) return;
-  const items=DATA.recursos.map(r=>{
-    if(!r.url) return `<div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:0.85rem 1.1rem;display:flex;align-items:center;gap:0.75rem;opacity:0.5"><span style="font-size:1.4rem">${r.icono}</span><div><div style="font-size:0.88rem;font-weight:600;color:var(--crema)">${r.titulo}</div><div style="font-size:0.75rem;color:var(--muted)">${r.subtitulo}</div><div style="font-size:0.72rem;color:#555;margin-top:2px;font-style:italic">Próximamente</div></div></div>`;
-    return `<a href="${r.url}" target="_blank" rel="noopener" style="text-decoration:none"><div style="background:var(--bg2);border:1px solid rgba(82,183,136,0.25);border-radius:var(--r);padding:0.85rem 1.1rem;display:flex;align-items:center;gap:0.75rem;cursor:pointer"><span style="font-size:1.4rem">${r.icono}</span><div style="flex:1;min-width:0"><div style="font-size:0.88rem;font-weight:600;color:var(--crema)">${r.titulo}</div><div style="font-size:0.75rem;color:var(--muted)">${r.subtitulo}</div></div><span style="font-size:0.75rem;color:var(--verde2);flex-shrink:0">Abrir →</span></div></a>`;
+/* ══════════════════════════════════════════
+   RECURSOS
+══════════════════════════════════════════ */
+function renderRecursos() {
+  const cont = document.getElementById("recursos-section");
+  if (!cont || !DATA.recursos) return;
+  const items = DATA.recursos.map(r => {
+    if (!r.url) return `
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:0.85rem 1.1rem;display:flex;align-items:center;gap:0.75rem;opacity:0.5">
+      <span style="font-size:1.4rem">${r.icono}</span>
+      <div>
+        <div style="font-size:0.88rem;font-weight:600;color:var(--crema)">${r.titulo}</div>
+        <div style="font-size:0.75rem;color:var(--muted)">${r.subtitulo}</div>
+        <div style="font-size:0.72rem;color:#555;margin-top:2px;font-style:italic">Link pendiente</div>
+      </div>
+    </div>`;
+    return `
+    <a href="${r.url}" target="_blank" rel="noopener" style="text-decoration:none">
+      <div style="background:var(--bg2);border:1px solid rgba(82,183,136,0.25);border-radius:var(--r);padding:0.85rem 1.1rem;display:flex;align-items:center;gap:0.75rem;transition:border-color 0.18s;cursor:pointer" onmouseover="this.style.borderColor='rgba(82,183,136,0.5)'" onmouseout="this.style.borderColor='rgba(82,183,136,0.25)'">
+        <span style="font-size:1.4rem">${r.icono}</span>
+        <div style="flex:1;min-width:0">
+          <div style="font-size:0.88rem;font-weight:600;color:var(--crema)">${r.titulo}</div>
+          <div style="font-size:0.75rem;color:var(--muted)">${r.subtitulo}</div>
+        </div>
+        <span style="font-size:0.75rem;color:var(--verde2);flex-shrink:0">Ver →</span>
+      </div>
+    </a>`;
   }).join("");
-  cont.innerHTML=`<h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.09em;color:var(--cafe);font-weight:600;margin-bottom:0.75rem">Recursos del ciclo</h3><div style="display:flex;flex-direction:column;gap:0.5rem">${items}</div>`;
+  cont.innerHTML = `
+    <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.09em;color:var(--cafe);font-weight:600;margin-bottom:0.75rem">Recursos del ciclo</h3>
+    <div style="display:flex;flex-direction:column;gap:0.5rem">${items}</div>`;
 }
 
-function renderEquipo(){
-  document.getElementById("team-grid").innerHTML=DATA.equipo.map(m=>{
-    const rc=m.rol==="responsable"?"#E9A84C":"#C77DFF",rl=m.rol==="responsable"?"Responsable de Manada":"Asistente de Manada",sl=(m.selva||"").toLowerCase();
-    const av=sl==="akela"?`<div class="member-avatar" style="background:rgba(233,168,76,0.15);border:1.5px solid rgba(233,168,76,0.4)">🐺</div>`:sl==="raksha"?`<div class="member-avatar" style="background:rgba(201,168,124,0.15);border:1.5px solid rgba(201,168,124,0.4)">🦊</div>`:sl==="bagheera"?`<div class="member-avatar" style="background:rgba(155,93,229,0.15);border:1.5px solid rgba(155,93,229,0.4);padding:0"><svg width="32" height="32" viewBox="0 0 48 48"><path d="M14 20 L17 14 L20 19 Z" fill="#2a2a3a"/><path d="M28 19 L31 14 L34 20 Z" fill="#2a2a3a"/><ellipse cx="24" cy="27" rx="10" ry="9" fill="#2a2a3a"/><circle cx="20" cy="25" r="1.5" fill="#F9C80E"/><circle cx="28" cy="25" r="1.5" fill="#F9C80E"/><path d="M22 31 Q24 33 26 31" stroke="#F2E8D5" stroke-width="1" fill="none" stroke-linecap="round"/></svg></div>`:`<div class="member-avatar" style="background:${rc}18;color:${rc};border:1.5px solid ${rc}33;font-size:0.85rem;font-weight:600">${ini(m.nombre)}</div>`;
-    return `<div class="member-card">${av}<div><div class="member-name">${m.nombre}</div><div class="member-role"><span class="badge badge-${m.rol}">${rl}</span></div>${m.selva?`<div class="member-selva">${m.selva}</div>`:""}</div></div>`;
-  }).join("");
-}
-
-function renderLobatos(){
-  document.getElementById("lobatos-grid").innerHTML=DATA.lobatos.map(l=>{
-    const edad=calcEdad(l.fn),etapa=etapaDesdeEdad(edad),ec=etapaCol(etapa),gc=gCol(l.genero),insig=INSIGNIAS[etapa];
-    const av=insig?`<img src="${insig}" alt="${etapaLbl(etapa,l.genero)}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1.5px solid ${ec}55">`:`<div style="width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:600;flex-shrink:0;background:${gc}18;color:${gc};border:1.5px solid ${gc}33">${ini(l.nombre)}</div>`;
-    return `<div class="lobato-card">${av}<div style="min-width:0"><div class="lobato-nombre">${l.nombre}</div><div class="lobato-meta">${edad} años · ${l.genero==="F"?"Lobata":"Lobato"}</div><div class="lobato-etapa" style="color:${ec}">${etapaLbl(etapa,l.genero)}</div>${l.alerta?`<div style="font-size:0.67rem;color:#E76F51;margin-top:2px">⏳ ${l.alerta}</div>`:""}${l.intereses?`<div class="lobato-intereses">🎯 ${l.intereses}</div>`:""}</div></div>`;
-  }).join("");
-}
-
-function filtrar(btn){
-  areaFiltro=btn.dataset.area;
-  document.querySelectorAll(".fchip").forEach(b=>{b.classList.remove("on");b.style.borderColor="";b.style.color="";});
-  btn.classList.add("on");
-  const col=areaFiltro!=="todas"?(AREAS[areaFiltro]?.color||"var(--verde2)"):"var(--verde2)";
-  btn.style.borderColor=col;btn.style.color=col;renderActs();
-}
-
-function renderActs(){
-  const sinVac=ACTIVIDADES.filter(a=>a.id!==9);
-  actsFilt=areaFiltro==="todas"?sinVac:sinVac.filter(a=>a.areas.includes(areaFiltro));
-  document.getElementById("m-total").textContent=sinVac.length;
-  document.getElementById("m-real").textContent=sinVac.filter(a=>estadoActual(a.fecha,a.estado)==="realizada").length;
-  document.getElementById("m-prox").textContent=sinVac.filter(a=>estadoActual(a.fecha,a.estado)==="proxima").length;
-  document.getElementById("m-pend").textContent=sinVac.filter(a=>estadoActual(a.fecha,a.estado)==="pendiente").length;
-  document.getElementById("act-list").innerHTML=actsFilt.map((a,i)=>{
-    const col=a.areas[0]?AREAS[a.areas[0]]?.color||"#555":"#555";
-    const dots=a.areas.map(ar=>`<div class="adot" style="background:${AREAS[ar]?.color||'#555'}" title="${AREAS[ar]?.label||ar}"></div>`).join("");
-    const est=estadoActual(a.fecha,a.estado);
-    const lbl=est==="proxima"?"Próxima":est==="realizada"?"Realizada":"Pendiente";
-    return `<div class="act-card" onclick="abrirModal(${i})"><div class="act-inner"><div class="act-accent" style="background:${col}"></div><div class="act-body"><div class="act-top"><div><div class="act-nombre">${a.nombre}</div><div class="act-actividad">${a.act}</div></div><div class="act-right"><div class="act-fecha">📅 ${fmt(a.fecha)}</div><div class="epill ep-${est}"><span class="edot"></span>${lbl}</div></div></div><div class="act-areas-dots">${dots}</div></div></div></div>`;
-  }).join("");
-}
-
-function renderCal(){
-  const cont=document.getElementById("pub-cal");
-  if(!cont||cont.innerHTML) return;
-  let html="";
-  for(let m=3;m<=7;m++) html+=`<div style="margin-bottom:2rem">${renderMesHTML(m,2026)}</div>`;
-  cont.innerHTML=html;
-}
-
-function init(){
-  const sinVac=ACTIVIDADES.filter(a=>a.id!==9);
-  document.getElementById("s-lobatos").textContent=DATA.lobatos.length;
-  document.getElementById("s-acts").textContent=sinVac.length;
-  document.getElementById("s-equipo").textContent=DATA.equipo.length;
-  document.getElementById("s-real").textContent=sinVac.filter(a=>estadoActual(a.fecha,a.estado)==="realizada").length;
-  renderEquipo();renderLobatos();renderActs();renderRecursosPub();
-}
+/* ══════════════════════════════════════════
+   ARRANQUE
+══════════════════════════════════════════ */
 init();
 </script>
 </body>
